@@ -5,6 +5,8 @@ const cors = require('cors');
 const mongoSanitize = require('express-mongo-sanitize');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const authRouter = require('./routes/authRoute');
+const userRouter = require('./routes/userRoute');
 
 const authController = require('./controllers/authController');
 
@@ -30,5 +32,9 @@ app.use(compression());
 
 //Routes
 app.get('/api/sessions/oauth/google', authController.googleAuthHandler);
+app.get('/api/sessions/oauth/facebook', authController.facebookAuthHandler);
+
+app.use('/api/auth', authRouter);
+app.use('/api/user', userRouter);
 
 module.exports = app;
