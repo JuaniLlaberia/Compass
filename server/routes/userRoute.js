@@ -4,8 +4,10 @@ const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-router
-  .route('/update')
-  .patch(authController.protect, userController.updateUser);
+router.use(authController.protect);
+
+router.route('/me').get(userController.getUser);
+router.route('/update').patch(userController.updateUser);
+router.route('/matches').get(userController.getAllMatches);
 
 module.exports = router;
