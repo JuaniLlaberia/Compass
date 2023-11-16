@@ -37,47 +37,74 @@ exports.getAllMatches = async (req, res) => {
 exports.getUsers = async (req, res) => {
   const { distance, category, gender, minAge, maxAge } = req.user.filters;
 
-  const query = User.find({
-    $and: [
-      { _id: { $ne: req.user._id } }, //Users that are not auth one
-      { hideUser: false }, //That are public/not hidden
-      { newUser: false }, //That have finish acc creation process
-    ],
-  }).select('-email -__v -newUser -hideUser -membership -birthDate');
+  const aggStages = [
+    {
+      //Filter auth user and all already interacted users
+      $match: {
+        $and: [
+          { _id: { $ne: req.user._id } },
+          { _id: { $nin: req.user.interactions } },
+        ],
+      },
+    },
+    {
+      $match: {
+        $and: [{ hideUser: false }, { newUser: false }, { category }],
+      },
+    },
+  ];
 
-  //Users that match the category you are searching
-  if (category) query.find({ category });
-
-  //Users that match the gender
-  if (gender) query.find({ gender });
-
-  //Users that match the age range
-  if (minAge || maxAge) {
-    query.find({
-      $and: [
-        { birthDate: { $gte: sub(new Date(), { years: maxAge }) } },
-        { birthDate: { $lte: sub(new Date(), { years: minAge }) } },
-      ],
+  //Filter for user with 'employer' role (Gender & age range)
+  if (gender & minAge & maxAge)
+    aggStages.push({
+      $match: {
+        $and: [
+          { gender },
+          { birthDate: { $gte: sub(new Date(), { years: maxAge }) } },
+          { birthDate: { $lte: sub(new Date(), { years: minAge }) } },
+        ],
+      },
     });
-  }
 
-  //Users in a certain distance raidius from you (How to get user location??)
+  //Filter for user with 'employee' role (distance to employer)
   if (distance) {
-    const radius = distance / 6378.1;
+    if (!req.body.coordinates)
+      res
+        .status(400)
+        .json({ status: 'failed', message: 'Missing user coordinates.' });
 
+    const radius = distance / 6378.1;
     const [lat, lng] = req.body.coordinates;
 
-    query.find({
-      location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
+    aggStages.push({
+      $match: {
+        location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
+      },
     });
   }
 
-  //FILTER FOR ALREADY SEEN USERS
-  //PAGINATION SYSTEM
-  //SHUFFLE
+  //Returning just 2 random docs
+  aggStages.push({
+    $sample: {
+      size: 2,
+    },
+  });
+
+  //Not retrieve unwanted fields
+  aggStages.push({
+    $project: {
+      email: 0,
+      __v: 0,
+      newUser: 0,
+      hideUser: 0,
+      membership: 0,
+      birthDate: 0,
+    },
+  });
 
   try {
-    const users = await query;
+    //Aggregation pipeline
+    const users = await User.aggregate(aggStages);
     res.status(200).json({ status: 'success', data: users });
   } catch (err) {
     res.status(404).json({ status: 'failed' });
