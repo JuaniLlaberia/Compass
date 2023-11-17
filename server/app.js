@@ -27,16 +27,17 @@ app.use(
 );
 app.set('trust proxy', 1);
 app.use(helmet());
-app.use(
-  express.json({
-    limit: '10kb',
-  })
-);
 
 app.post(
   '/webhook',
   express.raw({ type: 'application/json' }),
   paymentController.webHookCheckout
+);
+
+app.use(
+  express.json({
+    limit: '10kb',
+  })
 );
 
 app.use(mongoSanitize());
