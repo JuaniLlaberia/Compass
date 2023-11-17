@@ -8,5 +8,6 @@ router.use(authController.protect);
 
 router.route('/left').post(swipesController.swipeLeft);
 router.route('/right').post(swipesController.swipeRight);
+router.route('/undo').post(swipesController.undoPreviousSwipe);
 
 module.exports = router;

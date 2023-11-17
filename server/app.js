@@ -9,6 +9,7 @@ const compression = require('compression');
 const authRouter = require('./routes/authRoute');
 const userRouter = require('./routes/userRoute');
 const swipesRouter = require('./routes/swipesRoute');
+const matchesRouter = require('./routes/matchRoute');
 
 const authController = require('./controllers/authController');
 
@@ -39,5 +40,6 @@ app.get('/api/sessions/oauth/facebook', authController.facebookAuthHandler);
 app.use('/api/auth', authRouter);
 app.use('/api/swipes', swipesRouter);
 app.use('/api/user', userRouter);
+app.use('/api/matches', matchesRouter);
 
 module.exports = app;
