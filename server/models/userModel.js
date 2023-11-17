@@ -55,6 +55,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 10,
   },
+  extraLikes: {
+    type: Number,
+    default: 0,
+  },
   location: {
     type: {
       type: String,
