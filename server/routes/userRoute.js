@@ -10,5 +10,6 @@ router.route('/').get(userController.getUsers);
 router.route('/me').get(userController.getUser);
 router.route('/update').patch(userController.updateUser);
 router.route('/matches').get(userController.getAllMatches);
+router.route('/reset-likes').patch(userController.resetLikes);
 
 module.exports = router;

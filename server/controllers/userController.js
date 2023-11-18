@@ -110,3 +110,11 @@ exports.getUsers = async (req, res) => {
     res.status(404).json({ status: 'failed' });
   }
 };
+
+//Called from a cron job to reset likes ones per day
+exports.resetLikes = async (req, res) => {
+  await User.updateMany({ $set: { likes: 10 } });
+  res
+    .status(200)
+    .json({ status: 'success', message: 'Likes have been reseted.' });
+};
