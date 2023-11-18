@@ -1,44 +1,58 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const User = require('../models/userModel');
+const LikesPack = require('../models/likePackModel');
 
 exports.createCheckoutSession = async (req, res) => {
-  //This data should be store in the DB so nobody can modify it
-
-  const { productName, productPrice, likesAmount } = req.body;
-
-  const userEmail = req.user.email;
-
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        price_data: {
-          unit_amount: productPrice,
-          currency: 'usd',
-          product_data: {
-            name: productName,
-          },
-        },
-        quantity: 1,
-      },
-    ],
-    mode: 'payment',
-    success_url: 'http://localhost:5173',
-    cancel_url: 'http://localhost:5173',
-    client_reference_id: likesAmount,
-    customer_email: userEmail,
+  //Getting package info from DB
+  const package = await LikesPack.findOne({
+    likesAmount: req.body.likesPackage,
   });
 
-  //   res.redirect(303, session.url);
-  res.status(200).json({ link: session.url });
+  if (!package) {
+    return res.status(404).json({
+      status: 'failed',
+      message: 'Please provide a valid likes package.',
+    });
+  }
+
+  const { likesAmount, name, price, description } = package;
+
+  try {
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          price_data: {
+            unit_amount: price,
+            currency: 'usd',
+            product_data: {
+              name,
+              description,
+            },
+          },
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: 'http://localhost:5173',
+      cancel_url: 'http://localhost:5173',
+      client_reference_id: likesAmount,
+      customer_email: req.user.email,
+    });
+
+    //   res.redirect(303, session.url);
+    res.status(200).json({ link: session.url });
+  } catch (err) {
+    res
+      .status(400)
+      .json({ status: 'failed', message: 'Something went wrong.' });
+  }
 };
 
 const addLikes = async event => {
   try {
-    //Get the likes package from the ID and use that amount
-
     await User.findOneAndUpdate(
       { email: event.customer_email },
-      { $inc: { extraLikes: 25 } }
+      { $inc: { extraLikes: event.client_reference_id } }
     );
   } catch (err) {
     //Handle properly errors in case this fails, so users receive the likes eventually
@@ -69,8 +83,6 @@ exports.webHookCheckout = async (req, res) => {
     case 'checkout.session.completed': {
       //In development add likes as test mode will always be this type
       if (process.env.NODE_ENV === 'development') addLikes(event.data.object);
-      //The payment could be pending in production so we need to mark it as pending until it gets paid
-      //And handle the wait
       //When paid add likes
       if (event.status === 'paid') addLikes(event.data.object);
       break;
