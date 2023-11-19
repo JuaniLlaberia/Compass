@@ -15,6 +15,7 @@ const paymentRouter = require('./routes/paymentRoute');
 const authController = require('./controllers/authController');
 const paymentController = require('./controllers/paymentController');
 const errorController = require('./controllers/errorsController');
+const CustomError = require('./utils/error');
 
 const app = express();
 
@@ -53,6 +54,10 @@ app.use('/api/auth', authRouter);
 app.use('/api/swipes', swipesRouter);
 app.use('/api/user', userRouter);
 app.use('/api/matches', matchesRouter);
+
+app.use('*', (req, res, next) => {
+  next(new CustomError('Endpoint not found.', 404));
+});
 
 app.use(errorController);
 
