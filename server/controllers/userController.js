@@ -1,12 +1,13 @@
 const sub = require('date-fns/sub');
 const User = require('../models/userModel');
 const Matches = require('../models/matchesModel');
+const catchErrorAsync = require('../utils/catchAsyncErrors');
 
 exports.getUser = (req, res) => {
   res.status(200).json({ status: 'success', data: req.user });
 };
 
-exports.updateUser = async (req, res) => {
+exports.updateUser = catchErrorAsync(async (req, res) => {
   //Filter fields that user can't modify
   let filteredBody = { ...req.body };
   ['_id', 'email', 'membership'].forEach(field => delete filteredBody[field]);
@@ -18,23 +19,19 @@ exports.updateUser = async (req, res) => {
   });
 
   res.status(200).json({ status: 'success', data: user });
-};
+});
 
-exports.getAllMatches = async (req, res) => {
-  try {
-    const matches = await Matches.find({
-      users: req.user._id,
-    });
+exports.getAllMatches = catchErrorAsync(async (req, res) => {
+  const matches = await Matches.find({
+    users: req.user._id,
+  });
 
-    res
-      .status(200)
-      .json({ status: 'success', count: matches.length, data: matches });
-  } catch (err) {
-    res.status(404).json({ status: 'failed', message: err.message });
-  }
-};
+  res
+    .status(200)
+    .json({ status: 'success', count: matches.length, data: matches });
+});
 
-exports.getUsers = async (req, res) => {
+exports.getUsers = catchErrorAsync(async (req, res) => {
   const { distance, category, gender, minAge, maxAge } = req.user.filters;
 
   const aggStages = [
@@ -102,11 +99,15 @@ exports.getUsers = async (req, res) => {
     },
   });
 
-  try {
-    //Aggregation pipeline
-    const users = await User.aggregate(aggStages);
-    res.status(200).json({ status: 'success', data: users });
-  } catch (err) {
-    res.status(404).json({ status: 'failed' });
-  }
-};
+  //Aggregation pipeline
+  const users = await User.aggregate(aggStages);
+  res.status(200).json({ status: 'success', data: users });
+});
+
+//Called from a cron job to reset likes ones per day
+exports.resetLikes = catchErrorAsync(async (req, res) => {
+  await User.updateMany({ $set: { likes: 10 } });
+  res
+    .status(200)
+    .json({ status: 'success', message: 'Likes have been reseted.' });
+});

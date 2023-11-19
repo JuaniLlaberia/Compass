@@ -46,14 +46,13 @@ const userSchema = new mongoose.Schema({
     maxAge: Number,
     gender: String,
   },
-  membership: {
-    type: String,
-    default: 'regular',
-    enum: ['regular', 'premium'],
-  },
   likes: {
     type: Number,
     default: 10,
+  },
+  extraLikes: {
+    type: Number,
+    default: 0,
   },
   location: {
     type: {

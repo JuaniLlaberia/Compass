@@ -10,8 +10,12 @@ const authRouter = require('./routes/authRoute');
 const userRouter = require('./routes/userRoute');
 const swipesRouter = require('./routes/swipesRoute');
 const matchesRouter = require('./routes/matchRoute');
+const paymentRouter = require('./routes/paymentRoute');
 
 const authController = require('./controllers/authController');
+const paymentController = require('./controllers/paymentController');
+const errorController = require('./controllers/errorsController');
+const CustomError = require('./utils/error');
 
 const app = express();
 
@@ -25,11 +29,19 @@ app.use(
 );
 app.set('trust proxy', 1);
 app.use(helmet());
+
+app.post(
+  '/webhook',
+  express.raw({ type: 'application/json' }),
+  paymentController.webHookCheckout
+);
+
 app.use(
   express.json({
     limit: '10kb',
   })
 );
+
 app.use(mongoSanitize());
 app.use(compression());
 
@@ -37,9 +49,16 @@ app.use(compression());
 app.get('/api/sessions/oauth/google', authController.googleAuthHandler);
 app.get('/api/sessions/oauth/facebook', authController.facebookAuthHandler);
 
+app.use('/api/payment', paymentRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/swipes', swipesRouter);
 app.use('/api/user', userRouter);
 app.use('/api/matches', matchesRouter);
+
+app.use('*', (req, res, next) => {
+  next(new CustomError('Endpoint not found.', 404));
+});
+
+app.use(errorController);
 
 module.exports = app;

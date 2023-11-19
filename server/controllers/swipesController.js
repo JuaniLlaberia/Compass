@@ -2,22 +2,30 @@ const mongoose = require('mongoose');
 const Swipes = require('../models/swipeModel');
 const Matches = require('../models/matchesModel');
 const User = require('../models/userModel');
+const catchErrorAsync = require('../utils/catchAsyncErrors');
+const CustomError = require('../utils/error');
 
-const addInteraction = async (userId, userToAdd) => {
-  await User.findByIdAndUpdate(userId, {
+const addInteraction = catchErrorAsync(async (userId, userToAdd, likesType) => {
+  const updateQuery = {
     $addToSet: { interactions: userToAdd },
-    $inc: { likes: -1 },
-  });
-};
+  };
 
-exports.swipeRight = async (req, res) => {
+  if (likesType === 'regular') updateQuery.$inc = { likes: -1 };
+  if (likesType === 'extra') updateQuery.$inc = { extraLikes: -1 };
+
+  await User.findByIdAndUpdate(userId, updateQuery);
+});
+
+exports.swipeRight = catchErrorAsync(async (req, res, next) => {
   const crrUser = req.user._id;
   const swipedUser = req.body.swipedUserId;
 
-  if (req.user.likes === 0)
+  if (req.user.likes <= 0 && req.user.extraLikes <= 0)
     return res
       .status(400)
       .json({ status: 'failed', message: 'You have no more likes' });
+
+  const hasExtraLikes = req.user.extraLikes >= 1;
 
   //1) Check if swipe is a match
   const swipeObject = await Swipes.exists({
@@ -45,11 +53,9 @@ exports.swipeRight = async (req, res) => {
     } catch (err) {
       //We abort and cancel all changes (DB is intact)
       await session.abortTransaction();
-      res.status(400).json({
-        status: 'failed',
-        error: err.message,
-        message: 'The DB was not modified due to the error.',
-      });
+      return next(
+        new CustomError('The DB was not modified due to the error.', 400)
+      );
     } finally {
       //We close the session
       session.endSession();
@@ -63,38 +69,34 @@ exports.swipeRight = async (req, res) => {
   }
 
   //Add user id to interactions array in auth user
-  addInteraction(crrUser, swipedUser);
+  addInteraction(crrUser, swipedUser, hasExtraLikes ? 'extra' : 'regular');
 
   //4) Return response (match === false) + Decrese user likes
   res.status(200).json({ status: 'success', match: isMatch });
-};
+});
 
-exports.swipeLeft = async (req, res) => {
-  try {
-    //1) Check if user you swiped left (reject) has swiped you right before
-    const isSwiped = await Swipes.exists({
-      $and: [
-        { swipeFrom: req.body.swipedUserId },
-        { swipeTo: req.user._id.valueOf() },
-      ],
-    });
+exports.swipeLeft = catchErrorAsync(async (req, res, next) => {
+  //1) Check if user you swiped left (reject) has swiped you right before
+  const isSwiped = await Swipes.exists({
+    $and: [
+      { swipeFrom: req.body.swipedUserId },
+      { swipeTo: req.user._id.valueOf() },
+    ],
+  });
 
-    //2) If true -> Remove swipe
-    if (isSwiped) {
-      await Swipes.findByIdAndDelete(isSwiped);
-    }
-
-    //Add interaction
-    addInteraction(req.user._id.valueOf(), req.body.swipedUserId);
-
-    //3) Response
-    res.status(200).json({ status: 'success' });
-  } catch (err) {
-    res.status(400).json({ status: 'failed', message: err.message });
+  //2) If true -> Remove swipe
+  if (isSwiped) {
+    await Swipes.findByIdAndDelete(isSwiped);
   }
-};
 
-exports.undoPreviousSwipe = async (req, res) => {
+  //Add interaction
+  addInteraction(req.user._id.valueOf(), req.body.swipedUserId);
+
+  //3) Response
+  res.status(200).json({ status: 'success' });
+});
+
+exports.undoPreviousSwipe = catchErrorAsync(async (req, res, next) => {
   const lastSwiped = req.user.interactions.at(-1);
   let user;
 
@@ -119,8 +121,7 @@ exports.undoPreviousSwipe = async (req, res) => {
     session.commitTransaction();
   } catch (err) {
     session.abortTransaction();
-    console.log(err);
-    res.status(404).json({ status: 'failed' });
+    return next(new CustomError('The DB was not modified.', 400));
   } finally {
     session.endSession();
   }
@@ -128,4 +129,4 @@ exports.undoPreviousSwipe = async (req, res) => {
   res
     .status(200)
     .json({ status: 'success', data: user || 'No swipe to undo.' });
-};
+});
