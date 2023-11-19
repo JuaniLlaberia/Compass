@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const getGoogleTokens = require('../utils/authProviders/getGoogleTokens');
 const User = require('../models/userModel');
 const getFacebookTokens = require('../utils/authProviders/getFacebookTokens');
+const catchAsyncErrors = require('../utils/catchAsyncErrors');
+const CustomError = require('../utils/error');
 
 //JWT
 const signToken = id => {
@@ -24,7 +26,7 @@ const createSendJWT = (id, res) => {
   res.cookie('jwt', token, cookieOptions);
 };
 
-const checkSignUser = async (user, res) => {
+const checkSignUser = catchAsyncErrors(async (user, res) => {
   //Check if user already exist
   const userId = await User.exists({ email: user.email });
   const isUserNew = !Boolean(userId);
@@ -33,20 +35,16 @@ const checkSignUser = async (user, res) => {
     //Create user in DB with provider info
     const { email, name } = user;
 
-    try {
-      const newUser = await User.create({
-        email,
-        fullName: name,
-      });
+    const newUser = await User.create({
+      email,
+      fullName: name,
+    });
 
-      //JWT process
-      createSendJWT(newUser._id.valueOf(), res);
+    //JWT process
+    createSendJWT(newUser._id.valueOf(), res);
 
-      //Redicrect to finish profile page
-      return res.status(201).redirect('http://localhost:5173');
-    } catch (err) {
-      console.log(err);
-    }
+    //Redicrect to finish profile page
+    return res.status(201).redirect('http://localhost:5173');
   }
 
   //Create JWT token for authorization and store it in the cookies.
@@ -54,40 +52,32 @@ const checkSignUser = async (user, res) => {
 
   //Redirect the user back to the home page
   res.status(200).redirect('http://localhost:5173');
-};
+});
 
-exports.googleAuthHandler = async (req, res) => {
-  try {
-    //Get google code from request object
-    const code = req.query.code;
+exports.googleAuthHandler = catchAsyncErrors(async (req, res) => {
+  //Get google code from request object
+  const code = req.query.code;
 
-    //Get google ID and token from the code we got back
-    const googleId = await getGoogleTokens(code);
+  //Get google ID and token from the code we got back
+  const googleId = await getGoogleTokens(code);
 
-    //Decode token to get user information (email, name and maybe photo)
-    const userData = jwt.decode(googleId);
+  //Decode token to get user information (email, name and maybe photo)
+  const userData = jwt.decode(googleId);
 
-    //Check if user exist: True -> Login user | False -> Create new user
-    checkSignUser(userData, res);
-  } catch (err) {
-    console.log(err);
-  }
-};
+  //Check if user exist: True -> Login user | False -> Create new user
+  checkSignUser(userData, res);
+});
 
-exports.facebookAuthHandler = async (req, res) => {
-  try {
-    //Get code sent by Facebook
-    const code = req.query.code;
+exports.facebookAuthHandler = catchAsyncErrors(async (req, res) => {
+  //Get code sent by Facebook
+  const code = req.query.code;
 
-    //Get user information from Facebook
-    const userInfo = await getFacebookTokens(code);
+  //Get user information from Facebook
+  const userInfo = await getFacebookTokens(code);
 
-    //Check if user exist: True -> Login user | False -> Create new user
-    checkSignUser(userInfo, res);
-  } catch (err) {
-    console.log(err);
-  }
-};
+  //Check if user exist: True -> Login user | False -> Create new user
+  checkSignUser(userInfo, res);
+});
 
 exports.logout = (req, res) => {
   const cookieOptions = {
@@ -105,7 +95,7 @@ exports.logout = (req, res) => {
   });
 };
 
-exports.protect = async (req, res, next) => {
+exports.protect = catchAsyncErrors(async (req, res, next) => {
   //Get JWT token
   let token;
 
@@ -117,9 +107,7 @@ exports.protect = async (req, res, next) => {
   } else if (req.cookies.jwt) token = req.cookies.jwt;
 
   if (!token) {
-    return res
-      .status(401)
-      .json({ status: 'failed', message: 'You are not logged in.' });
+    return next(new CustomError('You are not logged in.', 401));
   }
 
   //Get user ID stored in token
@@ -129,11 +117,9 @@ exports.protect = async (req, res, next) => {
   const authUser = await User.findById(decodedId);
 
   if (!authUser)
-    return res
-      .status(404)
-      .json({ status: 'failed', message: 'User does not exist anymore.' });
+    return next(new CustomError('User does not exist anymore.', 404));
 
   req.user = authUser;
 
   next();
-};
+});

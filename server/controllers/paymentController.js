@@ -1,66 +1,53 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const User = require('../models/userModel');
 const LikesPack = require('../models/likePackModel');
+const catchErrorAsync = require('../utils/catchAsyncErrors');
+const CustomError = require('../utils/error');
 
-exports.createCheckoutSession = async (req, res) => {
+exports.createCheckoutSession = catchErrorAsync(async (req, res, next) => {
   //Getting package info from DB
   const package = await LikesPack.findOne({
     likesAmount: req.body.likesPackage,
   });
 
-  if (!package) {
-    return res.status(404).json({
-      status: 'failed',
-      message: 'Please provide a valid likes package.',
-    });
-  }
+  if (!package)
+    return next(new CustomError('Please provide a valid likes package', 404));
 
   const { likesAmount, name, price, description } = package;
 
-  try {
-    const session = await stripe.checkout.sessions.create({
-      line_items: [
-        {
-          price_data: {
-            unit_amount: price,
-            currency: 'usd',
-            product_data: {
-              name,
-              description,
-            },
+  const session = await stripe.checkout.sessions.create({
+    line_items: [
+      {
+        price_data: {
+          unit_amount: price,
+          currency: 'usd',
+          product_data: {
+            name,
+            description,
           },
-          quantity: 1,
         },
-      ],
-      mode: 'payment',
-      success_url: 'http://localhost:5173',
-      cancel_url: 'http://localhost:5173',
-      client_reference_id: likesAmount,
-      customer_email: req.user.email,
-    });
+        quantity: 1,
+      },
+    ],
+    mode: 'payment',
+    success_url: 'http://localhost:5173',
+    cancel_url: 'http://localhost:5173',
+    client_reference_id: likesAmount,
+    customer_email: req.user.email,
+  });
 
-    //   res.redirect(303, session.url);
-    res.status(200).json({ link: session.url });
-  } catch (err) {
-    res
-      .status(400)
-      .json({ status: 'failed', message: 'Something went wrong.' });
-  }
-};
+  //   res.redirect(303, session.url);
+  res.status(200).json({ link: session.url });
+});
 
-const addLikes = async event => {
-  try {
-    await User.findOneAndUpdate(
-      { email: event.customer_email },
-      { $inc: { extraLikes: event.client_reference_id } }
-    );
-  } catch (err) {
-    //Handle properly errors in case this fails, so users receive the likes eventually
-    console.log(err);
-  }
-};
+const addLikes = catchErrorAsync(async event => {
+  await User.findOneAndUpdate(
+    { email: event.customer_email },
+    { $inc: { extraLikes: event.client_reference_id } }
+  );
+});
 
-exports.webHookCheckout = async (req, res) => {
+exports.webHookCheckout = catchErrorAsync(async (req, res, next) => {
   const payload = req.body;
   const signature = req.headers['stripe-signature'];
 
@@ -74,9 +61,7 @@ exports.webHookCheckout = async (req, res) => {
   try {
     event = stripe.webhooks.constructEvent(payload, signature, secret);
   } catch (err) {
-    return res
-      .status(400)
-      .json({ status: 'failed', message: `Webook error: ${err}` });
+    return next(new CustomError(err.message, 400));
   }
 
   switch (event.type) {
@@ -104,4 +89,4 @@ exports.webHookCheckout = async (req, res) => {
     status: 'success',
     message: 'Payment received. You will receive your likes now.',
   });
-};
+});
