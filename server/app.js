@@ -14,6 +14,7 @@ const paymentRouter = require('./routes/paymentRoute');
 
 const authController = require('./controllers/authController');
 const paymentController = require('./controllers/paymentController');
+const errorController = require('./controllers/errorsController');
 
 const app = express();
 
@@ -52,5 +53,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/swipes', swipesRouter);
 app.use('/api/user', userRouter);
 app.use('/api/matches', matchesRouter);
+
+app.use(errorController);
 
 module.exports = app;
