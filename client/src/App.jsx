@@ -1,56 +1,56 @@
-const getGoogleAuthUrl = () => {
-  const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-  const options = {
-    redirect_uri: import.meta.env.VITE_GOOGLE_OAUTH_REDIRECT_URL,
-    client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-    access_type: 'offline',
-    response_type: 'code',
-    prompt: 'consent',
-    scope: [
-      'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email',
-    ].join(' '),
-  };
+import AuthPage from './pages/AuthPage';
+import AppLayout from './pages/AppLayout';
+import HomePage from './pages/HomePage';
+import SettingsPage from './pages/SettingsPage';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AuthContextProvider } from './context/AuthContext';
+import ProtectedRoutes from './features/auth/ProtectedRoutes';
 
-  const urlSearchParams = new URLSearchParams(options);
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <AuthPage />,
+  },
+  {
+    element: <ProtectedRoutes />,
+    children: [
+      {
+        element: <AppLayout />,
+        children: [
+          {
+            path: '/app',
+            element: <HomePage />,
+          },
+          {
+            path: '/settings',
+            element: <SettingsPage />,
+          },
+        ],
+      },
+    ],
+  },
+]);
 
-  return `${rootUrl}?${urlSearchParams.toString()}`;
-};
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+    },
+  },
+});
 
-const getFacebookAuthUrl = () => {
-  const rootUrl = 'https://www.facebook.com/v12.0/dialog/oauth';
-
-  const options = {
-    redirect_uri: import.meta.env.VITE_FACEBOOK_OAUTH_REDIRECT_URL,
-    client_id: import.meta.env.VITE_FACEBOOK_CLIENT_ID,
-    access_type: 'offline',
-    response_type: 'code',
-    scope: ['email'].join(' '),
-  };
-
-  const urlSearchParams = new URLSearchParams(options);
-
-  return `${rootUrl}?${urlSearchParams.toString()}`;
-};
-
-function App() {
+const App = () => {
   return (
     <>
-      <a
-        className='text-red-700'
-        href={getGoogleAuthUrl()}
-      >
-        Login
-      </a>
-      <a
-        className='text-blue-700'
-        href={getFacebookAuthUrl()}
-      >
-        Login
-      </a>
+      <QueryClientProvider client={queryClient}>
+        <AuthContextProvider>
+          <RouterProvider router={router} />
+        </AuthContextProvider>
+      </QueryClientProvider>
     </>
   );
-}
+};
 
 export default App;
