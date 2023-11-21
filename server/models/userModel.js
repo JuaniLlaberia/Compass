@@ -23,14 +23,14 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['employee', 'employer'],
+    enum: ['user', 'business'],
   },
   birthDate: {
     type: Date,
   },
   gender: {
     type: String,
-    enum: ['Male', 'Female', 'Other'],
+    enum: ['male', 'female', 'other'],
   },
   summary: {
     type: String,
