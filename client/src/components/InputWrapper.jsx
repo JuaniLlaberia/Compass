@@ -8,7 +8,7 @@ const InputWrapper = ({ label, id, error, children }) => {
       >
         {label}
       </label>
-      {error && <p className='text-sm px-2 text-red-500'>ERROR</p>}
+      {error && <p className='text-sm px-2 text-red-500'>{error}</p>}
     </div>
   );
 };
