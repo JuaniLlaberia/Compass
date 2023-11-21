@@ -8,3 +8,14 @@ export const getAuthUser = async () => {
 
   return await response.json();
 };
+
+export const logoutUser = async () => {
+  try {
+    await fetch('http://localhost:8000/api/auth/logout', {
+      method: 'POST',
+      credentials: 'include',
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
