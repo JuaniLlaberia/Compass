@@ -3,8 +3,7 @@ import { useState } from 'react';
 export const useMultiStepForm = steps => {
   const [crrIndex, setCrrIndex] = useState(0);
 
-  const nextStep = e => {
-    e.preventDefault();
+  const nextStep = () => {
     setCrrIndex(i => {
       if (i >= steps.length - 1) return i;
       return i + 1;
