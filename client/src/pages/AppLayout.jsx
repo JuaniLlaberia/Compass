@@ -1,14 +1,16 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import MainHeader from '../components/MainHeader';
+import MainNav from '../components/MainNav';
 
 const AppLayout = () => {
   return (
-    <div className='text-black'>
-      Layout
-      <Outlet />
-      <Link to='/app'>TEST 1</Link>
-      <Link to='/settings'>TEST 2</Link>
-      <Link to='/'>TEST 3</Link>
-    </div>
+    <>
+      <MainHeader />
+      <main className='p-4 bg-[red]'>
+        <Outlet />
+      </main>
+      <MainNav />
+    </>
   );
 };
 

@@ -11,7 +11,7 @@ const ProtectedRoutes = () => {
     if (user?.status === 'failed') return navigate('/');
     //New user must go through registration proccess
     if (user?.status === 'success' && user?.data?.newUser)
-      return navigate('/settings');
+      return navigate('/signup/information');
   }, [user, navigate]);
 
   if (user?.status === 'success') return <Outlet />;
