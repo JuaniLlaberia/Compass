@@ -1,6 +1,9 @@
-import React from 'react';
+import { useState } from 'react';
+import defaultImg from '../../public/default.jpg';
 
 const UserImgForm = ({ register, error }) => {
+  const [previewImg, setPreviewImage] = useState(defaultImg);
+
   return (
     <>
       <h1 className='text-light-text-1 dark:text-dark-text-1 text-2xl mb-1 font-semibold'>
@@ -10,20 +13,31 @@ const UserImgForm = ({ register, error }) => {
         This image will be part of you profile and card, that other users can
         see. You can change it whenever you like.
       </p>
-      <h2 className='mb-4'>Preview</h2>
+      <h2 className='mb-4 font-semibold text-light-text-1'>Preview</h2>
       <label
         htmlFor='profileImg'
-        className='flex justify-center items-end gap-6 mb-16'
+        className='flex justify-center items-end gap-6 mb-12'
       >
-        <div className='h-40 w-40 bg-[gray] rounded-full'></div>
-        <div className='h-20 w-20 bg-[gray] rounded-full'></div>
+        <img
+          src={previewImg}
+          className='h-40 w-40 bg-[gray] rounded-full object-cover'
+        />
+        <img
+          src={previewImg}
+          className='h-20 w-20 bg-[gray] rounded-full object-cover'
+        />
       </label>
       <input
-        {...register('image', { required: 'Please upload you image' })}
+        {...register('image', {
+          required: 'Please upload you image',
+          onChange: e =>
+            setPreviewImage(URL.createObjectURL(e.target.files[0])),
+        })}
         type='file'
         className='hidden'
         id='profileImg'
       />
+      {error && <p className='px-2 text-red-500'>{error.message}</p>}
     </>
   );
 };

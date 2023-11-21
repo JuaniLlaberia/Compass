@@ -8,8 +8,8 @@ const AccTypeForm = ({ register, error }) => {
         Select account type
       </h1>
       <p className='mb-6 text-sm text-light-text-2 dark:text-dark-text-2'>
-        If you are looking to get hire then you should select 'Employee'. But if
-        you are a business and need to hire, select 'Business'.
+        If you are looking for a job you should select 'Employee'. But if you
+        are a business and are looking to hire, select 'Business'.
       </p>
       <ul className='flex flex-col gap-4'>
         <CustomRadio
@@ -31,7 +31,7 @@ const AccTypeForm = ({ register, error }) => {
           })}
         />
       </ul>
-      {error && <p className='text-red-500 mt-2'>Please select one option</p>}
+      {error && <p className='text-red-500 mt-2'>{error.message}</p>}
     </>
   );
 };
