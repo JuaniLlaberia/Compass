@@ -1,9 +1,11 @@
 import { subYears } from 'date-fns';
 import Input from './Input';
 import InputWrapper from './InputWrapper';
-import CustomRadioSmall from './CustomRadioSmall';
+import Select from './Select';
+import RadioGroup from './RadioGroup';
+import { categories } from '../utils/lists/categories';
 
-export const UserFields = ({ register, error }) => {
+export const UserFields = ({ register, error, setValue, selectedOptions }) => {
   return (
     <>
       <InputWrapper
@@ -42,32 +44,18 @@ export const UserFields = ({ register, error }) => {
         id='gender'
         error={error?.gender?.message}
       >
-        <ul className='flex gap-3'>
-          {['male', 'female', 'other'].map(gender => (
-            <CustomRadioSmall
-              key={gender}
-              value={gender}
-              label={gender}
-              register={register('gender', {
-                required: 'Please specify your gender',
-              })}
-            />
-          ))}
-        </ul>
-      </InputWrapper>
-      <InputWrapper
-        label='What are you looking?'
-        id='category'
-        error={error?.category?.message}
-      >
-        <Input
-          register={register('category', {
-            required: 'Please provide a category',
+        <RadioGroup
+          options={['male', 'female', 'other']}
+          fn={register('gender', {
+            required: 'Please specify your gender',
           })}
-          error={error?.category}
-          id='category'
-          placeholder='Category'
-          type='text'
+        />
+      </InputWrapper>
+      <InputWrapper label='What job category are you looking?'>
+        <Select
+          options={categories}
+          onChange={setValue}
+          selectedOptions={selectedOptions}
         />
       </InputWrapper>
     </>

@@ -1,7 +1,14 @@
 import Input from './Input';
 import InputWrapper from './InputWrapper';
+import Select from './Select';
+import { categories } from '../utils/lists/categories';
 
-export const BusinessFields = ({ register, error }) => {
+export const BusinessFields = ({
+  register,
+  error,
+  setValue,
+  selectedOptions,
+}) => {
   return (
     <>
       <InputWrapper
@@ -34,32 +41,11 @@ export const BusinessFields = ({ register, error }) => {
           type='text'
         />
       </InputWrapper>
-      <InputWrapper
-        label='Business category'
-        id='category'
-        error={error?.category?.message}
-      >
-        <Input
-          register={register('category', {
-            required: 'Please provide your category',
-          })}
-          error={error?.category}
-          id='category'
-          placeholder='Category'
-          type='text'
-        />
-      </InputWrapper>
-      <InputWrapper
-        label='Extra field?'
-        id='x'
-        error={error?.x?.message}
-      >
-        <Input
-          register={register('x')}
-          error={error?.x}
-          id='x'
-          placeholder='x'
-          type='text'
+      <InputWrapper label='What are you looking to hire?'>
+        <Select
+          options={categories}
+          onChange={setValue}
+          selectedOptions={selectedOptions}
         />
       </InputWrapper>
     </>

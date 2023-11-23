@@ -1,7 +1,21 @@
+import { useState } from 'react';
 import { BusinessFields } from './BusinessFields';
 import { UserFields } from './UserFields';
 
-const UserInfoForm = ({ register, error, selectedRole }) => {
+const UserInfoForm = ({
+  register,
+  error,
+  selectedRole,
+  categories,
+  setValue,
+}) => {
+  const [selectedOptions, setSelectedOptions] = useState(categories || []);
+
+  const updateSelectedOptionsForm = newOptions => {
+    setSelectedOptions(newOptions);
+    setValue('category', newOptions);
+  };
+
   return (
     <>
       <h1 className='text-light-text-1 dark:text-dark-text-1 text-2xl mb-1 font-semibold'>
@@ -13,11 +27,15 @@ const UserInfoForm = ({ register, error, selectedRole }) => {
       </p>
       {selectedRole === 'user' ? (
         <UserFields
+          setValue={updateSelectedOptionsForm}
+          selectedOptions={selectedOptions}
           register={register}
           error={error}
         />
       ) : (
         <BusinessFields
+          setValue={updateSelectedOptionsForm}
+          selectedOptions={selectedOptions}
           register={register}
           error={error}
         />
