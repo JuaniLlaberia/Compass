@@ -17,7 +17,7 @@ export default {
         'light-bg-2': '#F4F4F4',
         'light-bg-3': '#EAEAE9',
         'light-text-1': '#0A0A0A',
-        'light-text-2': '#A59F9F',
+        'light-text-2': '#8f8d8d',
         'light-text-3': '',
         'light-shadow-1': '',
         'light-shadow-2': '',

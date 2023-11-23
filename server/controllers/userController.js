@@ -8,8 +8,19 @@ exports.getUser = (req, res) => {
 };
 
 exports.updateUser = catchErrorAsync(async (req, res) => {
+  let imageLink = '';
+  //If image update else keep going
+  if (req?.file?.buffer) {
+    //Optimize image + proper format
+    //Upload buffer to bucket
+    //Get access url
+  }
+
   //Filter fields that user can't modify
-  let filteredBody = { ...req.body };
+  let filteredBody = {
+    ...req.body,
+    profileImage: imageLink === '' ? req.body.profileImage : imageLink,
+  };
   ['_id', 'email', 'membership'].forEach(field => delete filteredBody[field]);
 
   //Find and update the user
