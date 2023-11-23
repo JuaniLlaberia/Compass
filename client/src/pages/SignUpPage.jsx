@@ -3,6 +3,7 @@ import MainHeader from '../components/MainHeader';
 import AccTypeForm from '../components/AccTypeForm';
 import UserInfoForm from '../components/UserInfoForm';
 import UserImgForm from '../components/UserImgForm';
+import Button from '../components/Button';
 import { useMultiStepForm } from '../hooks/useMultiStepForm';
 import { useUpdateUser } from '../features/user/useUpdateUser';
 
@@ -12,6 +13,7 @@ const SignUpPage = () => {
     formState: { errors },
     handleSubmit,
     getValues,
+    setValue,
   } = useForm();
 
   const { updateUser, isUpdating } = useUpdateUser();
@@ -23,7 +25,9 @@ const SignUpPage = () => {
         error={errors.role}
       />,
       <UserInfoForm
+        setValue={setValue}
         selectedRole={getValues('role')}
+        categories={getValues('category')}
         register={register}
         error={errors}
       />,
@@ -36,7 +40,6 @@ const SignUpPage = () => {
   const onSubmit = data => {
     if (!isLastStep) return nextStep();
 
-    //Handle data and image -> send to back-end
     const formData = new FormData();
 
     formData.append('role', data.role);
@@ -64,7 +67,7 @@ const SignUpPage = () => {
           className='p-3'
         >
           {crrStep}
-          <div className='flex gap-3 justify-end mt-6'>
+          <section className='flex gap-4 justify-end mt-6'>
             {!isFirstStep && (
               <button
                 disabled={isUpdating}
@@ -74,13 +77,10 @@ const SignUpPage = () => {
                 Back
               </button>
             )}
-            <button
-              disabled={isUpdating}
-              className='bg-dark-bg-2 text-dark-text-1 px-6 py-2 rounded-md active:bg-dark-bg-3 md:hover:bg-dark-bg-3 transition-colors'
-            >
-              {isLastStep ? (isUpdating ? 'Loading...' : 'Done') : 'Next'}
-            </button>
-          </div>
+            <Button isLoading={isUpdating}>
+              {isLastStep ? 'Done' : 'Next'}
+            </Button>
+          </section>
         </form>
       </main>
     </>
