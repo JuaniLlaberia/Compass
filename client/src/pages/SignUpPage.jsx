@@ -20,10 +20,7 @@ const SignUpPage = () => {
 
   const { crrStep, nextStep, prevStep, isFirstStep, isLastStep } =
     useMultiStepForm([
-      <AccTypeForm
-        register={register}
-        error={errors.role}
-      />,
+      <AccTypeForm register={register} error={errors.role} />,
       <UserInfoForm
         setValue={setValue}
         selectedRole={getValues('role')}
@@ -31,13 +28,11 @@ const SignUpPage = () => {
         register={register}
         error={errors}
       />,
-      <UserImgForm
-        register={register}
-        error={errors.image}
-      />,
+      <UserImgForm register={register} error={errors.image} />,
     ]);
 
   const onSubmit = data => {
+    console.log(data.category);
     if (!isLastStep) return nextStep();
 
     const formData = new FormData();
@@ -45,7 +40,7 @@ const SignUpPage = () => {
     formData.append('role', data.role);
     formData.append('fullName', data.fullName);
     formData.append('profileImage', data.image[0]);
-    formData.append('category', data.category);
+    data.category.forEach(cat => formData.append('category', cat));
     formData.append('newUser', false);
 
     if (data.role === 'user') {
@@ -62,10 +57,7 @@ const SignUpPage = () => {
     <>
       <MainHeader />
       <main className='bg-light-bg-1 dark:bg-dark-bg-1 p-4'>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className='p-3'
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className='p-3'>
           {crrStep}
           <section className='flex gap-4 justify-end mt-6'>
             {!isFirstStep && (
