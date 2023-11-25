@@ -37,11 +37,10 @@ const userSchema = new mongoose.Schema({
     maxLength: [300, 'User description must have less than 300 characters.'],
   },
   category: {
-    type: String,
+    type: [String],
   },
   filters: {
     distance: String,
-    category: String,
     minAge: Number,
     maxAge: Number,
     gender: String,
