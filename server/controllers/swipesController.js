@@ -76,6 +76,7 @@ exports.swipeRight = catchErrorAsync(async (req, res, next) => {
 });
 
 exports.swipeLeft = catchErrorAsync(async (req, res, next) => {
+  console.log(req.body.swipedUserId);
   //1) Check if user you swiped left (reject) has swiped you right before
   const isSwiped = await Swipes.exists({
     $and: [
