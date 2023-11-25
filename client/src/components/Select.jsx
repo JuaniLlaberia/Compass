@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { IoChevronDown } from 'react-icons/io5';
 import { useClickOutside } from '../hooks/useClickOutside';
+import { motion } from 'framer-motion';
 
 const Select = ({ options, onChange, selectedOptions }) => {
   //Handle if input is open or close
@@ -25,10 +26,7 @@ const Select = ({ options, onChange, selectedOptions }) => {
   };
 
   return (
-    <div
-      className='relative mt-7 cursor-pointer'
-      ref={ref}
-    >
+    <div className='relative mt-7 cursor-pointer' ref={ref}>
       <div
         className={`w-full border h-11 rounded-lg flex justify-between items-center ${
           isOpen ? 'border-secondary-1' : ''
@@ -49,9 +47,9 @@ const Select = ({ options, onChange, selectedOptions }) => {
         </div>
       </div>
       <ul
-        className={`absolute w-full h-0 ${
-          isOpen ? 'h-28 border' : ''
-        } max-h-28 overflow-y-auto overflow-x-hidden transition-all duration-300 rounded-lg mt-1 shadow-sm z-40 bg-light-bg-1`}
+        className={`fixed w-full h-0 max-h-60 bottom-0 left-0 z-[100] md:absolute md:max-h-36 md:top-[100%] ${
+          isOpen ? 'h-60 md:36 border-t md:border border-[#a1a0a0]' : ''
+        } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-2xl md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1`}
       >
         {options.map(option => (
           <li
@@ -61,7 +59,7 @@ const Select = ({ options, onChange, selectedOptions }) => {
                 ? unSelectOption(option)
                 : selectOption(option)
             }
-            className={`px-3 py-1.5 active:bg-light-bg-2 md:bg-light-bg-2 border-b flex items-center gap-3 ${
+            className={`px-3 py-2.5 active:bg-light-bg-2 border-b flex items-center gap-3 ${
               selectedOptions.includes(option) ? 'bg-light-bg-2' : ''
             }`}
           >
@@ -75,6 +73,15 @@ const Select = ({ options, onChange, selectedOptions }) => {
           </li>
         ))}
       </ul>
+      {isOpen && (
+        <motion.div
+          onClick={() => setIsOpen(false)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className='md:hidden fixed top-0 left-0 h-full w-full z-[80] bg-[#f1ecec14] backdrop-blur-[1px]'
+        ></motion.div>
+      )}
     </div>
   );
 };

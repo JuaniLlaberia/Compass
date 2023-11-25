@@ -28,13 +28,9 @@ const items = [
 const MainNav = () => {
   return (
     <nav>
-      <ul className='w-full h-12 fixed bottom-0 z-50 flex justify-around items-center bg-light-bg-1 dark:bg-dark-bg-1'>
+      <ul className='w-full h-14 fixed bottom-0 z-50 flex justify-around items-center '>
         {items.map(item => (
-          <NavItem
-            key={item.link}
-            link={item.link}
-            icon={item.icon}
-          />
+          <NavItem key={item.link} link={item.link} icon={item.icon} />
         ))}
       </ul>
     </nav>
