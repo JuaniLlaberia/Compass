@@ -6,9 +6,7 @@ const CustomError = require('../utils/error');
 
 exports.createCheckoutSession = catchErrorAsync(async (req, res, next) => {
   //Getting package info from DB
-  const package = await LikesPack.findOne({
-    likesAmount: req.body.likesPackage,
-  });
+  const package = await LikesPack.findById(req.body.packageId);
 
   if (!package)
     return next(new CustomError('Please provide a valid likes package', 404));
@@ -30,13 +28,13 @@ exports.createCheckoutSession = catchErrorAsync(async (req, res, next) => {
       },
     ],
     mode: 'payment',
-    success_url: 'http://localhost:5173',
-    cancel_url: 'http://localhost:5173',
+    success_url: 'http://localhost:5173/profile',
+    cancel_url: 'http://localhost:5173/profile',
     client_reference_id: likesAmount,
     customer_email: req.user.email,
   });
 
-  //   res.redirect(303, session.url);
+  // res.redirect(303, session.url);
   res.status(200).json({ link: session.url });
 });
 
@@ -88,5 +86,14 @@ exports.webHookCheckout = catchErrorAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     message: 'Payment received. You will receive your likes now.',
+  });
+});
+
+exports.getPackages = catchErrorAsync(async (req, res) => {
+  const packages = await LikesPack.find();
+
+  res.status(200).json({
+    status: 'success',
+    data: packages,
   });
 });
