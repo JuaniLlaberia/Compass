@@ -1,14 +1,39 @@
 export const updateUser = async userInfo => {
+  const isFormData = userInfo instanceof FormData;
+
+  const optionsRegular = {
+    method: 'PATCH',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userInfo),
+  };
+
+  const optionsFormData = {
+    method: 'PATCH',
+    credentials: 'include',
+    body: userInfo,
+  };
+
   try {
     //Sending data with formData because of image
-    const response = await fetch('http://localhost:8000/api/user/update', {
-      method: 'PATCH',
-      credentials: 'include',
-      body: userInfo,
-    });
+    const response = await fetch(
+      'http://localhost:8000/api/user/update',
+      isFormData ? optionsFormData : optionsRegular
+    );
 
     // if(!response.ok)
     return await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteUser = async () => {
+  try {
+    await fetch('http://localhost:8000/api/user/delete', {
+      method: 'DELETE',
+      credentials: 'include',
+    });
   } catch (err) {
     console.log(err);
   }
