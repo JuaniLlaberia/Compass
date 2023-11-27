@@ -15,7 +15,10 @@ const UserEditFields = ({
     <>
       <h1 className='border-b py-2 mb-8 font-semibold'>Personal Information</h1>
 
-      <InputWrapper label='Full name' id='name'>
+      <InputWrapper
+        label='Full name'
+        id='name'
+      >
         <Input
           register={register('fullName', {
             required: 'Please provide your name',
@@ -25,7 +28,10 @@ const UserEditFields = ({
           type='text'
         />
       </InputWrapper>
-      <InputWrapper label='Summary' id='summary'>
+      <InputWrapper
+        label='Summary'
+        id='summary'
+      >
         <TextArea
           register={register('summary', {
             required: 'Please tell us about you',
