@@ -6,8 +6,11 @@ import UserImgForm from '../components/UserImgForm';
 import Button from '../components/Button';
 import { useMultiStepForm } from '../hooks/useMultiStepForm';
 import { useUpdateUser } from '../features/user/useUpdateUser';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     formState: { errors },
@@ -20,7 +23,10 @@ const SignUpPage = () => {
 
   const { crrStep, nextStep, prevStep, isFirstStep, isLastStep } =
     useMultiStepForm([
-      <AccTypeForm register={register} error={errors.role} />,
+      <AccTypeForm
+        register={register}
+        error={errors.role}
+      />,
       <UserInfoForm
         setValue={setValue}
         selectedRole={getValues('role')}
@@ -28,7 +34,10 @@ const SignUpPage = () => {
         register={register}
         error={errors}
       />,
-      <UserImgForm register={register} error={errors.image} />,
+      <UserImgForm
+        register={register}
+        error={errors.image}
+      />,
     ]);
 
   const onSubmit = data => {
@@ -50,14 +59,19 @@ const SignUpPage = () => {
       formData.append('location', data.location);
     }
 
-    updateUser(formData);
+    updateUser(formData, {
+      onSuccess: () => navigate('/app'),
+    });
   };
 
   return (
     <>
       <MainHeader />
       <main className='bg-light-bg-1 dark:bg-dark-bg-1 p-4'>
-        <form onSubmit={handleSubmit(onSubmit)} className='p-3'>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='p-3'
+        >
           {crrStep}
           <section className='flex gap-4 justify-end mt-6'>
             {!isFirstStep && (
