@@ -26,7 +26,10 @@ const Select = ({ options, onChange, selectedOptions }) => {
   };
 
   return (
-    <div className='relative mt-7 cursor-pointer' ref={ref}>
+    <div
+      className='relative mt-7 cursor-pointer'
+      ref={ref}
+    >
       <div
         className={`w-full border h-11 rounded-lg flex justify-between items-center ${
           isOpen ? 'border-secondary-1' : ''
@@ -48,8 +51,8 @@ const Select = ({ options, onChange, selectedOptions }) => {
       </div>
       <ul
         className={`fixed w-full h-0 max-h-60 bottom-0 left-0 z-[100] md:absolute md:max-h-36 md:top-[100%] ${
-          isOpen ? 'h-60 md:36 border-t md:border border-[#a1a0a0]' : ''
-        } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-2xl md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1`}
+          isOpen ? 'h-60 md:36 border-t md:border border-[#dddcdc]' : ''
+        } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-lg md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1`}
       >
         {options.map(option => (
           <li

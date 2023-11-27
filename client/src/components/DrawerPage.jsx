@@ -20,7 +20,7 @@ const Page = ({ children, title, pageId }) => {
 
   return (
     <main
-      className={`fixed z-[100] bottom-0 left-0 h-[100dvh] w-full bg-light-bg-1 transition-transform duration-500 ${
+      className={`fixed z-[100] bottom-0 left-0 pb-12 h-[100vh] w-full bg-light-bg-1 transition-transform duration-500 ${
         isOpen === pageId ? 'translate-y-0' : 'translate-y-full'
       }`}
     >
