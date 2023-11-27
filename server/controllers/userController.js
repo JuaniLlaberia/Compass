@@ -21,7 +21,7 @@ exports.updateUser = catchErrorAsync(async (req, res) => {
     ...req.body,
     profileImage: imageLink === '' ? req.body.profileImage : imageLink,
   };
-  ['_id', 'email', 'membership'].forEach(field => delete filteredBody[field]);
+  ['_id', 'email'].forEach(field => delete filteredBody[field]);
 
   //Find and update the user
   const user = await User.findByIdAndUpdate(req.user._id, filteredBody, {
@@ -30,6 +30,11 @@ exports.updateUser = catchErrorAsync(async (req, res) => {
   });
 
   res.status(200).json({ status: 'success', data: user });
+});
+
+exports.deleteUser = catchErrorAsync(async (req, res) => {
+  await User.findByIdAndDelete(req.user._id);
+  res.status(200).json({ status: 'success', message: 'Account deleted.' });
 });
 
 exports.getAllMatches = catchErrorAsync(async (req, res) => {
