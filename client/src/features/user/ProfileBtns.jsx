@@ -5,7 +5,7 @@ import {
 } from 'react-icons/io5';
 import Drawer from '../../components/DrawerPage';
 import UserEdit from './UserEdit';
-import UserSettings from './UserSettings';
+import UserSettings from '../settings/UserSettings';
 
 const ProfileBtns = () => {
   return (
@@ -34,11 +34,20 @@ const ProfileBtns = () => {
         </li>
       </ul>
 
-      <Drawer.Page title='Statistics' pageId='statistics'></Drawer.Page>
-      <Drawer.Page title='Edit profile' pageId='edit'>
+      <Drawer.Page
+        title='Statistics'
+        pageId='statistics'
+      ></Drawer.Page>
+      <Drawer.Page
+        title='Edit profile'
+        pageId='edit'
+      >
         <UserEdit />
       </Drawer.Page>
-      <Drawer.Page title='Settings' pageId='settings'>
+      <Drawer.Page
+        title='Settings'
+        pageId='settings'
+      >
         <UserSettings />
       </Drawer.Page>
     </Drawer>

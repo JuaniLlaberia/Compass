@@ -1,7 +1,7 @@
 import defaultImg from '../../../public/default.jpg';
 import ProfileBtns from './ProfileBtns';
 import Modal from '../../components/Modal';
-import PacksModal from '../../components/PacksModal';
+import PacksModal from '../payments/PacksModal';
 import { useAuthContext } from '../../context/AuthContext';
 
 const ProfileHome = () => {
@@ -11,7 +11,10 @@ const ProfileHome = () => {
   return (
     <>
       <header className='flex flex-col justify-center items-center mt-4'>
-        <img src={defaultImg} className='h-36 w-36 rounded-full' />
+        <img
+          src={defaultImg}
+          className='h-36 w-36 rounded-full'
+        />
         <h1 className='text-lg text-light-text-1'>{fullName}</h1>
         <h2 className='text-light-text-2 font-semibold'>
           {category.join(', ')}
