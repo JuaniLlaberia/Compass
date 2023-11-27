@@ -11,6 +11,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
 import SignUpPage from './pages/SignUpPage';
+import { ThemeContextProvider } from './context/ThemeContext';
 
 const router = createBrowserRouter([
   {
@@ -66,7 +67,9 @@ const App = () => {
     <>
       <QueryClientProvider client={queryClient}>
         <AuthContextProvider>
-          <RouterProvider router={router} />
+          <ThemeContextProvider>
+            <RouterProvider router={router} />
+          </ThemeContextProvider>
         </AuthContextProvider>
       </QueryClientProvider>
     </>
