@@ -41,7 +41,6 @@ const SignUpPage = () => {
     ]);
 
   const onSubmit = data => {
-    console.log(data.category);
     if (!isLastStep) return nextStep();
 
     const formData = new FormData();

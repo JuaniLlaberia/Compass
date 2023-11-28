@@ -7,7 +7,8 @@ export const useGetUsers = () => {
     refetch,
     isRefetching,
     isLoading,
+    error,
   } = useQuery({ queryKey: ['users'], queryFn: getUsers, staleTime: 0 });
 
-  return { users, isLoading, isRefetching, refetch };
+  return { users, isLoading, isRefetching, refetch, error };
 };

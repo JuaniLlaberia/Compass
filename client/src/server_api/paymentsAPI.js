@@ -1,24 +1,36 @@
 export const getPackages = async () => {
-  const response = await fetch('http://localhost:8000/api/payment/packages', {
-    method: 'GET',
-    credentials: 'include',
-  });
+  try {
+    const response = await fetch('http://localhost:8000/api/payment/packages', {
+      method: 'GET',
+      credentials: 'include',
+    });
 
-  //Check response
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
 
-  return await response.json();
+    return await response.json();
+  } catch (err) {
+    throw err;
+  }
 };
 
 export const createCheckout = async packageId => {
-  const response = await fetch(
-    'http://localhost:8000/api/payment/create-session',
-    {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ packageId }),
-    }
-  );
+  try {
+    const response = await fetch(
+      'http://localhost:8000/api/payment/create-session',
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ packageId }),
+      }
+    );
 
-  return await response.json();
+    if (!response.ok) throw new Error(response.statusText);
+
+    return await response.json();
+  } catch (err) {
+    throw err;
+  }
 };

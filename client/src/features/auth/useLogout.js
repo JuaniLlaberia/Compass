@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from '../../server_api/authAPI';
+import { toast } from 'sonner';
 
 export const useLogout = () => {
   const queryClient = useQueryClient();
@@ -12,7 +13,9 @@ export const useLogout = () => {
       queryClient.invalidateQueries({ queryKey: ['auth-user'] });
       navigate('/');
     },
-    onError: () => {},
+    onError: () => {
+      toast.error('Something went wrong!');
+    },
   });
 
   return { logout, isLoading };

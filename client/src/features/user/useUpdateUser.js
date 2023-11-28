@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 import { updateUser as updateUserAPI } from '../../server_api/userAPI';
 
 export const useUpdateUser = () => {
@@ -10,7 +11,7 @@ export const useUpdateUser = () => {
       queryClient.invalidateQueries({ queryKey: ['auth-user'] });
       queryClient.setQueryData('auth-user', data?.data);
     },
-    onError: () => {},
+    onError: () => toast.error('Something went wrong. Please try again.'),
   });
 
   return { updateUser, isUpdating };

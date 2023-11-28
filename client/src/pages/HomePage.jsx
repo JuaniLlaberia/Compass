@@ -4,19 +4,21 @@ import { useSwipeLeft } from '../features/user/useSwipeLeft';
 import Test from './Test';
 
 const HomePage = () => {
-  const { users, isLoading, refetch, isRefetching } = useGetUsers();
+  const { users, isLoading, refetch, isRefetching, error } = useGetUsers();
   const { swipeRight } = useSwipeRight();
   const { swipeLeft } = useSwipeLeft();
 
   if (isLoading) return <h1>Loading</h1>;
 
   return (
-    <Test
-      users={users.data}
-      refetch={refetch}
-      swipeLeft={swipeLeft}
-      swipeRight={swipeRight}
-    />
+    <>
+      <Test
+        users={users.data}
+        refetch={refetch}
+        swipeLeft={swipeLeft}
+        swipeRight={swipeRight}
+      />
+    </>
   );
 };
 

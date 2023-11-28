@@ -1,21 +1,27 @@
 export const getAuthUser = async () => {
-  const response = await fetch('http://localhost:8000/api/user/me', {
-    method: 'GET',
-    credentials: 'include',
-  });
+  try {
+    const response = await fetch('http://localhost:8000/api/user/me', {
+      method: 'GET',
+      credentials: 'include',
+    });
 
-  // if (!response.ok)
-
-  return await response.json();
+    return await response.json();
+  } catch (err) {
+    throw new Error(err.message);
+  }
 };
 
 export const logoutUser = async () => {
   try {
-    await fetch('http://localhost:8000/api/auth/logout', {
+    const response = await fetch('http://localhost:8000/api/auth/logout', {
       method: 'POST',
       credentials: 'include',
     });
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };

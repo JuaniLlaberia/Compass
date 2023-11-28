@@ -15,27 +15,29 @@ export const updateUser = async userInfo => {
   };
 
   try {
-    //Sending data with formData because of image
     const response = await fetch(
       'http://localhost:8000/api/user/update',
       isFormData ? optionsFormData : optionsRegular
     );
 
-    // if(!response.ok)
+    if (!response.ok) throw new Error(response.statusText);
+
     return await response.json();
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
 export const deleteUser = async () => {
   try {
-    await fetch('http://localhost:8000/api/user/delete', {
+    const response = await fetch('http://localhost:8000/api/user/delete', {
       method: 'DELETE',
       credentials: 'include',
     });
+
+    if (!response.ok) throw new Error(response.statusText);
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
@@ -46,15 +48,17 @@ export const getUsers = async () => {
       credentials: 'include',
     });
 
+    if (!response.ok) throw new Error(response.statusText);
+
     return await response.json();
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
 export const swipeRight = async userId => {
   try {
-    const response = await fetch('http://localhost:8000/api/swipes/right', {
+    const response = await fetch('http://localhost:8000/api/swipes/rights', {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -63,10 +67,11 @@ export const swipeRight = async userId => {
       body: JSON.stringify({ swipedUserId: userId }),
     });
 
-    //Check if everything is good!
-    console.log(response);
+    if (!response.ok) throw new Error(response.statusText);
+
+    return await response.json();
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
@@ -81,8 +86,8 @@ export const swipeLeft = async userId => {
       body: JSON.stringify({ swipedUserId: userId }),
     });
 
-    console.log(response);
+    if (!response.ok) throw new Error(response.statusText);
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };

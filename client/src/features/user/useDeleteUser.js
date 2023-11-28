@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 import { deleteUser } from '../../server_api/userAPI';
 
 export const useDeleteUser = () => {
@@ -12,7 +13,7 @@ export const useDeleteUser = () => {
       navigate('/');
       queryClient.invalidateQueries({ queryKey: ['auth-user'] });
     },
-    onError: () => {},
+    onError: () => toast.error('Something went wrong. Please try again.'),
   });
 
   return { deleteAccount, isDeleting };
