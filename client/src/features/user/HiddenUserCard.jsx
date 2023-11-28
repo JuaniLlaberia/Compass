@@ -1,5 +1,5 @@
 import { IoEyeSharp } from 'react-icons/io5';
-import { useUpdateUser } from '../features/user/useUpdateUser';
+import { useUpdateUser } from './useUpdateUser';
 import { ClipLoader } from 'react-spinners';
 
 const HiddenUserCard = () => {
