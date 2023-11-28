@@ -4,6 +4,7 @@ import TextArea from '../../components/TextArea';
 import RadioGroup from '../../components/RadioGroup';
 import Select from '../../components/Select';
 import { categories } from '../../utils/lists/categories';
+import SeparatorHeader from '../../components/SeparatorHeader';
 
 const BusinessEditFields = ({
   register,
@@ -12,8 +13,11 @@ const BusinessEditFields = ({
 }) => {
   return (
     <>
-      <h1 className='border-b py-2 mb-8 font-semibold'>Business Information</h1>
-      <InputWrapper label='Business name' id='name'>
+      <SeparatorHeader>Business Information</SeparatorHeader>
+      <InputWrapper
+        label='Business name'
+        id='name'
+      >
         <Input
           register={register('fullName', {
             required: 'Please provide your name',
@@ -23,7 +27,10 @@ const BusinessEditFields = ({
           type='text'
         />
       </InputWrapper>
-      <InputWrapper label='Summary' id='summary'>
+      <InputWrapper
+        label='Summary'
+        id='summary'
+      >
         <TextArea
           register={register('summary', {
             required: 'Please tell us about you',
@@ -41,7 +48,7 @@ const BusinessEditFields = ({
           onChange={updateSelectedOptionsForm}
         />
       </InputWrapper>
-      <h1 className='border-b py-2 mb-8 font-semibold'>Search filters</h1>
+      <SeparatorHeader>Search filters</SeparatorHeader>
       <InputWrapper label='Gender'>
         <RadioGroup
           options={['male', 'female', 'all']}

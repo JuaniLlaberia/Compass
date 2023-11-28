@@ -4,6 +4,7 @@ import TextArea from '../../components/TextArea';
 import Button from '../../components/Button';
 import RadioGroup from '../../components/RadioGroup';
 import Select from '../../components/Select';
+import SeparatorHeader from '../../components/SeparatorHeader';
 import { categories } from '../../utils/lists/categories';
 
 const UserEditFields = ({
@@ -13,8 +14,7 @@ const UserEditFields = ({
 }) => {
   return (
     <>
-      <h1 className='border-b py-2 mb-8 font-semibold'>Personal Information</h1>
-
+      <SeparatorHeader>Personal Information</SeparatorHeader>
       <InputWrapper
         label='Full name'
         id='name'
@@ -50,7 +50,7 @@ const UserEditFields = ({
           })}
         />
       </InputWrapper>
-      <h1 className='border-b py-2 mb-8 font-semibold'>Extra Information</h1>
+      <SeparatorHeader>Extra Information</SeparatorHeader>
       <InputWrapper label='What type of jobs are you looking?'>
         <Select
           options={categories}

@@ -27,7 +27,7 @@ const PacksModal = () => {
           for the inconvenience.
         </p>
       )}
-      <p className='mt-5 text-sm text-light-text-2 px-2'>
+      <p className='mt-5 text-sm text-light-text-2 dark:text-dark-text-2 px-2'>
         All extra like packages have no expiration date and they work exactly
         the same as regular likes. All payments are handle by Stripe©.
       </p>

@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-import MainHeader from '../components/MainHeader';
 import AccTypeForm from '../components/AccTypeForm';
 import UserInfoForm from '../components/UserInfoForm';
 import UserImgForm from '../components/UserImgForm';
@@ -73,18 +72,18 @@ const SignUpPage = () => {
 
   return (
     <>
-      <MainHeader />
-      <main className='bg-light-bg-1 dark:bg-dark-bg-1 p-4'>
+      <header className='fixed top-0 bg-secondary-1 w-full h-14 flex justify-center items-center'></header>
+      <main className='h-[100dvh]'>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='p-3'
+          className='bg-light-bg-1 dark:bg-dark-bg-1 h-full py-4 px-7 pt-16'
         >
           {crrStep}
           <section className='flex gap-4 justify-end mt-6'>
             {!isFirstStep && (
               <button
                 disabled={isUpdating}
-                className='text-light-text-2'
+                className='text-light-text-2 dark:text-dark-text-2'
                 onClick={prevStep}
               >
                 Back
