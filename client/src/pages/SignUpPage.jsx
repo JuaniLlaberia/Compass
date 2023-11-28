@@ -7,9 +7,12 @@ import Button from '../components/Button';
 import { useMultiStepForm } from '../hooks/useMultiStepForm';
 import { useUpdateUser } from '../features/user/useUpdateUser';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../context/AuthContext';
+import { useEffect } from 'react';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
+  const { user } = useAuthContext();
 
   const {
     register,
@@ -62,6 +65,11 @@ const SignUpPage = () => {
       onSuccess: () => navigate('/app'),
     });
   };
+
+  useEffect(() => {
+    if (user?.status === 'success' && !user?.data?.newUser)
+      return navigate('/app');
+  }, [user]);
 
   return (
     <>
