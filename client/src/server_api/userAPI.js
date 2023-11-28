@@ -58,7 +58,7 @@ export const getUsers = async () => {
 
 export const swipeRight = async userId => {
   try {
-    const response = await fetch('http://localhost:8000/api/swipes/rights', {
+    const response = await fetch('http://localhost:8000/api/swipes/right', {
       method: 'POST',
       credentials: 'include',
       headers: {
