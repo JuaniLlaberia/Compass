@@ -8,11 +8,7 @@ import NotificationPage from './pages/NotificationPage';
 import ChatsPage from './pages/ChatsPage';
 import ProfilePage from './pages/ProfilePage';
 import SettingsPage from './pages/SettingsPage';
-import {
-  MutationCache,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
 import SignUpPage from './pages/SignUpPage';
