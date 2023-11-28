@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Toaster } from 'sonner';
 
 import AuthPage from './pages/AuthPage';
 import AppLayout from './pages/AppLayout';
@@ -7,7 +8,11 @@ import NotificationPage from './pages/NotificationPage';
 import ChatsPage from './pages/ChatsPage';
 import ProfilePage from './pages/ProfilePage';
 import SettingsPage from './pages/SettingsPage';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  MutationCache,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
 import SignUpPage from './pages/SignUpPage';
@@ -69,6 +74,11 @@ const App = () => {
         <AuthContextProvider>
           <ThemeContextProvider>
             <RouterProvider router={router} />
+            <Toaster
+              richColors
+              closeButton
+              position='bottom-center'
+            />
           </ThemeContextProvider>
         </AuthContextProvider>
       </QueryClientProvider>
