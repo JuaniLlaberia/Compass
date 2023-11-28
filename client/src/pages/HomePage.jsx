@@ -1,25 +1,11 @@
-import { useGetUsers } from '../features/user/useGetUsers';
-import { useSwipeRight } from '../features/user/useSwipeRight';
-import { useSwipeLeft } from '../features/user/useSwipeLeft';
 import Test from './Test';
+import { useAuthContext } from '../context/AuthContext';
+import HiddenUserCard from '../components/HiddenUserCard';
 
 const HomePage = () => {
-  const { users, isLoading, refetch, isRefetching, error } = useGetUsers();
-  const { swipeRight } = useSwipeRight();
-  const { swipeLeft } = useSwipeLeft();
+  const { user } = useAuthContext();
 
-  if (isLoading) return <h1>Loading</h1>;
-
-  return (
-    <>
-      <Test
-        users={users.data}
-        refetch={refetch}
-        swipeLeft={swipeLeft}
-        swipeRight={swipeRight}
-      />
-    </>
-  );
+  return <>{!user.data.hideUser ? <Test /> : <HiddenUserCard />}</>;
 };
 
 export default HomePage;
