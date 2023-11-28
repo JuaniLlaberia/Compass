@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import RadioGroup from '../../components/RadioGroup';
-import Select from '../../components/Select';
 import SettingsBtns from './SettingsBtns';
 import { useThemeContext } from '../../context/ThemeContext';
 
@@ -20,11 +19,6 @@ const UserSettings = () => {
             toggleTheme(val.target.value);
           },
         })}
-      />
-      <h1 className='font-semibold border-b py-1 my-2'>Language</h1>
-      <Select
-        options={['English', 'Spanish']}
-        selectedOptions={['Spanish']}
       />
       <SettingsBtns />
     </section>
