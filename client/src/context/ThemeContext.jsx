@@ -11,17 +11,10 @@ export const ThemeContextProvider = ({ children }) => {
   const toggleTheme = option => {
     switch (option) {
       case 'Light':
-        setTheme('Light');
+        setTheme(option);
         break;
       case 'Dark':
-        setTheme('Dark');
-        break;
-      case 'System':
-        const systemTheme = window.matchMedia('(prefers-color-scheme: light')
-          .matches
-          ? 'Light'
-          : 'Dark';
-        setTheme(systemTheme);
+        setTheme(option);
         break;
     }
 

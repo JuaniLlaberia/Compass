@@ -13,7 +13,7 @@ const UserSettings = () => {
     <section className='relative h-full'>
       <h1 className='font-semibold border-b py-1 mb-2'>Theme</h1>
       <RadioGroup
-        options={['Light', 'Dark', 'System']}
+        options={['Light', 'Dark']}
         fn={register('theme', {
           onChange: val => {
             toggleTheme(val.target.value);
