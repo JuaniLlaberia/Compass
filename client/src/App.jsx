@@ -7,7 +7,6 @@ import HomePage from './pages/HomePage';
 import NotificationPage from './pages/NotificationPage';
 import ChatsPage from './pages/ChatsPage';
 import ProfilePage from './pages/ProfilePage';
-import SettingsPage from './pages/SettingsPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
@@ -44,10 +43,6 @@ const router = createBrowserRouter([
           {
             path: '/profile',
             element: <ProfilePage />,
-          },
-          {
-            path: '/settings',
-            element: <SettingsPage />,
           },
         ],
       },

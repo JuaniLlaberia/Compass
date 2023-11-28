@@ -29,7 +29,7 @@ const Window = ({ children, windowName }) => {
   if (isOpen !== windowName) return null;
 
   return createPortal(
-    <div className='dark'>
+    <>
       <motion.div
         initial={{ y: '-100%', x: '-50%', opacity: 0, scale: 0.85 }}
         animate={{ y: '-40%', x: '-50%', opacity: 1, scale: 1 }}
@@ -52,7 +52,7 @@ const Window = ({ children, windowName }) => {
         onClick={close}
         className='fixed top-0 left-0 h-full w-full z-[100] bg-[#a8a8a834] backdrop-blur-[1.5px]'
       ></motion.div>
-    </div>,
+    </>,
     document.body
   );
 };
