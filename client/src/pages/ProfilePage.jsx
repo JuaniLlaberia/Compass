@@ -1,7 +1,7 @@
-import React from 'react';
+import ProfileHome from '../features/user/ProfileHome';
 
 const ProfilePage = () => {
-  return <div>ProfilePage</div>;
+  return <ProfileHome />;
 };
 
 export default ProfilePage;

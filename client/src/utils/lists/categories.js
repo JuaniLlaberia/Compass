@@ -5,4 +5,8 @@ export const categories = [
   'Chef',
   'Security',
   'Cleaner',
+  'Cook',
+  'Baker',
+  'Painter',
+  'Worker',
 ];

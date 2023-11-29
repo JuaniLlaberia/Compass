@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Toaster } from 'sonner';
 
 import AuthPage from './pages/AuthPage';
 import AppLayout from './pages/AppLayout';
@@ -6,11 +7,11 @@ import HomePage from './pages/HomePage';
 import NotificationPage from './pages/NotificationPage';
 import ChatsPage from './pages/ChatsPage';
 import ProfilePage from './pages/ProfilePage';
-import SettingsPage from './pages/SettingsPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
 import SignUpPage from './pages/SignUpPage';
+import { ThemeContextProvider } from './context/ThemeContext';
 
 const router = createBrowserRouter([
   {
@@ -43,10 +44,6 @@ const router = createBrowserRouter([
             path: '/profile',
             element: <ProfilePage />,
           },
-          {
-            path: '/settings',
-            element: <SettingsPage />,
-          },
         ],
       },
     ],
@@ -66,7 +63,14 @@ const App = () => {
     <>
       <QueryClientProvider client={queryClient}>
         <AuthContextProvider>
-          <RouterProvider router={router} />
+          <ThemeContextProvider>
+            <RouterProvider router={router} />
+            <Toaster
+              richColors
+              closeButton
+              position='bottom-center'
+            />
+          </ThemeContextProvider>
         </AuthContextProvider>
       </QueryClientProvider>
     </>

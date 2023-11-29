@@ -1,5 +1,11 @@
+import Cards from '../features/user/Cards';
+import { useAuthContext } from '../context/AuthContext';
+import HiddenUserCard from '../features/user/HiddenUserCard';
+
 const HomePage = () => {
-  return <div className='text-black'>Home</div>;
+  const { user } = useAuthContext();
+
+  return <>{!user.data.hideUser ? <Cards /> : <HiddenUserCard />}</>;
 };
 
 export default HomePage;
