@@ -2,14 +2,15 @@ import InputWrapper from '../../components/InputWrapper';
 import Input from '../../components/Input';
 import TextArea from '../../components/TextArea';
 import RadioGroup from '../../components/RadioGroup';
-import Select from '../../components/Select';
-import { categories } from '../../utils/lists/categories';
+import SelectMultiple from '../../components/SelectMultiple';
 import SeparatorHeader from '../../components/SeparatorHeader';
+import { categories } from '../../utils/lists/categories';
 
 const BusinessEditFields = ({
   register,
   selectedOptions,
   updateSelectedOptionsForm,
+  errors,
 }) => {
   return (
     <>
@@ -17,6 +18,7 @@ const BusinessEditFields = ({
       <InputWrapper
         label='Business name'
         id='name'
+        error={errors?.fullName?.message}
       >
         <Input
           register={register('fullName', {
@@ -30,6 +32,7 @@ const BusinessEditFields = ({
       <InputWrapper
         label='Summary'
         id='summary'
+        error={errors?.summary?.message}
       >
         <TextArea
           register={register('summary', {
@@ -41,15 +44,18 @@ const BusinessEditFields = ({
           type='text'
         />
       </InputWrapper>
+      <SeparatorHeader>Search information</SeparatorHeader>
       <InputWrapper label='What do you need to hire?'>
-        <Select
+        <SelectMultiple
           options={categories}
           selectedOptions={selectedOptions}
           onChange={updateSelectedOptionsForm}
         />
       </InputWrapper>
-      <SeparatorHeader>Search filters</SeparatorHeader>
-      <InputWrapper label='Gender'>
+      <InputWrapper
+        label='Gender'
+        error={errors?.gender?.message}
+      >
         <RadioGroup
           options={['male', 'female', 'all']}
           fn={register('gender', {
@@ -57,16 +63,40 @@ const BusinessEditFields = ({
           })}
         />
       </InputWrapper>
-      <p className='p-1.5'></p>
-      <InputWrapper label='Age range (min. & max.)'>
-        <input
-          {...register('distance')}
-          type='range'
-          className='mt-4 transparent h-[3px] w-full cursor-pointer appearance-none border-transparent bg-neutral-200 dark:bg-neutral-600 accent-secondary-1'
-          min={1}
-          max={400}
-        />
-      </InputWrapper>
+      <div className='flex gap-4'>
+        <InputWrapper
+          error={errors?.minAge?.message}
+          label='Mininum age'
+          id='minAge'
+        >
+          <Input
+            register={register('minAge', {
+              required: 'Specify the min. age',
+              min: [18, 'The minimum age is 18'],
+              max: [120, 'The maximum age is 120'],
+            })}
+            id='minAge'
+            type='number'
+            placeholder='test'
+          />
+        </InputWrapper>
+        <InputWrapper
+          error={errors?.maxAge?.message}
+          label='Maximun age'
+          id='maxAge'
+        >
+          <Input
+            register={register('maxAge', {
+              required: 'Please a max. age',
+              min: [18, 'The minimum age is 18'],
+              max: [120, 'The maximum age is 120'],
+            })}
+            id='maxAge'
+            type='number'
+            placeholder='test'
+          />
+        </InputWrapper>
+      </div>
     </>
   );
 };

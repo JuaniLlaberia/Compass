@@ -1,13 +1,15 @@
 import { useForm } from 'react-hook-form';
-
-import { useAuthContext } from '../../context/AuthContext';
 import { useState } from 'react';
 import UserEditFields from './UserEditFields';
 import BusinessEditFields from './BusinessEditFields';
+import { useUpdateUser } from '../user/useUpdateUser';
+import { useAuthContext } from '../../context/AuthContext';
 
 const UserEdit = () => {
   const { user } = useAuthContext();
-  const [selectedOptions, setSelectedOptions] = useState(
+  const { updateUser } = useUpdateUser();
+
+  const [selectedOptionsCategory, setSelectedOptionsCategory] = useState(
     user.data.category || []
   );
 
@@ -17,16 +19,47 @@ const UserEdit = () => {
     getValues,
     formState: { errors },
     handleSubmit,
-  } = useForm({ defaultValues: user.data });
+  } = useForm({
+    defaultValues: {
+      ...user.data,
+      distance: user.data.filters.distance,
+      minAge: user.data.filters.minAge,
+      maxAge: user.data.filters.maxAge,
+      gender:
+        user.data.role === 'user' ? user.data.gender : user.data.filters.gender,
+    },
+  });
 
   const updateSelectedOptionsForm = newOptions => {
-    setSelectedOptions(newOptions);
+    setSelectedOptionsCategory(newOptions);
     setValue('category', newOptions);
   };
 
-  const onSubmit = data => {
-    console.log(data);
-    //Perform update
+  const onSubmit = ({
+    category,
+    fullName,
+    summary,
+    gender,
+    distance,
+    maxAge,
+    minAge,
+  }) => {
+    const filtersUser = {
+      distance,
+    };
+    const filtersBuss = {
+      minAge,
+      maxAge,
+      gender,
+    };
+
+    updateUser({
+      fullName,
+      summary,
+      category,
+      gender: user.data.role === 'user' ? gender : undefined,
+      filters: user.data.role === 'user' ? filtersUser : filtersBuss,
+    });
   };
 
   return (
@@ -35,13 +68,16 @@ const UserEdit = () => {
         <UserEditFields
           register={register}
           updateSelectedOptionsForm={updateSelectedOptionsForm}
-          selectedOptions={selectedOptions}
+          selectedOptions={selectedOptionsCategory}
+          errors={errors}
+          distanceValue={getValues('distance')}
         />
       ) : (
         <BusinessEditFields
           register={register}
           updateSelectedOptionsForm={updateSelectedOptionsForm}
-          selectedOptions={selectedOptions}
+          selectedOptions={selectedOptionsCategory}
+          errors={errors}
         />
       )}
     </form>

@@ -1,6 +1,6 @@
 import Input from './Input';
 import InputWrapper from './InputWrapper';
-import Select from './Select';
+import SelectMultiple from './SelectMultiple';
 import { categories } from '../utils/lists/categories';
 
 export const BusinessFields = ({
@@ -42,7 +42,7 @@ export const BusinessFields = ({
         />
       </InputWrapper>
       <InputWrapper label='What are you looking to hire?'>
-        <Select
+        <SelectMultiple
           options={categories}
           onChange={setValue}
           selectedOptions={selectedOptions}

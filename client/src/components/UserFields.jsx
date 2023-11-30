@@ -1,7 +1,7 @@
 import { subYears } from 'date-fns';
 import Input from './Input';
 import InputWrapper from './InputWrapper';
-import Select from './Select';
+import SelectMultiple from './SelectMultiple';
 import RadioGroup from './RadioGroup';
 import { categories } from '../utils/lists/categories';
 
@@ -52,7 +52,7 @@ export const UserFields = ({ register, error, setValue, selectedOptions }) => {
         />
       </InputWrapper>
       <InputWrapper label='What job category are you looking?'>
-        <Select
+        <SelectMultiple
           options={categories}
           onChange={setValue}
           selectedOptions={selectedOptions}
