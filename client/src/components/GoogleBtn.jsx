@@ -9,7 +9,7 @@ const GoogleBtn = () => {
       className='flex justify-center items-center gap-2 bg-light-bg-1 active:bg-light-bg-2 md:hover:bg-light-bg-2 shadow-sm border rounded-lg py-3 my-3 font-semibold cursor-pointer transition-colors'
     >
       <FcGoogle size={30} />
-      <span>Log in with Google</span>
+      <span>Continue with Google</span>
     </Link>
   );
 };

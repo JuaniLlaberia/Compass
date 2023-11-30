@@ -12,7 +12,7 @@ const FacebookBtn = () => {
         size={30}
         fill='#3b5998'
       />
-      <span>Log in with Google</span>
+      <span>Continue with Google</span>
     </Link>
   );
 };

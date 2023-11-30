@@ -3,7 +3,7 @@ import { IoChevronDown } from 'react-icons/io5';
 import { useClickOutside } from '../hooks/useClickOutside';
 import { motion } from 'framer-motion';
 
-const Select = ({ options, onChange, selectedOptions }) => {
+const SelectMultiple = ({ options, onChange, selectedOptions, max }) => {
   //Handle if input is open or close
   const [isOpen, setIsOpen] = useState(false);
   const { ref } = useClickOutside(() => setIsOpen(false));
@@ -14,6 +14,8 @@ const Select = ({ options, onChange, selectedOptions }) => {
   };
 
   const selectOption = option => {
+    if (max && selectedOptions.length === max) return;
+
     const updatedSelection = [...selectedOptions, option];
     onChange(updatedSelection);
     setIsOpen(false);
@@ -27,7 +29,7 @@ const Select = ({ options, onChange, selectedOptions }) => {
 
   return (
     <div
-      className='relative mt-7 cursor-pointer'
+      className='relative mb-7 cursor-pointer'
       ref={ref}
     >
       <div
@@ -93,4 +95,4 @@ const Select = ({ options, onChange, selectedOptions }) => {
   );
 };
 
-export default Select;
+export default SelectMultiple;
