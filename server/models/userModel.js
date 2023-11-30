@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
     type: [String],
   },
   filters: {
-    distance: String,
+    distance: Number,
     minAge: Number,
     maxAge: Number,
     gender: String,
