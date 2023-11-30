@@ -27,20 +27,52 @@ export const BusinessFields = ({
         />
       </InputWrapper>
       <InputWrapper
-        label='Location'
-        id='location'
-        error={error?.location?.message}
+        label='Address'
+        id='address'
+        error={error?.address?.message}
       >
         <Input
-          register={register('location', {
+          register={register('address', {
             required: 'Please provide your address',
           })}
-          error={error?.location}
-          id='location'
-          placeholder='Location'
+          error={error?.address}
+          id='address'
+          placeholder='address'
           type='text'
         />
       </InputWrapper>
+      <div className='flex gap-4'>
+        <InputWrapper
+          label='City'
+          id='city'
+          error={error?.city?.message}
+        >
+          <Input
+            register={register('city', {
+              required: 'Please provide your city',
+            })}
+            error={error?.city}
+            id='city'
+            placeholder='city'
+            type='text'
+          />
+        </InputWrapper>
+        <InputWrapper
+          label='Country'
+          id='country'
+          error={error?.country?.message}
+        >
+          <Input
+            register={register('country', {
+              required: 'Please provide your country',
+            })}
+            error={error?.country}
+            id='country'
+            placeholder='country'
+            type='text'
+          />
+        </InputWrapper>
+      </div>
       <InputWrapper label='What are you looking to hire?'>
         <SelectMultiple
           options={categories}
