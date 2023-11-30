@@ -24,6 +24,7 @@ export default {
         'light-shadow-2': '',
         'light-border-1': '#dddcdc',
         'secondary-1': '#936CF5',
+        'secondary-2': '#9772f3',
       },
     },
   },
