@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import AccTypeForm from '../components/AccTypeForm';
 import UserInfoForm from '../components/UserInfoForm';
 import UserImgForm from '../components/UserImgForm';
 import Button from '../components/Button';
 import { useMultiStepForm } from '../hooks/useMultiStepForm';
 import { useUpdateUser } from '../features/user/useUpdateUser';
-import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
-import { useEffect } from 'react';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -42,7 +42,18 @@ const SignUpPage = () => {
       />,
     ]);
 
-  const onSubmit = data => {
+  const getCoords = async address => {
+    const response = await fetch(
+      `http://api.positionstack.com/v1/forward?access_key=977570ac6051e2192e64942c6538d016&query=${address}`
+    );
+
+    const data = await response.json();
+    const { latitude, longitude } = data.data[0];
+
+    return [latitude, longitude];
+  };
+
+  const onSubmit = async data => {
     if (!isLastStep) return nextStep();
 
     const formData = new FormData();
@@ -57,7 +68,10 @@ const SignUpPage = () => {
       formData.append('gender', data.gender);
       formData.append('birthDate', data.birthDate);
     } else {
-      formData.append('location', data.location);
+      const location = `${data.address}, ${data.city} ${data.country}`;
+      const [latitude, longitude] = await getCoords(location);
+
+      formData.append('location', [latitude, longitude]);
     }
 
     updateUser(formData, {

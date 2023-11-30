@@ -23,11 +23,17 @@ exports.updateUser = catchErrorAsync(async (req, res) => {
   };
   ['_id', 'email'].forEach(field => delete filteredBody[field]);
 
+  const [lat, lng] = filteredBody.location.split(',');
+
   //Find and update the user
-  const user = await User.findByIdAndUpdate(req.user._id, filteredBody, {
-    new: true,
-    runValidators: true,
-  });
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    { ...filteredBody, location: [Number(lat), Number(lng)] },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
 
   res.status(200).json({ status: 'success', data: user });
 });
