@@ -44,7 +44,7 @@ const SignUpPage = () => {
 
   const getCoords = async address => {
     const response = await fetch(
-      `http://api.positionstack.com/v1/forward?access_key=977570ac6051e2192e64942c6538d016&query=${address}`
+      `http://api.positionstack.com/v1/forward?access_key=a795b1a738bdb35b04c8d4690ee9d9c4&query=${address}`
     );
 
     const data = await response.json();
@@ -72,6 +72,7 @@ const SignUpPage = () => {
       const [latitude, longitude] = await getCoords(location);
 
       formData.append('location', [latitude, longitude]);
+      formData.append('address', location);
     }
 
     updateUser(formData, {

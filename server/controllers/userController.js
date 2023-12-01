@@ -16,24 +16,26 @@ exports.updateUser = catchErrorAsync(async (req, res) => {
     //Get access url
   }
 
+  let coords;
+
+  if (req.body.role === 'business') {
+    const [lat, lng] = filteredBody?.location?.split(',');
+    coords = [lng, lat];
+  }
+
   //Filter fields that user can't modify
   let filteredBody = {
     ...req.body,
     profileImage: imageLink === '' ? req.body.profileImage : imageLink,
+    location: req.body.role === 'business' ? coords : undefined,
   };
   ['_id', 'email'].forEach(field => delete filteredBody[field]);
 
-  const [lat, lng] = filteredBody.location.split(',');
-
   //Find and update the user
-  const user = await User.findByIdAndUpdate(
-    req.user._id,
-    { ...filteredBody, location: [Number(lat), Number(lng)] },
-    {
-      new: true,
-      runValidators: true,
-    }
-  );
+  const user = await User.findByIdAndUpdate(req.user._id, filteredBody, {
+    new: true,
+    runValidators: true,
+  });
 
   res.status(200).json({ status: 'success', data: user });
 });
@@ -95,19 +97,19 @@ exports.getUsers = catchErrorAsync(async (req, res) => {
   //Filter for user with 'employee' role (distance to employer)
   if (distance || req.user.role === 'user') {
     // if (!req.body.coordinates)
-    //   res
+    //   return res
     //     .status(400)
     //     .json({ status: 'failed', message: 'Missing user coordinates.' });
 
-    // const radius = distance / 6378.1;
+    const radius = distance / 6378.1;
     // const [lat, lng] = req.body.coordinates;
 
     aggStages.push({
       $match: {
         $and: [
-          // {
-          //   location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
-          // },
+          {
+            location: { $geoWithin: { $centerSphere: [[-58, -34], radius] } },
+          },
           {
             role: 'business',
           },
