@@ -3,12 +3,10 @@ import { IoChevronDown } from 'react-icons/io5';
 import { useClickOutside } from '../hooks/useClickOutside';
 import { motion } from 'framer-motion';
 
-const SelectMultiple = ({ options, onChange, selectedOptions, max }) => {
-  //Handle if input is open or close
+const SelectMultiple = ({ options, onChange, selectedOptions, max = 6 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { ref } = useClickOutside(() => setIsOpen(false));
 
-  //Open/Close select input
   const toggleMenu = () => {
     setIsOpen(prev => !prev);
   };

@@ -1,6 +1,5 @@
 import {
   IoSendSharp,
-  IoNotifications,
   IoChatbubbleEllipsesSharp,
   IoPerson,
 } from 'react-icons/io5';
