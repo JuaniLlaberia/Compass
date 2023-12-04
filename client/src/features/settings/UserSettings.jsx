@@ -31,7 +31,7 @@ const UserSettings = () => {
       <SelectSingle
         selectedOption={language}
         onChange={''}
-        options={['English', 'Spanish']}
+        options={['English']}
       />
       <SettingsBtns />
     </section>

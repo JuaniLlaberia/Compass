@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { logoutUser } from '../../server_api/authAPI';
 import { toast } from 'sonner';
+import { logoutUser } from '../../server_api/authAPI';
 
 export const useLogout = () => {
   const queryClient = useQueryClient();
