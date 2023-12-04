@@ -22,11 +22,13 @@ const UserEdit = () => {
   } = useForm({
     defaultValues: {
       ...user.data,
-      distance: user.data.filters.distance,
-      minAge: user.data.filters.minAge,
-      maxAge: user.data.filters.maxAge,
+      distance: user.data.filters?.distance,
+      minAge: user.data.filters?.minAge,
+      maxAge: user.data.filters?.maxAge,
       gender:
-        user.data.role === 'user' ? user.data.gender : user.data.filters.gender,
+        user.data.role === 'user'
+          ? user.data.gender
+          : user.data.filters?.gender,
     },
   });
 

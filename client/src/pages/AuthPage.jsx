@@ -1,5 +1,5 @@
-import GoogleBtn from '../components/GoogleBtn';
-import FacebookBtn from '../components/FacebookBtn';
+import GoogleBtn from '../features/auth/GoogleBtn';
+import FacebookBtn from '../features/auth/FacebookBtn';
 import Modal from '../components/Modal';
 import { useAuthContext } from '../context/AuthContext';
 import { useEffect } from 'react';
