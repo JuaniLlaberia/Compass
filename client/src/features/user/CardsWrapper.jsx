@@ -1,25 +1,20 @@
-import { ClipLoader } from 'react-spinners';
 import Cards from './Cards';
+import CardsEmpty from './CardsEmpty';
+import CardsLoader from './CardsLoader';
+import CardsBtns from './CardsBtns';
+import CardsError from './CardsError';
 import { useGetUsers } from './useGetUsers';
 import { useSwipeRight } from './useSwipeRight';
 import { useSwipeLeft } from './useSwipeLeft';
-import { useEffect, useState } from 'react';
 
 const CardsWrapper = () => {
-  const { users, isLoading, refetch, error } = useGetUsers();
+  const { users, isLoading, refetch, error, isRefetching } = useGetUsers();
   const { swipeRight } = useSwipeRight();
   const { swipeLeft } = useSwipeLeft();
-  const [userQueue, setUserQueue] = useState([]);
-
-  useEffect(() => {
-    if (users && users.data.length > 0) {
-      setUserQueue(prev => [...prev, ...users.data]);
-    }
-  }, [users]);
 
   const swipeUserRight = () => {
     //Remove user from screen
-    const swipedUser = userQueue.shift();
+    const swipedUser = users.data.shift();
     //Perform swipe with userId
     swipeRight(swipedUser._id, {
       onSuccess: () => {
@@ -31,39 +26,32 @@ const CardsWrapper = () => {
   const swipeUserLeft = () => {
     //Remove user from screen
     //Perform swipe with userId
-    swipeLeft(users.data[0]._id, {
+    const swipedUser = users.data.shift();
+    //Perform swipe with userId
+    swipeLeft(swipedUser._id, {
       onSuccess: () => {
         //Fetch more users
         refetch();
-        // users.data.shift();
       },
     });
   };
 
+  if (isLoading) return <CardsLoader />;
+  if (error) return <CardsError />;
+
   return (
-    <section className='relative'>
-      {isLoading ? (
-        <ClipLoader />
-      ) : userQueue.length !== 0 && !isLoading ? (
-        <Cards users={userQueue} />
+    <section className='relative h-full'>
+      {users.data.length !== 0 && !isLoading ? (
+        <>
+          <Cards userToSwipe={users.data[0]} />
+          <CardsBtns
+            swipeUserLeft={swipeUserLeft}
+            swipeUserRight={swipeUserRight}
+          />
+        </>
       ) : (
-        'EMPTY'
+        <CardsEmpty />
       )}
-      <div className='fixed bottom-20 left-0 flex justify-center items-center gap-10 w-full'>
-        <button
-          onClick={swipeUserRight}
-          className='w-16 h-16 border rounded-full'
-        >
-          X
-        </button>
-        <button
-          onClick={swipeUserLeft}
-          className='w-16 h-16 border rounded-full'
-        >
-          X
-        </button>
-        <button className='w-16 h-16 border rounded-full'>X</button>
-      </div>
     </section>
   );
 };
