@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import defaultImg from '../../public/default.jpg';
+import defaultImg from '/default.jpg';
 
 const UserImgForm = ({ register, error }) => {
   const [previewImg, setPreviewImage] = useState(defaultImg);

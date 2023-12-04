@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
     type: [String],
   },
   filters: {
-    distance: String,
+    distance: Number,
     minAge: Number,
     maxAge: Number,
     gender: String,
@@ -59,6 +59,9 @@ const userSchema = new mongoose.Schema({
       coordinates: ['Point'],
     },
     coordinates: [Number],
+  },
+  address: {
+    type: String,
   },
   interactions: { type: [mongoose.Schema.ObjectId], default: [] },
   hideUser: {

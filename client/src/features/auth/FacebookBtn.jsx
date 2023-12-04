@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FaFacebook } from 'react-icons/fa';
-import { getFacebookAuthUrl } from '../utils/getFacebookAuthUrl';
+import { getFacebookAuthUrl } from '../../utils/getFacebookAuthUrl';
 
 const FacebookBtn = () => {
   return (
@@ -12,7 +12,7 @@ const FacebookBtn = () => {
         size={30}
         fill='#3b5998'
       />
-      <span>Log in with Google</span>
+      <span>Continue with Google</span>
     </Link>
   );
 };

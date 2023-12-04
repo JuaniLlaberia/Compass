@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form';
-import AccTypeForm from '../components/AccTypeForm';
-import UserInfoForm from '../components/UserInfoForm';
-import UserImgForm from '../components/UserImgForm';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import AccTypeForm from '../features/auth/AccTypeForm';
+import UserInfoForm from '../features/auth/UserInfoForm';
+import UserImgForm from '../features/auth/UserImgForm';
 import Button from '../components/Button';
 import { useMultiStepForm } from '../hooks/useMultiStepForm';
 import { useUpdateUser } from '../features/user/useUpdateUser';
-import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
-import { useEffect } from 'react';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -42,7 +42,23 @@ const SignUpPage = () => {
       />,
     ]);
 
-  const onSubmit = data => {
+  const getCoords = async address => {
+    try {
+      const response = await fetch(
+        `https://geocode.maps.co/search?q=${address}`
+      );
+
+      const data = await response.json();
+
+      const { lat, lon } = data[0];
+
+      return [lat, lon];
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const onSubmit = async data => {
     if (!isLastStep) return nextStep();
 
     const formData = new FormData();
@@ -57,7 +73,11 @@ const SignUpPage = () => {
       formData.append('gender', data.gender);
       formData.append('birthDate', data.birthDate);
     } else {
-      formData.append('location', data.location);
+      const location = `${data.address}, ${data.city} ${data.country}`;
+      const [lat, lon] = await getCoords(location);
+
+      formData.append('location', [lon, lat]);
+      formData.append('address', location);
     }
 
     updateUser(formData, {

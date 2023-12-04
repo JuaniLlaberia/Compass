@@ -1,5 +1,5 @@
 import { FcShop, FcConferenceCall } from 'react-icons/fc';
-import CustomRadio from './CustomRadio';
+import CustomRadio from '../../components/CustomRadio';
 
 const AccTypeForm = ({ register, error }) => {
   return (

@@ -6,7 +6,7 @@ export const useSwipeRight = () => {
   const { mutate: swipeRight, isLoading } = useMutation({
     mutationFn: userId => swipeRightAPI(userId),
     onSuccess: data => {
-      console.log(data.mutate ? 'We have a match' : 'No match');
+      console.log(data.match ? 'We have a match' : 'No match');
     },
     onError: () => toast.error('Something went wrong. Please try again.'),
   });

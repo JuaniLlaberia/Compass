@@ -1,33 +1,24 @@
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { IoChevronDown } from 'react-icons/io5';
 import { useClickOutside } from '../hooks/useClickOutside';
-import { motion } from 'framer-motion';
 
-const Select = ({ options, onChange, selectedOptions }) => {
-  //Handle if input is open or close
+const SelectSingle = ({ options, onChange, selectedOption }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { ref } = useClickOutside(() => setIsOpen(false));
 
-  //Open/Close select input
   const toggleMenu = () => {
     setIsOpen(prev => !prev);
   };
 
   const selectOption = option => {
-    const updatedSelection = [...selectedOptions, option];
-    onChange(updatedSelection);
-    setIsOpen(false);
-  };
-
-  const unSelectOption = option => {
-    const updatedSelection = [...selectedOptions].filter(el => el !== option);
-    onChange(updatedSelection);
+    onChange(option);
     setIsOpen(false);
   };
 
   return (
     <div
-      className='relative mt-7 cursor-pointer'
+      className='relative mt-3 cursor-pointer'
       ref={ref}
     >
       <div
@@ -37,9 +28,7 @@ const Select = ({ options, onChange, selectedOptions }) => {
         onClick={toggleMenu}
       >
         <h1 className='px-4 line-clamp-1 text-light-text-1 dark:text-dark-text-1'>
-          {selectedOptions.length === 0
-            ? 'Select options'
-            : selectedOptions.join(', ')}
+          {selectedOption === '' ? 'Select options' : selectedOption}
         </h1>
         <div className='px-4 border-l text-light-text-1 dark:text-dark-text-1'>
           <IoChevronDown
@@ -59,23 +48,11 @@ const Select = ({ options, onChange, selectedOptions }) => {
         {options.map(option => (
           <li
             key={option}
-            onClick={() =>
-              selectedOptions.includes(option)
-                ? unSelectOption(option)
-                : selectOption(option)
-            }
+            onClick={() => selectOption(option)}
             className={`px-3 py-2.5 text-light-text-1 dark:text-dark-text-1 active:bg-light-bg-2 active:dark:bg-dark-bg-2 border-b border-light-border-1 dark:border-dark-border-1 flex items-center gap-3 ${
-              selectedOptions.includes(option)
-                ? 'bg-light-bg-2 dark:bg-dark-bg-2'
-                : ''
+              selectedOption === option ? 'bg-light-bg-2 dark:bg-dark-bg-2' : ''
             }`}
           >
-            <input
-              className='cursor-pointer w-4 h-4 accent-secondary-1'
-              type='checkbox'
-              checked={selectedOptions.includes(option)}
-              readOnly={true}
-            />
             {option}
           </li>
         ))}
@@ -93,4 +70,4 @@ const Select = ({ options, onChange, selectedOptions }) => {
   );
 };
 
-export default Select;
+export default SelectSingle;

@@ -14,12 +14,20 @@ exports.updateUser = catchErrorAsync(async (req, res) => {
     //Optimize image + proper format
     //Upload buffer to bucket
     //Get access url
+    console.log('Updating image');
+  }
+
+  let coords;
+
+  if (req.body.role === 'business') {
+    coords = req.body?.location?.split(',').map(coord => Number(coord));
   }
 
   //Filter fields that user can't modify
   let filteredBody = {
     ...req.body,
     profileImage: imageLink === '' ? req.body.profileImage : imageLink,
+    location: req.body.role === 'business' ? coords : undefined,
   };
   ['_id', 'email'].forEach(field => delete filteredBody[field]);
 
@@ -49,9 +57,6 @@ exports.getAllMatches = catchErrorAsync(async (req, res) => {
 
 exports.getUsers = catchErrorAsync(async (req, res) => {
   const { distance, gender, minAge, maxAge } = req.user.filters;
-
-  console.log(req.user.interactions);
-
   const aggStages = [
     {
       //Filter auth user and all already interacted users
@@ -74,7 +79,7 @@ exports.getUsers = catchErrorAsync(async (req, res) => {
   ];
 
   //Filter for user with 'employer' role (Gender & age range)
-  if (gender && minAge && maxAge && req.user.role === 'business')
+  if (req.user.role === 'business')
     aggStages.push({
       $match: {
         $and: [
@@ -87,21 +92,25 @@ exports.getUsers = catchErrorAsync(async (req, res) => {
     });
 
   //Filter for user with 'employee' role (distance to employer)
-  if (distance || req.user.role === 'user') {
-    // if (!req.body.coordinates)
-    //   res
-    //     .status(400)
-    //     .json({ status: 'failed', message: 'Missing user coordinates.' });
+  if (req.user.role === 'user') {
+    if (!req.query.lng || !req.query.lat)
+      return res
+        .status(400)
+        .json({ status: 'failed', message: 'Missing user coordinates.' });
 
-    // const radius = distance / 6378.1;
-    // const [lat, lng] = req.body.coordinates;
+    const radius = distance / 6378.1;
+    const { lng, lat } = req.query;
 
     aggStages.push({
       $match: {
         $and: [
-          // {
-          //   location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
-          // },
+          {
+            location: {
+              $geoWithin: {
+                $centerSphere: [[Number(lng), Number(lat)], radius],
+              },
+            },
+          },
           {
             role: 'business',
           },
@@ -124,8 +133,6 @@ exports.getUsers = catchErrorAsync(async (req, res) => {
       __v: 0,
       newUser: 0,
       hideUser: 0,
-      membership: 0,
-      birthDate: 0,
     },
   });
 
