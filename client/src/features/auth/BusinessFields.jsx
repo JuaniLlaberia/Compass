@@ -1,7 +1,7 @@
-import Input from './Input';
-import InputWrapper from './InputWrapper';
-import SelectMultiple from './SelectMultiple';
-import { categories } from '../utils/lists/categories';
+import Input from '../../components/Input';
+import InputWrapper from '../../components/InputWrapper';
+import SelectMultiple from '../../components/SelectMultiple';
+import { categories } from '../../utils/lists/categories';
 
 export const BusinessFields = ({
   register,

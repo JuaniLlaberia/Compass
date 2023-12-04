@@ -1,9 +1,9 @@
 import { subYears } from 'date-fns';
-import Input from './Input';
-import InputWrapper from './InputWrapper';
-import SelectMultiple from './SelectMultiple';
-import RadioGroup from './RadioGroup';
-import { categories } from '../utils/lists/categories';
+import Input from '../../components/Input';
+import InputWrapper from '../../components/InputWrapper';
+import SelectMultiple from '../../components/SelectMultiple';
+import RadioGroup from '../../components/RadioGroup';
+import { categories } from '../../utils/lists/categories';
 
 export const UserFields = ({ register, error, setValue, selectedOptions }) => {
   return (

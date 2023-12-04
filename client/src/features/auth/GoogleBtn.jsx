@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
-import { getGoogleAuthUrl } from '../utils/getGoogleAuthUrl';
+import { getGoogleAuthUrl } from '../../utils/getGoogleAuthUrl';
 
 const GoogleBtn = () => {
   return (

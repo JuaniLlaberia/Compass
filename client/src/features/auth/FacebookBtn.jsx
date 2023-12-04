@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FaFacebook } from 'react-icons/fa';
-import { getFacebookAuthUrl } from '../utils/getFacebookAuthUrl';
+import { getFacebookAuthUrl } from '../../utils/getFacebookAuthUrl';
 
 const FacebookBtn = () => {
   return (
