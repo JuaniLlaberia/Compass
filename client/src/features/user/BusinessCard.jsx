@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { IoArrowDownCircle } from 'react-icons/io5';
-import { differenceInYears } from 'date-fns';
+import { IoArrowDownCircle, IoLocationSharp } from 'react-icons/io5';
 import defaultImg from '/default.jpg';
 
-const UserCard = ({ userToSwipe, userCategories }) => {
+const BusinessCard = ({ userToSwipe, userCategories }) => {
   const [open, isOpen] = useState(false);
-  const { fullName, gender, category, profileImage, summary, birthDate } =
-    userToSwipe;
+  const { fullName, address, category, profileImage, summary } = userToSwipe;
 
   const matchedCategories = userCategories.filter(cat =>
     category.includes(cat)
@@ -54,7 +52,7 @@ const UserCard = ({ userToSwipe, userCategories }) => {
       >
         <section className='mb-3'>
           <h2 className='px-2 font-semibold text-light-text-2 dark:text-dark-text-2'>
-            My Experience
+            We are hiring?
           </h2>
           <ul className='flex gap-2 items-center flex-wrap px-2 mt-2'>
             {categoriesToRender.map(cat => (
@@ -83,18 +81,14 @@ const UserCard = ({ userToSwipe, userCategories }) => {
             </section>
             <section className='mb-3'>
               <h2 className='px-2 font-semibold text-light-text-2 dark:text-dark-text-2'>
-                Gender
+                Location
               </h2>
-              <p className='px-2 capitalize text-light-text-1 dark:text-dark-text-1'>
-                {gender}
-              </p>
-            </section>
-            <section className='mb-3'>
-              <h2 className='px-2 font-semibold text-light-text-2 dark:text-dark-text-2'>
-                Age
-              </h2>
-              <p className='px-2 text-light-text-1 dark:text-dark-text-1'>
-                {differenceInYears(new Date(), new Date(birthDate))} years old
+              <p className='text-sm px-2 flex items-center gap-1 text-light-text-1 dark:text-dark-text-1'>
+                <IoLocationSharp
+                  size={18}
+                  className='text-light-text-2 dark:text-dark-text-2'
+                />{' '}
+                <span>{address}</span>
               </p>
             </section>
           </>
@@ -104,4 +98,4 @@ const UserCard = ({ userToSwipe, userCategories }) => {
   );
 };
 
-export default UserCard;
+export default BusinessCard;
