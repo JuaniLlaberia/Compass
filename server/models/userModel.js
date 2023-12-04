@@ -40,18 +40,9 @@ const userSchema = new mongoose.Schema({
     type: [String],
   },
   filters: {
-    distance: {
-      type: Number,
-      default: 1,
-    },
-    minAge: {
-      type: Number,
-      default: 18,
-    },
-    maxAge: {
-      type: Number,
-      default: 100,
-    },
+    distance: Number,
+    minAge: Number,
+    maxAge: Number,
     gender: String,
   },
   likes: {
