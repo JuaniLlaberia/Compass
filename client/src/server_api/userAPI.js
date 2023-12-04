@@ -1,3 +1,5 @@
+import { getUserCoords } from '../utils/getUserCoords';
+
 export const updateUser = async userInfo => {
   const isFormData = userInfo instanceof FormData;
 
@@ -42,11 +44,16 @@ export const deleteUser = async () => {
 };
 
 export const getUsers = async () => {
+  const [lng, lat] = await getUserCoords();
+
   try {
-    const response = await fetch('http://localhost:8000/api/user', {
-      method: 'GET',
-      credentials: 'include',
-    });
+    const response = await fetch(
+      `http://localhost:8000/api/user?lng=${lng}&lat=${lat}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    );
 
     if (!response.ok) throw new Error(response.statusText);
 

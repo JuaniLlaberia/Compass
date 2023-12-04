@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import AccTypeForm from '../components/AccTypeForm';
-import UserInfoForm from '../components/UserInfoForm';
-import UserImgForm from '../components/UserImgForm';
+import AccTypeForm from '../features/auth/AccTypeForm';
+import UserInfoForm from '../features/auth/UserInfoForm';
+import UserImgForm from '../features/auth/UserImgForm';
 import Button from '../components/Button';
 import { useMultiStepForm } from '../hooks/useMultiStepForm';
 import { useUpdateUser } from '../features/user/useUpdateUser';
@@ -43,14 +43,19 @@ const SignUpPage = () => {
     ]);
 
   const getCoords = async address => {
-    const response = await fetch(
-      `http://api.positionstack.com/v1/forward?access_key=a795b1a738bdb35b04c8d4690ee9d9c4&query=${address}`
-    );
+    try {
+      const response = await fetch(
+        `https://geocode.maps.co/search?q=${address}`
+      );
 
-    const data = await response.json();
-    const { latitude, longitude } = data.data[0];
+      const data = await response.json();
 
-    return [latitude, longitude];
+      const { lat, lon } = data[0];
+
+      return [lat, lon];
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const onSubmit = async data => {
@@ -69,9 +74,9 @@ const SignUpPage = () => {
       formData.append('birthDate', data.birthDate);
     } else {
       const location = `${data.address}, ${data.city} ${data.country}`;
-      const [latitude, longitude] = await getCoords(location);
+      const [lat, lon] = await getCoords(location);
 
-      formData.append('location', [latitude, longitude]);
+      formData.append('location', [lon, lat]);
       formData.append('address', location);
     }
 
