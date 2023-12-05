@@ -22,7 +22,7 @@ const SelectSingle = ({ options, onChange, selectedOption }) => {
       ref={ref}
     >
       <div
-        className={`w-full border h-11 rounded-lg flex justify-between items-center ${
+        className={`w-full border border-light-border-1 dark:border-dark-border-1 h-11 rounded-lg flex justify-between items-center ${
           isOpen ? 'border-secondary-1' : ''
         }`}
         onClick={toggleMenu}
@@ -30,7 +30,7 @@ const SelectSingle = ({ options, onChange, selectedOption }) => {
         <h1 className='px-4 line-clamp-1 text-light-text-1 dark:text-dark-text-1'>
           {selectedOption === '' ? 'Select options' : selectedOption}
         </h1>
-        <div className='px-4 border-l text-light-text-1 dark:text-dark-text-1'>
+        <div className='px-4 border-l border-light-border-1 dark:border-dark-border-1 text-light-text-1 dark:text-dark-text-1'>
           <IoChevronDown
             className={`${
               isOpen ? 'rotate-180' : ''
