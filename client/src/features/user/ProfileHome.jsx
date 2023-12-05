@@ -1,4 +1,3 @@
-import defaultImg from '../../../public/default.jpg';
 import ProfileBtns from './ProfileBtns';
 import LikesSection from './LikesSection';
 import { useAuthContext } from '../../context/AuthContext';
@@ -11,8 +10,8 @@ const ProfileHome = () => {
     <>
       <header className='flex flex-col justify-center items-center mt-4'>
         <img
-          src={defaultImg}
-          className='h-32 w-32 rounded-full'
+          src={profileImage}
+          className='h-32 w-32 rounded-full bg-light-bg-3 dark:bg-dark-bg-3'
         />
         <h1 className='text-lg text-light-text-1 dark:text-dark-text-1'>
           {fullName}

@@ -13,16 +13,6 @@ const UpdateImgModal = ({ onClose }) => {
     });
   };
 
-  const handleRemove = () => {
-    //Set back to default image
-    updateUser(
-      { profileImage: 'default.jpg' },
-      {
-        onSuccess: () => onClose(),
-      }
-    );
-  };
-
   return (
     <section className='flex flex-col'>
       <h1 className='text-lg text-center text-light-text-2 dark:text-dark-text-2 mb-6'>
@@ -44,9 +34,9 @@ const UpdateImgModal = ({ onClose }) => {
       />
       <button
         className='w-full font-semibold text-red-500  pt-3'
-        onClick={handleRemove}
+        onClick={onClose}
       >
-        Remove Current Image
+        Cancel
       </button>
     </section>
   );
