@@ -74,7 +74,10 @@ export const swipeRight = async userId => {
       body: JSON.stringify({ swipedUserId: userId }),
     });
 
-    if (!response.ok) throw new Error(response.statusText);
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
 
     return await response.json();
   } catch (err) {
