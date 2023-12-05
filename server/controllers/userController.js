@@ -76,9 +76,20 @@ exports.getAllMatches = catchErrorAsync(async (req, res) => {
     users: req.user._id,
   });
 
+  const matchedUserIds = matches.reduce((acc, match) => {
+    const otherUserId = match.users.find(
+      userId => userId.toString() !== req.user._id.toString()
+    );
+    return otherUserId ? [...acc, otherUserId] : acc;
+  }, []);
+
+  const matchedUsersData = await User.find({
+    _id: { $in: matchedUserIds },
+  }).select('fullName profileImage');
+
   res
     .status(200)
-    .json({ status: 'success', count: matches.length, data: matches });
+    .json({ status: 'success', count: matches.length, data: matchedUsersData });
 });
 
 exports.getUsers = catchErrorAsync(async (req, res) => {

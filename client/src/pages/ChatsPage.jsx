@@ -1,7 +1,13 @@
-import React from 'react';
+import Matches from '../features/chats/Matches';
+import Chats from '../features/chats/Chats';
 
 const ChatsPage = () => {
-  return <div>ChatsPage</div>;
+  return (
+    <>
+      <Matches />
+      <Chats />
+    </>
+  );
 };
 
 export default ChatsPage;
