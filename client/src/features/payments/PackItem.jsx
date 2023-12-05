@@ -1,7 +1,7 @@
 import { formatPrice } from '../../utils/formatPrice';
 import { useCreateCheckout } from './useCreateCheckout';
 
-const PackItem = ({ id, label, price, special }) => {
+const PackItem = ({ id, label, price, special, image }) => {
   const { checkout } = useCreateCheckout();
 
   return (
@@ -14,7 +14,10 @@ const PackItem = ({ id, label, price, special }) => {
       onClick={() => checkout(id)}
     >
       <div className='flex items-center gap-2'>
-        <div className='h-10 w-10 rounded-full bg-secondary-1'></div>
+        <img
+          src={image}
+          className='h-10 w-10 rounded-full mr-1'
+        />
         <h2 className='font-semibold text-light-text-1 dark:text-dark-text-1'>
           {label}
         </h2>

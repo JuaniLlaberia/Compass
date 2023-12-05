@@ -4,6 +4,8 @@ import PackItem from './PackItem';
 const PacksModal = () => {
   const { packages, isLoading, error } = useGetPackages();
 
+  console.log(packages);
+
   return (
     <>
       <h1 className='text-xl mb-4 px-2 font-semibold'>All packages</h1>
@@ -18,6 +20,7 @@ const PacksModal = () => {
               price={pack.price}
               special={i === 1}
               label={pack.name}
+              image={pack.image}
             />
           ))}
         </ul>
