@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { CardsLink } from '../../components/CardsLink';
 
 const CardsEmpty = () => {
   return (
@@ -10,12 +10,7 @@ const CardsEmpty = () => {
         There are no more users to show based on your search and filters. You
         can expand your search to keep swiping.
       </p>
-      <Link
-        to='/profile'
-        className='flex justify-center items-center gap-3 min-w-[180px] font-semibold bg-secondary-1 py-2 px-5 rounded-full text-dark-text-1'
-      >
-        Go to profile
-      </Link>
+      <CardsLink link='/profile'>Go to profile</CardsLink>
     </section>
   );
 };

@@ -4,8 +4,6 @@ import PackItem from './PackItem';
 const PacksModal = () => {
   const { packages, isLoading, error } = useGetPackages();
 
-  console.log(packages);
-
   return (
     <>
       <h1 className='text-xl mb-4 px-2 font-semibold'>All packages</h1>
