@@ -1,12 +1,17 @@
 import Modal from '../../components/Modal';
 import PacksModal from '../payments/PacksModal';
+import heartExtra from '/heart_extra.svg';
+import heart from '/heart_icon.svg';
 
 const LikesSection = ({ likes, extraLikes }) => {
   return (
     <section className='mt-14 flex gap-4'>
       <Modal>
-        <div className='relative w-full bg-light-bg-1 dark:bg-dark-bg-2 border border-light-border-1 dark:border-dark-border-1 shadow-md rounded-lg px-3 pt-6 pb-2'>
-          <div className='absolute -top-7 left-[50%] translate-x-[-50%] h-14 w-14 bg-secondary-1 rounded-full'></div>
+        <div className='relative w-full bg-light-bg-1 dark:bg-dark-bg-1 border border-light-border-1 dark:border-dark-border-1 shadow-md rounded-lg px-3 pt-6 pb-2'>
+          <img
+            className='absolute -top-8 left-[50%] translate-x-[-50%] h-16 w-16 border rounded-full p-3 bg-light-bg-1 dark:bg-dark-bg-1 border-light-border-1 dark:border-dark-border-1'
+            src={heart}
+          />
           <h1 className='mt-3 font-semibold text-center text-light-text-1 dark:text-dark-text-1'>
             Regular likes
           </h1>
@@ -14,8 +19,11 @@ const LikesSection = ({ likes, extraLikes }) => {
             You have <span className='font-semibold'>{likes}</span> left
           </h2>
         </div>
-        <div className='relative w-full bg-light-bg-1 dark:bg-dark-bg-2 border border-light-border-1 dark:border-dark-border-1 shadow-md rounded-lg px-3 pt-6 pb-2'>
-          <div className='absolute -top-7 left-[50%] translate-x-[-50%] h-14 w-14 bg-secondary-1 rounded-full'></div>
+        <div className='relative w-full bg-light-bg-1 dark:bg-dark-bg-1 border border-light-border-1 dark:border-dark-border-1 shadow-md rounded-lg px-3 pt-6 pb-2'>
+          <img
+            className='absolute -top-8 left-[50%] translate-x-[-50%] h-16 w-16 border rounded-full p-3 bg-light-bg-1 dark:bg-dark-bg-1 border-light-border-1 dark:border-dark-border-1'
+            src={heartExtra}
+          />
           <h1 className='mt-3 font-semibold text-center text-light-text-1 dark:text-dark-text-1'>
             Extra likes
           </h1>
