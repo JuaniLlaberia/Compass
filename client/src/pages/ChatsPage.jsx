@@ -3,10 +3,10 @@ import Chats from '../features/chats/Chats';
 
 const ChatsPage = () => {
   return (
-    <>
+    <section className='relative h-full'>
       <Matches />
       <Chats />
-    </>
+    </section>
   );
 };
 
