@@ -1,48 +1,24 @@
-import { useSearchParams } from 'react-router-dom';
 import ChatItem from './ChatItem';
 import ChatsSekelon from './ChatsSkeleton';
-import defaultImg from '/default.jpg';
-import { Conversation } from './Conversation';
-
-const chats = [
-  {
-    id: 1,
-    image: defaultImg,
-    name: 'John Lopez',
-  },
-  {
-    id: 2,
-    image: defaultImg,
-    name: 'Carlos Raul',
-  },
-  {
-    id: 3,
-    image: defaultImg,
-    name: 'David Laid',
-  },
-];
-
-const isLoading = false;
+import { useGetChats } from './useGetChats';
 
 const Chats = () => {
-  const [searchParams] = useSearchParams();
+  const { chats, isLoading } = useGetChats();
 
   return (
     <>
       <h2 className='text-light-text-1 dark:text-dark-text-1 font-semibold'>
         Chats
       </h2>
-
       {isLoading ? (
         <ChatsSekelon />
-      ) : chats.length >= 1 ? (
+      ) : chats.data.length >= 1 ? (
         <ul className='my-3'>
-          {chats.map(chat => (
+          {chats.data.map(chat => (
             <ChatItem
-              key={chat.id}
-              id={chat.id}
-              image={chat.image}
-              name={chat.name}
+              key={chat._id}
+              chatId={chat._id}
+              recipientUser={chat.userData[0]}
             />
           ))}
         </ul>
@@ -51,7 +27,6 @@ const Chats = () => {
           No chats available. Start chatting now.
         </p>
       )}
-      {searchParams.get('chatId') ? <Conversation /> : null}
     </>
   );
 };
