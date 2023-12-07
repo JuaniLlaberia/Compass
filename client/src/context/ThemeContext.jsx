@@ -6,7 +6,7 @@ const ThemeContext = createContext();
 export const ThemeContextProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('THEME_SWIPES');
-    root.className = savedTheme.toLowerCase();
+    root.className = savedTheme?.toLowerCase();
     return savedTheme ? savedTheme : 'Light';
   });
 
