@@ -11,6 +11,7 @@ const userRouter = require('./routes/userRoute');
 const swipesRouter = require('./routes/swipesRoute');
 const matchesRouter = require('./routes/matchRoute');
 const paymentRouter = require('./routes/paymentRoute');
+const chatRouter = require('./routes/chatsRoute');
 
 const authController = require('./controllers/authController');
 const paymentController = require('./controllers/paymentController');
@@ -55,6 +56,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/swipes', swipesRouter);
 app.use('/api/user', userRouter);
 app.use('/api/matches', matchesRouter);
+app.use('/api/chats', chatRouter);
 
 app.use('*', (req, res, next) => {
   next(new CustomError('Endpoint not found.', 404));

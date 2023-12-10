@@ -20,6 +20,9 @@ const likesPackSchema = new mongoose.Schema({
       'Package description can not have more that 200 characters',
     ],
   },
+  image: {
+    type: String,
+  },
 });
 
 const LikesPack = mongoose.model('LikesPack', likesPackSchema);

@@ -18,6 +18,7 @@ const PacksModal = () => {
               price={pack.price}
               special={i === 1}
               label={pack.name}
+              image={pack.image}
             />
           ))}
         </ul>

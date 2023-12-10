@@ -12,6 +12,8 @@ import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
 import SignUpPage from './pages/SignUpPage';
 import { ThemeContextProvider } from './context/ThemeContext';
+import ErrorPage from './pages/ErrorPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,7 @@ const router = createBrowserRouter([
       },
       {
         element: <AppLayout />,
+        errorElement: <ErrorPage />,
         children: [
           {
             path: '/app',
@@ -43,6 +46,10 @@ const router = createBrowserRouter([
           {
             path: '/profile',
             element: <ProfilePage />,
+          },
+          {
+            path: '*',
+            element: <NotFoundPage />,
           },
         ],
       },

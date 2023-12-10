@@ -13,24 +13,14 @@ const UpdateImgModal = ({ onClose }) => {
     });
   };
 
-  const handleRemove = () => {
-    //Set back to default image
-    updateUser(
-      { profileImage: 'default.jpg' },
-      {
-        onSuccess: () => onClose(),
-      }
-    );
-  };
-
   return (
     <section className='flex flex-col'>
-      <h1 className='text-lg text-center text-light-text-1 dark:text-dark-text-1 mb-6'>
+      <h1 className='text-lg text-center text-light-text-2 dark:text-dark-text-2 mb-6'>
         Update your profile image
       </h1>
       <label
         htmlFor='update-image'
-        className='w-full text-center font-semibold border-y border-light-border-1 py-3 cursor-pointer active:bg-light-bg-2 dark:active:bg-dark-bg-2'
+        className='w-full text-center font-semibold border-y border-light-border-1 dark:border-dark-border-1 py-3 cursor-pointer active:bg-light-bg-2 dark:active:bg-dark-bg-2'
       >
         Upload New Image
       </label>
@@ -44,9 +34,9 @@ const UpdateImgModal = ({ onClose }) => {
       />
       <button
         className='w-full font-semibold text-red-500  pt-3'
-        onClick={handleRemove}
+        onClick={onClose}
       >
-        Remove Current Image
+        Cancel
       </button>
     </section>
   );

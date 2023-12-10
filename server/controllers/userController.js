@@ -1,7 +1,14 @@
 const sub = require('date-fns/sub');
+const sharp = require('sharp');
+const {
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+  deleteObject,
+} = require('firebase/storage');
 const User = require('../models/userModel');
-const Matches = require('../models/matchesModel');
 const catchErrorAsync = require('../utils/catchAsyncErrors');
+const firebase = require('../utils/firebase');
 
 exports.getUser = (req, res) => {
   res.status(200).json({ status: 'success', data: req.user });
@@ -9,12 +16,24 @@ exports.getUser = (req, res) => {
 
 exports.updateUser = catchErrorAsync(async (req, res) => {
   let imageLink = '';
+
   //If image update else keep going
   if (req?.file?.buffer) {
     //Optimize image + proper format
+    const optimizedImg = await sharp(req.file.buffer)
+      .resize(300, 300)
+      .toFormat('webp')
+      .webp({ quality: 90 })
+      .toBuffer();
+
     //Upload buffer to bucket
+    const bucketRef = ref(firebase.storage, `${req.user._id}.webp`);
+    const imgSnapshot = await uploadBytesResumable(bucketRef, optimizedImg, {
+      contentType: 'image/webp',
+    });
+
     //Get access url
-    console.log('Updating image');
+    imageLink = await getDownloadURL(imgSnapshot.ref);
   }
 
   let coords;
@@ -41,18 +60,14 @@ exports.updateUser = catchErrorAsync(async (req, res) => {
 });
 
 exports.deleteUser = catchErrorAsync(async (req, res) => {
+  //Remove profile img from storage
+  const imgToRemoveRef = ref(firebase.storage, req.user.profileImage);
+  await deleteObject(imgToRemoveRef);
+
+  //Remove user from database
   await User.findByIdAndDelete(req.user._id);
+
   res.status(200).json({ status: 'success', message: 'Account deleted.' });
-});
-
-exports.getAllMatches = catchErrorAsync(async (req, res) => {
-  const matches = await Matches.find({
-    users: req.user._id,
-  });
-
-  res
-    .status(200)
-    .json({ status: 'success', count: matches.length, data: matches });
 });
 
 exports.getUsers = catchErrorAsync(async (req, res) => {

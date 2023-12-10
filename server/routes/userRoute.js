@@ -16,7 +16,6 @@ router
   .patch(update.single('profileImage'), userController.updateUser);
 router.route('/delete').delete(userController.deleteUser);
 
-router.route('/matches').get(userController.getAllMatches);
 router.route('/reset-likes').patch(userController.resetLikes);
 
 module.exports = router;
