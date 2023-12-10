@@ -1,4 +1,4 @@
-import MatchItem from './MatchItem';
+import ChatItem from './ChatItem';
 import MatchesSkeleton from './MatchesSkeleton';
 import { useGetMatches } from './useGetMatches';
 
@@ -14,11 +14,12 @@ const Matches = () => {
       {isLoading ? (
         <MatchesSkeleton />
       ) : matches.data.length >= 1 ? (
-        <ul className='flex gap-3 w-[90dvw] overflow-scroll py-3'>
+        <ul className='flex gap-3 w-[90dvw] overflow-y-hidden overflow-x-scroll py-3'>
           {matches.data.map(match => (
-            <MatchItem
-              key={match._id}
-              match={match}
+            <ChatItem
+              chatId={match._id}
+              recipientUser={match.userData[0]}
+              isActive={match.isActive}
             />
           ))}
         </ul>
