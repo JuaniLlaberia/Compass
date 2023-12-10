@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-dotenv.config({ path: './config.env' });
 const ws = require('ws');
-const app = require('./app');
 const jwt = require('jsonwebtoken');
+const app = require('./app');
+
 const Message = require('./models/messageModel');
+const Matches = require('./models/matchesModel');
+
+dotenv.config({ path: './config.env' });
 
 mongoose
   .connect(process.env.MONGODB_URL)
@@ -19,19 +22,21 @@ const server = app.listen(port, () =>
 //Web sockets
 const wss = new ws.WebSocketServer({ server });
 
-wss.on('connection', (connection, req) => {
-  console.log(`Web Socket connected`);
-
-  connection.on('close', () => {
-    console.log('Web Socket closed');
+//Function to send online users to front end
+const broadcastOnlineUsers = () => {
+  [...wss.clients].forEach(client => {
+    client.send(
+      JSON.stringify({
+        online: [...wss.clients].map(c => c.userId),
+      })
+    );
   });
+};
 
-  //////////////////////
-  //Show online users//
-  ////////////////////
-
+wss.on('connection', (connection, req) => {
   const cookies = req.headers.cookie;
 
+  //Checking for online users
   if (cookies) {
     //Check if we have a cookie 'JWT'
     const tokenCookie = cookies.split(';').find(str => str.startsWith('jwt='));
@@ -44,31 +49,28 @@ wss.on('connection', (connection, req) => {
     }
   }
 
-  [...wss.clients].forEach(client => {
-    client.send(
-      JSON.stringify({
-        online: [...wss.clients].map(c => c.userId),
-      })
-    );
-  });
+  broadcastOnlineUsers();
 
-  ////////////////////////
+  connection.on('close', () => {
+    broadcastOnlineUsers();
+  });
 
   connection.on('message', async messageParam => {
     //Verify date
     const message = JSON.parse(messageParam.toString());
     //Create message in DB
     if (message.recipient && message.message) {
+      if (!message.isChatActive) {
+        await Matches.findByIdAndUpdate(message.chatId, {
+          isActive: true,
+        });
+      }
+
       const msg = await Message.create(message);
 
       [...wss.clients]
         .filter(c => c.userId === message.recipient)
         .forEach(c => c.send(JSON.stringify(msg)));
     }
-    // if(message?.recipient )
-    //DELETE MESSAGES AFTER X AMOUNT OF TIME???
-    //IMPLEMENT REVERSE PAGINATION
-    //ADD ONLINE STATUS OR NOT
-    //CHECK CLOSING CONECTION AND DISCONECTING....
   });
 });
