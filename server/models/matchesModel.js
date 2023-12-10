@@ -5,6 +5,10 @@ const matchesSchema = new mongoose.Schema({
     type: [mongoose.Schema.ObjectId],
     ref: 'User',
   },
+  isActive: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

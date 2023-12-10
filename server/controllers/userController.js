@@ -7,7 +7,6 @@ const {
   deleteObject,
 } = require('firebase/storage');
 const User = require('../models/userModel');
-const Matches = require('../models/matchesModel');
 const catchErrorAsync = require('../utils/catchAsyncErrors');
 const firebase = require('../utils/firebase');
 
@@ -69,27 +68,6 @@ exports.deleteUser = catchErrorAsync(async (req, res) => {
   await User.findByIdAndDelete(req.user._id);
 
   res.status(200).json({ status: 'success', message: 'Account deleted.' });
-});
-
-exports.getAllMatches = catchErrorAsync(async (req, res) => {
-  const matches = await Matches.find({
-    users: req.user._id,
-  });
-
-  const matchedUserIds = matches.reduce((acc, match) => {
-    const otherUserId = match.users.find(
-      userId => userId.toString() !== req.user._id.toString()
-    );
-    return otherUserId ? [...acc, otherUserId] : acc;
-  }, []);
-
-  const matchedUsersData = await User.find({
-    _id: { $in: matchedUserIds },
-  }).select('fullName profileImage');
-
-  res
-    .status(200)
-    .json({ status: 'success', count: matches.length, data: matchedUsersData });
 });
 
 exports.getUsers = catchErrorAsync(async (req, res) => {
