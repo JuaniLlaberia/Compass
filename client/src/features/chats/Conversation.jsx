@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { IoArrowBackOutline } from 'react-icons/io5';
 import { ClipLoader } from 'react-spinners';
-import Button from '../../components/Button';
 import CancelMatchModal from './CancelMatchModal';
 import Message from './Message';
-import { useGetMessages } from './useGetMessages';
+import { useGetMessagesInf } from './useGetMessagesInf';
 
 export const Conversation = ({
   chatId,
@@ -18,23 +17,45 @@ export const Conversation = ({
   setMessages,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { messages: fetchedMessages, isLoading } = useGetMessages();
+  const [page, setPage] = useState(1);
+  const isFirstRender = useRef(true);
+
+  const {
+    messages: fetchedMessages,
+    isLoading,
+    refetch,
+    isRefetching,
+    hasMorePages,
+  } = useGetMessagesInf({ page });
   const { _id: recipientId, fullName, profileImage } = recipientUser;
 
   const closeChat = () => {
     searchParams.set('chatId', '');
     setSearchParams(searchParams);
     setMessages([]);
+    setPage(1);
   };
 
   useEffect(() => {
-    if (!isLoading) {
-      setMessages(fetchedMessages.data);
-      setTimeout(() => {
-        reference?.current?.scrollIntoView();
-      }, 1);
+    if (!isLoading && !isRefetching) {
+      const newMessages = fetchedMessages.data.reverse();
+      setMessages(prev => [...newMessages, ...prev]);
+
+      if (isFirstRender.current) {
+        isFirstRender.current = false;
+        setTimeout(() => {
+          reference?.current?.scrollIntoView();
+        }, 1);
+      }
     }
-  }, [fetchedMessages]);
+  }, [fetchedMessages, isRefetching]);
+
+  const getMoreMessages = () => {
+    setPage(prev => prev + 1);
+    setTimeout(() => {
+      refetch();
+    }, 1);
+  };
 
   if (chatId !== searchParams.get('chatId')) return null;
 
@@ -58,14 +79,28 @@ export const Conversation = ({
         </div>
         <CancelMatchModal />
       </nav>
-      {isLoading ? (
-        <section className='flex flex-col h-[83dvh] justify-center items-center text-light-text-1 dark:text-dark-text-1'>
+
+      {isLoading || isRefetching ? (
+        <section className='flex flex-col h-[84.5dvh] justify-center items-center text-light-text-1 dark:text-dark-text-1'>
           <ClipLoader />
           <h6>Retrieving messages</h6>
         </section>
-      ) : (
-        <section className=''>
-          <ul className='flex flex-col gap-2 py-1 px-3 h-[83dvh] overflow-y-scroll'>
+      ) : messages.length >= 1 ? (
+        <section>
+          <ul className='flex flex-col gap-1 py-1 px-2 h-[84.5dvh] overflow-y-scroll'>
+            <li className='flex justify-center'>
+              {hasMorePages ? (
+                <button
+                  className='text-light-text-2 dark:text-dark-text-2'
+                  onClick={getMoreMessages}
+                >
+                  Load More
+                </button>
+              ) : isLoading || isRefetching ? (
+                <ClipLoader color='gray' />
+              ) : null}
+            </li>
+
             {messages.map((msg, i) => (
               <Message
                 key={i}
@@ -77,19 +112,29 @@ export const Conversation = ({
             <li ref={reference}></li>
           </ul>
         </section>
+      ) : (
+        <p className='text-center text-light-text-2 dark:text-dark-text-2'>
+          Be the first one to write
+        </p>
       )}
+
       <form
         onSubmit={sendMessage}
-        className='absolute bottom-1 w-full flex items-center gap-3 px-3 py-2 bg-light-bg-2 dark:bg-dark-bg-2 border-t border-light-border-1 dark:border-dark-border-1'
+        className='absolute bottom-0 w-full flex items-center gap-3 p-1.5'
       >
         <input
           placeholder='Write your message...'
           disabled={isLoading}
-          className='bg-light-bg-1 dark:bg-dark-bg-1 w-full text-base rounded-md p-2.5 text-light-text-1 dark:text-dark-text-1 focus:outline-none border border-light-border-1 dark:border-dark-border-1 focus:border-secondary-1 dark:focus:border-secondary-1 md:hover:bg-light-bg-2'
+          className='bg-light-bg-1 dark:bg-dark-bg-1 w-full text-base rounded-2xl p-2.5 pr-[3.5rem] text-light-text-1 dark:text-dark-text-1 focus:outline-none border border-light-border-1 dark:border-dark-border-1 focus:border-secondary-1 dark:focus:border-secondary-1 placeholder:text-light-text-2 dark:placeholder:text-dark-text-2 md:hover:bg-light-bg-2'
           value={inputField}
           onChange={e => setInputField(e.target.value)}
         />
-        <Button disabled={isLoading}>Send</Button>
+        <button
+          disabled={isLoading}
+          className='absolute right-5 font-semibold text-secondary-1'
+        >
+          Send
+        </button>
       </form>
     </section>
   );

@@ -19,6 +19,7 @@ const Chats = () => {
               key={chat._id}
               chatId={chat._id}
               recipientUser={chat.userData[0]}
+              isActive={chat.isActive}
             />
           ))}
         </ul>
