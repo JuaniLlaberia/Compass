@@ -101,18 +101,3 @@ export const swipeLeft = async userId => {
     throw err;
   }
 };
-
-export const getMatches = async () => {
-  try {
-    const response = await fetch('http://localhost:8000/api/user/matches', {
-      method: 'GET',
-      credentials: 'include',
-    });
-
-    if (!response.ok) throw new Error(response.statusText);
-
-    return await response.json();
-  } catch (err) {
-    throw err;
-  }
-};
