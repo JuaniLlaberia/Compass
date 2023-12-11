@@ -43,9 +43,7 @@ const MatchesChats = ({ children }) => {
     <MatchesChatsContext.Provider
       value={{ messages, setMessages, ws, onlineUsers }}
     >
-      <main className='flex h-full w-full border-b border-light-border-1 dark:border-dark-border-1'>
-        {children}
-      </main>
+      <main className='flex h-full w-full'>{children}</main>
     </MatchesChatsContext.Provider>
   );
 };
@@ -65,7 +63,7 @@ const List = ({ children, title }) => {
 
   return (
     <section>
-      <h3 className='px-2 mt-2 font-semibold text-lg text-light-text-2 dark:text-dark-text-2 xl:text-xl'>
+      <h3 className='p-4 pb-0 font-semibold text-lg text-light-text-1 dark:text-dark-text-1 xl:text-xl'>
         {title}
       </h3>
       {cloneElement(children, { online: onlineUsers })}

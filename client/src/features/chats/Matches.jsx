@@ -7,7 +7,7 @@ const Matches = () => {
   const { matches, isLoading } = useGetMatches();
 
   return (
-    <section className='w-full md:w-[450px] flex gap-3 py-3 px-2 overflow-y-hidden overflow-x-auto'>
+    <section className='w-full md:w-[450px] flex gap-3 px-2 overflow-y-hidden overflow-x-auto'>
       {isLoading ? (
         <MatchesSkeleton />
       ) : matches.data.length >= 1 ? (
@@ -24,7 +24,7 @@ const Matches = () => {
         </ul>
       ) : (
         <p className='py-4 px-2 text-light-text-2 dark:text-dark-text-2'>
-          No matches available. Keep swiping!
+          No matches available. Keep on with your search.
         </p>
       )}
     </section>

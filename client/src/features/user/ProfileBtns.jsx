@@ -1,53 +1,65 @@
-import { IoSettingsSharp, IoPencilSharp, IoImage } from 'react-icons/io5';
+import {
+  IoSettingsOutline,
+  IoLogOutOutline,
+  IoHelpCircleOutline,
+  IoPersonOutline,
+  IoHeartOutline,
+} from 'react-icons/io5';
 import Drawer from '../../components/DrawerPage';
 import UserEdit from './UserEdit';
 import UserSettings from '../settings/UserSettings';
 import Modal from '../../components/Modal';
-import UpdateImgModal from './UpdateImgModal';
+import { useLogout } from '../auth/useLogout';
+import PacksModal from '../payments/PacksModal';
 
 const ProfileBtns = () => {
+  const { logout } = useLogout();
+
   return (
     <Drawer>
       <Modal>
-        <ul className='flex justify-between items-center gap-10 mt-6 lg:mb-4 lg:mt-10 lg:gap-20'>
-          <li>
-            <Modal.Open opens='update-image'>
-              <div className='flex flex-col items-center gap-1 w-20'>
-                <button className='p-2.5 rounded-full text-3xl lg:p-3 lg:text-4xl xl:text-5xl text-secondary-1 bg-light-bg-1 dark:bg-dark-bg-2 active:bg-light-bg-2 border border-light-border-1 dark:border-dark-border-1 shadow-md'>
-                  <IoImage />
-                </button>
-                <p className='text-sm lg:text-base text-light-text-2 dark:text-dark-text-2 font-semibold'>
-                  My image
-                </p>
-              </div>
-            </Modal.Open>
-          </li>
-          <li>
-            <Modal.Open opens='edit-profile'>
-              <div className='flex flex-col items-center gap-1 w-20'>
-                <button className='p-2.5 rounded-full text-3xl lg:p-3 lg:text-4xl xl:text-5xl text-secondary-1 bg-light-bg-1 dark:bg-dark-bg-2 active:bg-light-bg-2 border border-light-border-1 dark:border-dark-border-1 shadow-md'>
-                  <IoPencilSharp />
-                </button>
-                <p className='text-sm lg:text-base text-light-text-2 dark:text-dark-text-2 font-semibold'>
-                  Edit profile
-                </p>
-              </div>
-            </Modal.Open>
-          </li>
-          <li>
-            <Drawer.Button
-              icon={<IoSettingsSharp />}
-              label='Settings'
-              opensId='settings'
-            />
+        <ul>
+          <Modal.Open opens='edit-profile'>
+            <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1'>
+              <IoPersonOutline size={25} />
+              <h6 className='text-lg font-semibold'>Edit Profile</h6>
+            </li>
+          </Modal.Open>
+          <Drawer.Open opensId='settings'>
+            <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1'>
+              <IoSettingsOutline size={25} />
+              <h6 className='text-lg font-semibold'>Account Settings</h6>
+            </li>
+          </Drawer.Open>
+          <Modal.Open opens='likes-package'>
+            <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1'>
+              <IoHeartOutline size={25} />
+              <h6 className='text-lg font-semibold '>Likes Packages</h6>
+            </li>
+          </Modal.Open>
+          <Modal.Open opens='support-modal'>
+            <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1'>
+              <IoHelpCircleOutline size={25} />
+              <h6 className='text-lg font-semibold'>Support</h6>
+            </li>
+          </Modal.Open>
+          <li
+            className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1'
+            onClick={logout}
+          >
+            <IoLogOutOutline size={25} />
+            <h6 className='text-lg font-semibold '>Log Out</h6>
           </li>
         </ul>
 
-        <Modal.Window windowName='update-image'>
-          <UpdateImgModal />
-        </Modal.Window>
         <Modal.Window windowName='edit-profile'>
           <UserEdit />
+        </Modal.Window>
+        <Modal.Window windowName='likes-package'>
+          <PacksModal />
+        </Modal.Window>
+        <Modal.Window windowName='support-modal'>
+          <p>SUPPORT</p>
         </Modal.Window>
 
         <Drawer.Page

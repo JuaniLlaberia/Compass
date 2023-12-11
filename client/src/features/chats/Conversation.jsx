@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { IoArrowBackOutline } from 'react-icons/io5';
+import { IoArrowBackOutline, IoSend } from 'react-icons/io5';
 import { ClipLoader } from 'react-spinners';
 import CancelMatchModal from './CancelMatchModal';
 import Message from './Message';
@@ -146,9 +146,12 @@ export const Conversation = ({
         />
         <button
           disabled={isLoading}
-          className='absolute right-5 font-semibold text-secondary-1 lg:text-lg lg:right-7'
+          className='absolute right-5 font-semibold text-secondary-1 lg:text-xl lg:right-7'
         >
-          Send
+          <span className='md:hidden'>
+            <IoSend size={25} />
+          </span>
+          <span className='hidden md:block'>Send</span>
         </button>
       </form>
     </section>

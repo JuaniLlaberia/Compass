@@ -17,8 +17,8 @@ const UsersCard = ({ userData, categories, matchedCategories }) => {
         <img
           src={profileImage}
           className={`${
-            open ? 'w-28 h-28 top-2' : 'w-48 h-48 top-10'
-          } absolute rounded-full shadow-md transition-all duration-300 bg-light-bg-3 dark:bg-dark-bg-3`}
+            open ? 'w-28 h-28 top-2 ' : 'w-72 h-72 top-10'
+          } absolute shadow-md transition-all duration-300 bg-light-bg-3 dark:bg-dark-bg-3`}
         />
       </header>
       <section className='absolute bottom-2.5 w-full flex items-center justify-between px-4 lg:px-6 lg:bottom-4'>

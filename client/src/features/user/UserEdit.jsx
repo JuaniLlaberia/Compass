@@ -75,7 +75,7 @@ const UserEdit = ({ onClose }) => {
       onSubmit={handleSubmit(onSubmit)}
       className='flex flex-col h-[500px] lg:h-[600px] overflow-auto px-2'
     >
-      <h3 className='text-lg font-semibold'>Edit profile</h3>
+      <h3 className='text-lg font-semibold mb-2'>Edit profile</h3>
       {user.data.role === 'user' ? (
         <UserEditFields
           register={register}
