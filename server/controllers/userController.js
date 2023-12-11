@@ -48,9 +48,10 @@ exports.updateUser = catchErrorAsync(async (req, res) => {
     ...req.body,
     profileImage: imageLink === '' ? req.body.profileImage : imageLink,
     location: req.body.role === 'business' ? coords : undefined,
-    filters: JSON.parse(req.body.filters),
   };
   ['_id', 'email'].forEach(field => delete filteredBody[field]);
+
+  if (req.body?.filters) filteredBody.filters = JSON.parse(req.body.filters);
 
   //Find and update the user
   const user = await User.findByIdAndUpdate(req.user._id, filteredBody, {
