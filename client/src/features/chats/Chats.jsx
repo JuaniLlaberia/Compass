@@ -6,7 +6,7 @@ const Chats = () => {
   const { chats, isLoading } = useGetChats();
 
   return (
-    <>
+    <section>
       <h2 className='text-light-text-1 dark:text-dark-text-1 font-semibold'>
         Chats
       </h2>
@@ -28,7 +28,7 @@ const Chats = () => {
           No chats available. Start chatting now.
         </p>
       )}
-    </>
+    </section>
   );
 };
 

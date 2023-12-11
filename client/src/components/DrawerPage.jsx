@@ -49,11 +49,11 @@ const Button = ({ opensId, icon, label }) => {
     <div className='flex flex-col items-center gap-1 w-20'>
       <button
         onClick={() => open(opensId)}
-        className='p-2.5 rounded-full text-3xl text-secondary-1 bg-light-bg-1 dark:bg-dark-bg-2 active:bg-light-bg-2 border border-light-border-1 dark:border-dark-border-1 shadow-md'
+        className='p-2.5 rounded-full text-3xl lg:p-3 lg:text-4xl xl:text-5xl text-secondary-1 bg-light-bg-1 dark:bg-dark-bg-2 active:bg-light-bg-2 border border-light-border-1 dark:border-dark-border-1 shadow-md'
       >
         {icon}
       </button>
-      <p className='text-sm text-light-text-2 dark:text-dark-text-2 font-semibold'>
+      <p className='text-sm lg:text-base text-light-text-2 dark:text-dark-text-2 font-semibold'>
         {label}
       </p>
     </div>

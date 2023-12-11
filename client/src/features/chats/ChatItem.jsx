@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import CancelMatchModal from './CancelMatchModal';
 import { Conversation } from './Conversation';
 import { useAuthContext } from '../../context/AuthContext';
 import UserItem from './UserItem';
@@ -76,6 +77,7 @@ const ChatItem = ({ chatId, recipientUser, isActive }) => {
         recipientUser={recipientUser}
         onlineUsers={onlineUsers}
       />
+
       {searchParams.get('chatId') ? (
         <Conversation
           reference={ref}
