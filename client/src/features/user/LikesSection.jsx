@@ -5,7 +5,7 @@ import heart from '/heart_icon.svg';
 
 const LikesSection = ({ likes, extraLikes }) => {
   return (
-    <section className='mt-14 flex justify-center gap-4'>
+    <section className='mt-14 flex justify-center gap-4 px-4'>
       <Modal>
         <div className='relative w-full bg-light-bg-1 dark:bg-dark-bg-1 border border-light-border-1 dark:border-dark-border-1 shadow-md rounded-lg px-3 pt-6 pb-2 lg:max-w-[20dvw] lg:min-w-[300px] lg:pb-4'>
           <img
