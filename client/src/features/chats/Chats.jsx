@@ -1,25 +1,24 @@
-import ChatItem from './ChatItem';
+import React from 'react';
 import ChatsSekelon from './ChatsSkeleton';
+import UserItem from './UserItem';
 import { useGetChats } from './useGetChats';
 
 const Chats = () => {
   const { chats, isLoading } = useGetChats();
 
   return (
-    <section>
-      <h2 className='text-light-text-1 dark:text-dark-text-1 font-semibold'>
-        Chats
-      </h2>
+    <>
       {isLoading ? (
         <ChatsSekelon />
       ) : chats.data.length >= 1 ? (
-        <ul className='my-3'>
+        <ul>
           {chats.data.map(chat => (
-            <ChatItem
+            <UserItem
               key={chat._id}
+              onlineUsers={[]}
               chatId={chat._id}
-              recipientUser={chat.userData[0]}
               isActive={chat.isActive}
+              recipientUser={chat.userData[0]}
             />
           ))}
         </ul>
@@ -28,7 +27,7 @@ const Chats = () => {
           No chats available. Start chatting now.
         </p>
       )}
-    </section>
+    </>
   );
 };
 

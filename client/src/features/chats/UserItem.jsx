@@ -1,10 +1,23 @@
-const UserItem = ({ isActive, openChat, recipientUser, onlineUsers }) => {
+import { useSearchParams } from 'react-router-dom';
+import { useChatContext } from '../../context/ChatsContext';
+
+const UserItem = ({ isActive, chatId, recipientUser, onlineUsers }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { setRecipientUser, setIsChatActive } = useChatContext();
+
+  const openChat = () => {
+    searchParams.set('chatId', chatId);
+    setSearchParams(searchParams);
+    setRecipientUser(recipientUser);
+    setIsChatActive(isActive);
+  };
+
   return (
     <>
       {isActive ? (
         <li
           onClick={openChat}
-          className='flex items-center justify-between border-b border-light-border-1 dark:border-dark-border-1 py-3 active:bg-light-bg-2 dark:active:bg-dark-bg-2 md:hover:bg-light-bg-2 md:dark:hover:bg-dark-bg-2'
+          className='flex items-center justify-between px-3 border-b border-light-border-1 dark:border-dark-border-1 py-3 active:bg-light-bg-2 dark:active:bg-dark-bg-2 md:hover:bg-light-bg-2 md:dark:hover:bg-dark-bg-2'
         >
           <div className='flex items-center gap-3'>
             <div className='relative'>
@@ -34,7 +47,7 @@ const UserItem = ({ isActive, openChat, recipientUser, onlineUsers }) => {
             src={recipientUser.profileImage}
             className='h-16 w-16 rounded-full bg-light-bg-3 dark:bg-dark-bg-3'
           />
-          <p>{recipientUser.fullName.split(' ')[0]}</p>
+          <p>{recipientUser.fullName?.split(' ')[0]}</p>
         </li>
       )}
     </>
