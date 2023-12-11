@@ -11,7 +11,7 @@ const Matches = () => {
       {isLoading ? (
         <MatchesSkeleton />
       ) : matches.data.length >= 1 ? (
-        <ul className='flex gap-3 w-[90dvw] overflow-y-hidden overflow-x-scroll py-3'>
+        <ul className='flex gap-3 w-[90dvw] overflow-y-hidden overflow-x-auto py-3'>
           {matches.data.map(match => (
             <UserItem
               key={match._id}

@@ -3,11 +3,11 @@ import ChatsSekelon from './ChatsSkeleton';
 import UserItem from './UserItem';
 import { useGetChats } from './useGetChats';
 
-const Chats = () => {
+const Chats = ({ online }) => {
   const { chats, isLoading } = useGetChats();
 
   return (
-    <>
+    <section className='flex flex-col gap-1 py-3 overflow-hidden'>
       {isLoading ? (
         <ChatsSekelon />
       ) : chats.data.length >= 1 ? (
@@ -15,7 +15,7 @@ const Chats = () => {
           {chats.data.map(chat => (
             <UserItem
               key={chat._id}
-              onlineUsers={[]}
+              onlineUsers={online}
               chatId={chat._id}
               isActive={chat.isActive}
               recipientUser={chat.userData[0]}
@@ -27,7 +27,7 @@ const Chats = () => {
           No chats available. Start chatting now.
         </p>
       )}
-    </>
+    </section>
   );
 };
 

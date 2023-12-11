@@ -15,9 +15,7 @@ const ChatsPage = () => {
               </div>
             </MatchesChats.List>
             <MatchesChats.List title='Chats'>
-              <div className='flex flex-col gap-1 py-3 overflow-hidden'>
-                <Chats />
-              </div>
+              <Chats />
             </MatchesChats.List>
           </MatchesChats.Sidebar>
           <MatchesChats.Conversation />

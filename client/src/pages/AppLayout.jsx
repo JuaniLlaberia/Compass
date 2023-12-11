@@ -6,7 +6,7 @@ const AppLayout = () => {
   return (
     <>
       <MainHeader />
-      <main className='bg-light-bg-1 dark:bg-dark-bg-1 h-[100dvh] py-16'>
+      <main className='bg-light-bg-1 dark:bg-dark-bg-1 h-[100dvh] py-14'>
         <Outlet />
       </main>
       <MainNav />

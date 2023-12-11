@@ -12,7 +12,7 @@ const Message = ({ text, recipientId, sender }) => {
           recipientId === sender
             ? 'bg-light-bg-3 rounded-bl-sm text-light-text-1 dark:bg-dark-bg-3 dark:text-dark-text-1'
             : 'bg-secondary-1 rounded-br-sm text-dark-text-1'
-        } rounded-xl`}
+        } rounded-xl xl:text-lg 2xl:text-xl`}
       >
         {text ? (
           <p>{text}</p>
