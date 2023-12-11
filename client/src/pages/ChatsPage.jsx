@@ -10,9 +10,7 @@ const ChatsPage = () => {
         <MatchesChats>
           <MatchesChats.Sidebar>
             <MatchesChats.List title='Matches'>
-              <div className='w-full md:w-[450px] flex gap-3 py-3 px-2 overflow-y-hidden overflow-x-auto'>
-                <Matches />
-              </div>
+              <Matches />
             </MatchesChats.List>
             <MatchesChats.List title='Chats'>
               <Chats />

@@ -7,7 +7,7 @@ const Matches = () => {
   const { matches, isLoading } = useGetMatches();
 
   return (
-    <>
+    <section className='w-full md:w-[450px] flex gap-3 py-3 px-2 overflow-y-hidden overflow-x-auto'>
       {isLoading ? (
         <MatchesSkeleton />
       ) : matches.data.length >= 1 ? (
@@ -27,7 +27,7 @@ const Matches = () => {
           No matches available. Keep swiping!
         </p>
       )}
-    </>
+    </section>
   );
 };
 

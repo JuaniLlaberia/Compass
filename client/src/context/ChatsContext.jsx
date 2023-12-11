@@ -8,7 +8,12 @@ export const ChatProvider = ({ children }) => {
 
   return (
     <ChatContext.Provider
-      value={{ recipientUser, setRecipientUser, isChatActive, setIsChatActive }}
+      value={{
+        recipientUser,
+        setRecipientUser,
+        isChatActive,
+        setIsChatActive,
+      }}
     >
       {children}
     </ChatContext.Provider>

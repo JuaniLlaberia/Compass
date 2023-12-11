@@ -62,7 +62,7 @@ export const Conversation = ({
 
   return (
     <section className='flex flex-col h-full'>
-      <nav className='flex justify-between bg-light-bg-2 dark:bg-dark-bg-2 items-center py-2 px-4 border-b border-light-border-1 dark:border-dark-border-1'>
+      <nav className='flex justify-between bg-light-bg-1 dark:bg-dark-bg-1 md:bg-light-bg-2 md:dark:bg-dark-bg-2 items-center py-2 px-4 border-b border-light-border-1 dark:border-dark-border-1 shadow-sm'>
         <button
           onClick={closeChat}
           className='text-secondary-1'
@@ -115,10 +115,19 @@ export const Conversation = ({
             </ul>
           </>
         ) : (
-          <div className='flex justify-center items-center h-full px-8'>
-            <p className='text-center text-light-text-2 dark:text-dark-text-2'>
-              You have matched with {fullName}. Be the first one to talk, dont't
-              be shy!
+          <div className='flex flex-col gap-3 justify-center items-center h-full px-8'>
+            <h5 className='text-light-text-1 dark:text-dark-text-1 text-lg lg:text-xl'>
+              New Match with{' '}
+              <span className='font-semibold text-xl lg:text-2xl'>
+                {fullName.split(' ')[0]}
+              </span>
+            </h5>
+            <img
+              src={profileImage}
+              className='w-24 h-24 rounded-full lg:w-32 lg:h-32'
+            />
+            <p className='text-center text-light-text-2 dark:text-dark-text-2 lg:text-lg'>
+              Be the first one to talk, dont't be shy!
             </p>
           </div>
         )}
