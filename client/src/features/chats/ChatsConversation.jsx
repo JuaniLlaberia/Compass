@@ -1,6 +1,7 @@
-import { createContext, useContext } from 'react';
+import { cloneElement, createContext, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
+import { IoMail } from 'react-icons/io5';
 import { useAuthContext } from '../../context/AuthContext';
 import { Conversation as ConversationPage } from './Conversation';
 import { useChatContext } from '../../context/ChatsContext';
@@ -11,12 +12,13 @@ const MatchesChatsContext = createContext();
 const MatchesChats = ({ children }) => {
   const [ws, setWs] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
   //Web socket actions
   const handleWSActivity = e => {
     const socketData = JSON.parse(e.data);
     if ('online' in socketData) {
-      // setOnlineUsers(socketData.online);
+      setOnlineUsers(socketData.online);
     } else {
       setMessages(prev => [...prev, JSON.parse(e.data)]);
     }
@@ -38,7 +40,9 @@ const MatchesChats = ({ children }) => {
   }, []);
 
   return (
-    <MatchesChatsContext.Provider value={{ messages, setMessages, ws }}>
+    <MatchesChatsContext.Provider
+      value={{ messages, setMessages, ws, onlineUsers }}
+    >
       <main className='flex h-full w-full border-b border-light-border-1 dark:border-dark-border-1'>
         {children}
       </main>
@@ -57,12 +61,14 @@ const Sidebar = ({ children }) => {
 
 //Reusalbe list component => Accepts children so the list can be style as needed
 const List = ({ children, title }) => {
+  const { onlineUsers } = useContext(MatchesChatsContext);
+
   return (
     <section>
-      <h3 className='px-2 mt-2 font-semibold text-lg text-light-text-2 dark:text-dark-text-2'>
+      <h3 className='px-2 mt-2 font-semibold text-lg text-light-text-2 dark:text-dark-text-2 xl:text-xl'>
         {title}
       </h3>
-      {children}
+      {cloneElement(children, { online: onlineUsers })}
     </section>
   );
 };
@@ -122,7 +128,17 @@ const Conversation = ({}) => {
             />
           </>
         </section>
-      ) : null}
+      ) : (
+        <section className='hidden w-full h-full md:flex md:flex-col md:justify-center md:items-center'>
+          <h6 className='flex items-center gap-1.5 font-semibold text-lg text-light-text-1 dark:text-dark-text-1 xl:text-xl'>
+            <IoMail size={22.5} />
+            Your messages
+          </h6>
+          <p className='text-light-text-2 dark:text-dark-text-2 xl:text-lg'>
+            Start a conversation by openning one of your chats
+          </p>
+        </section>
+      )}
     </>
   );
 };
