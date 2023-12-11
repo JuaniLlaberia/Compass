@@ -1,62 +1,28 @@
-import React from 'react';
-import Chats from './Chats';
-import Matches from './Matches';
+import { createContext, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { Conversation } from './Conversation';
 import { useAuthContext } from '../../context/AuthContext';
-// import UserItem from './UserItem';
+import { Conversation as ConversationPage } from './Conversation';
+import { useChatContext } from '../../context/ChatsContext';
 
-const ChatsConversation = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [onlineUsers, setOnlineUsers] = useState([]);
-  const [inputField, setInputField] = useState('');
-  const [messages, setMessages] = useState([]);
+const MatchesChatsContext = createContext();
+
+//Chat component
+const MatchesChats = ({ children }) => {
   const [ws, setWs] = useState(null);
-  const ref = useRef(null);
-
-  const { user } = useAuthContext();
-
-  const openChat = () => {
-    searchParams.set('chatId', chatId);
-    setSearchParams(searchParams);
-  };
+  const [messages, setMessages] = useState([]);
 
   //Web socket actions
   const handleWSActivity = e => {
     const socketData = JSON.parse(e.data);
     if ('online' in socketData) {
-      setOnlineUsers(socketData.online);
+      // setOnlineUsers(socketData.online);
     } else {
       setMessages(prev => [...prev, JSON.parse(e.data)]);
     }
   };
 
-  const sendMessage = e => {
-    e.preventDefault();
-
-    if (inputField === '') return;
-
-    const message = {
-      sender: user.data._id,
-      recipient: recipientUser._id,
-      chatId,
-      message: inputField,
-      isChatActive: isActive,
-    };
-
-    ws.send(JSON.stringify(message));
-    setMessages(prev => [...prev, message]);
-    setInputField('');
-
-    setTimeout(() => {
-      ref.current.scrollIntoView({
-        behavior: 'smooth',
-      });
-    }, 1);
-  };
-
-  //Handle web socket initialization and actions
+  //Handle web socket initialization and actions => When we enter the chats page we create the connection via scokets and it gets close when we leave
   useEffect(() => {
     //Connecting to web socket
     const ws = new WebSocket('ws://localhost:8000');
@@ -72,29 +38,97 @@ const ChatsConversation = () => {
   }, []);
 
   return (
-    <section className='flex  h-full border-b'>
-      <div className='w-[500px] border-r border-green-500'>
-        <Matches />
-        <Chats />
-      </div>
-      {searchParams.get('chatId') ? (
-        <div className='w-full'>
-          <Conversation
-            reference={ref}
-            inputField={inputField}
-            setInputField={setInputField}
-            messages={messages}
-            setMessages={setMessages}
-            chatId={searchParams.get('chatId')}
-            sendMessage={sendMessage}
-            recipientUser={''}
-          />
-        </div>
-      ) : (
-        <div className='w-full'>Start chatting</div>
-      )}
+    <MatchesChatsContext.Provider value={{ messages, setMessages, ws }}>
+      <main className='flex h-full w-full border-b border-light-border-1 dark:border-dark-border-1'>
+        {children}
+      </main>
+    </MatchesChatsContext.Provider>
+  );
+};
+
+//Layout component to make chat responsive
+const Sidebar = ({ children }) => {
+  return (
+    <aside className='relative w-full md:w-auto border-r border-light-border-1 dark:border-dark-border-1'>
+      {children}
+    </aside>
+  );
+};
+
+//Reusalbe list component => Accepts children so the list can be style as needed
+const List = ({ children, title }) => {
+  return (
+    <section>
+      <h3 className='px-2 mt-2 font-semibold text-lg text-light-text-2 dark:text-dark-text-2'>
+        {title}
+      </h3>
+      {children}
     </section>
   );
 };
 
-export default ChatsConversation;
+//Chat/Conversation page
+const Conversation = ({}) => {
+  const [searchParams] = useSearchParams();
+  const [inputField, setInputField] = useState('');
+  const { setMessages, messages, ws } = useContext(MatchesChatsContext);
+
+  const { user } = useAuthContext();
+  const { recipientUser, isChatActive } = useChatContext();
+
+  const chatRef = useRef(null);
+
+  const chatIdToRender = searchParams.get('chatId') || '';
+
+  //Create and send message via socket to the backend
+  const sendMessage = e => {
+    e.preventDefault();
+
+    if (inputField === '') return;
+
+    const message = {
+      sender: user.data._id,
+      chatId: chatIdToRender,
+      message: inputField,
+      recipient: recipientUser?._id,
+      isChatActive,
+    };
+
+    ws.send(JSON.stringify(message));
+    setMessages(prev => [...prev, message]);
+    setInputField('');
+
+    setTimeout(() => {
+      chatRef.current.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }, 1);
+  };
+
+  return (
+    <>
+      {chatIdToRender ? (
+        <section className='fixed bottom-0 left-0 h-full w-full bg-light-bg-1 dark:bg-dark-bg-1 z-[100] md:relative'>
+          <>
+            <ConversationPage
+              reference={chatRef}
+              inputField={inputField}
+              setInputField={setInputField}
+              messages={messages}
+              setMessages={setMessages}
+              sendMessage={sendMessage}
+              chatId={chatIdToRender}
+              recipientUser={recipientUser}
+            />
+          </>
+        </section>
+      ) : null}
+    </>
+  );
+};
+
+MatchesChats.Sidebar = Sidebar;
+MatchesChats.List = List;
+MatchesChats.Conversation = Conversation;
+
+export default MatchesChats;
