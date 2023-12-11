@@ -51,7 +51,8 @@ exports.updateUser = catchErrorAsync(async (req, res) => {
   };
   ['_id', 'email'].forEach(field => delete filteredBody[field]);
 
-  if (req.body?.filters) filteredBody.filters = JSON.parse(req.body.filters);
+  if (req.body?.filters && req.user.newUser)
+    filteredBody.filters = JSON.parse(req.body.filters);
 
   //Find and update the user
   const user = await User.findByIdAndUpdate(req.user._id, filteredBody, {
