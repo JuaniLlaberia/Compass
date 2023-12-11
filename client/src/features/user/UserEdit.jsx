@@ -4,8 +4,9 @@ import UserEditFields from './UserEditFields';
 import BusinessEditFields from './BusinessEditFields';
 import { useUpdateUser } from '../user/useUpdateUser';
 import { useAuthContext } from '../../context/AuthContext';
+import Button from '../../components/Button';
 
-const UserEdit = () => {
+const UserEdit = ({ onClose }) => {
   const { user } = useAuthContext();
   const { updateUser } = useUpdateUser();
 
@@ -55,17 +56,26 @@ const UserEdit = () => {
       gender,
     };
 
-    updateUser({
-      fullName,
-      summary,
-      category,
-      gender: user.data.role === 'user' ? gender : undefined,
-      filters: user.data.role === 'user' ? filtersUser : filtersBuss,
-    });
+    updateUser(
+      {
+        fullName,
+        summary,
+        category,
+        gender: user.data.role === 'user' ? gender : undefined,
+        filters: user.data.role === 'user' ? filtersUser : filtersBuss,
+      },
+      {
+        onSuccess: () => onClose(),
+      }
+    );
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className='flex flex-col h-[500px] lg:h-[600px] overflow-auto px-2'
+    >
+      <h3 className='text-lg font-semibold'>Edit profile</h3>
       {user.data.role === 'user' ? (
         <UserEditFields
           register={register}
@@ -82,6 +92,7 @@ const UserEdit = () => {
           errors={errors}
         />
       )}
+      <Button>Edit Profile</Button>
     </form>
   );
 };

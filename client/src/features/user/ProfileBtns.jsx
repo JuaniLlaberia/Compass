@@ -23,11 +23,16 @@ const ProfileBtns = () => {
             </Modal.Open>
           </li>
           <li>
-            <Drawer.Button
-              icon={<IoPencilSharp />}
-              label='Edit profile'
-              opensId='edit'
-            />
+            <Modal.Open opens='edit-profile'>
+              <div className='flex flex-col items-center gap-1 w-20'>
+                <button className='p-2.5 rounded-full text-3xl lg:p-3 lg:text-4xl xl:text-5xl text-secondary-1 bg-light-bg-1 dark:bg-dark-bg-2 active:bg-light-bg-2 border border-light-border-1 dark:border-dark-border-1 shadow-md'>
+                  <IoPencilSharp />
+                </button>
+                <p className='text-sm lg:text-base text-light-text-2 dark:text-dark-text-2 font-semibold'>
+                  Edit profile
+                </p>
+              </div>
+            </Modal.Open>
           </li>
           <li>
             <Drawer.Button
@@ -41,12 +46,10 @@ const ProfileBtns = () => {
         <Modal.Window windowName='update-image'>
           <UpdateImgModal />
         </Modal.Window>
-        <Drawer.Page
-          title='Edit profile'
-          pageId='edit'
-        >
+        <Modal.Window windowName='edit-profile'>
           <UserEdit />
-        </Drawer.Page>
+        </Modal.Window>
+
         <Drawer.Page
           title='Settings'
           pageId='settings'
