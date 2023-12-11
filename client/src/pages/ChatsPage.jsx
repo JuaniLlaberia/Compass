@@ -6,7 +6,7 @@ import { ChatProvider } from '../context/ChatsContext';
 const ChatsPage = () => {
   return (
     <ChatProvider>
-      <section className='relative h-full'>
+      <section className='relative h-full md:pb-3'>
         <MatchesChats>
           <MatchesChats.Sidebar>
             <MatchesChats.List title='Matches'>
