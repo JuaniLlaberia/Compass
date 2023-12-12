@@ -7,6 +7,9 @@ export const getUserCoords = () => {
       },
       error => {
         reject(error);
+        alert(
+          'Please enable your location in order to use the application. If now you will not be able to browse jobs/users'
+        );
       }
     );
   });
