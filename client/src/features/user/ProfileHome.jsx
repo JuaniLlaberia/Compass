@@ -1,38 +1,50 @@
-import ProfileBtns from './ProfileBtns';
-import LikesSection from './LikesSection';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { IoClose } from 'react-icons/io5';
+import UserPreview from './UserPreview';
+import ProfileHeader from './ProfileHeader';
 import { useAuthContext } from '../../context/AuthContext';
 
 const ProfileHome = () => {
   const { user } = useAuthContext();
-  const { fullName, category, profileImage, likes, extraLikes } = user.data;
+  const [previewOpen, isPreviewOpen] = useState(false);
 
   return (
-    <>
-      <header className='flex flex-col justify-center items-center mt-4'>
-        <img
-          src={profileImage}
-          className='h-32 w-32 rounded-full bg-light-bg-3 dark:bg-dark-bg-3'
-        />
-        <h1 className='text-lg text-light-text-1 dark:text-dark-text-1'>
-          {fullName}
-        </h1>
-        <ul className='flex justify-center gap-2 flex-wrap mt-2'>
-          {category.map(cat => (
-            <li
-              className='text-light-text-2 dark:text-dark-text-2 border border-light-border-1 dark:border-dark-border-1 rounded-full text-sm px-3'
-              key={cat}
-            >
-              {cat}
-            </li>
-          ))}
-        </ul>
+    <section className='flex h-full w-full'>
+      <header className='md:hidden'>
+        <ProfileHeader userData={user.data} />
+        <button
+          className='absolute top-4 right-5 bg-secondary-1 text-dark-text-1 font-semibold py-1 px-3 rounded-xl'
+          onClick={() => isPreviewOpen(true)}
+        >
+          Preview
+        </button>
       </header>
-      <ProfileBtns />
-      <LikesSection
-        likes={likes}
-        extraLikes={extraLikes}
-      />
-    </>
+      {previewOpen && (
+        <motion.section
+          initial={{ y: '100%' }}
+          animate={{ y: '0%' }}
+          transition={{ duration: 0.25 }}
+          className='fixed w-full h-full bg-light-bg-1 overflow-y-auto pb-24 md:hidden z-[100]'
+        >
+          <button
+            className='absolute top-2.5 right-2.5'
+            onClick={() => isPreviewOpen(false)}
+          >
+            <IoClose size={26} />
+          </button>
+          <UserPreview userData={user.data} />
+        </motion.section>
+      )}
+      <div className='hidden md:flex md:w-full'>
+        <aside className='border-r'>
+          <ProfileHeader userData={user.data} />
+        </aside>
+        <section className='flex justify-center w-full h-full overflow-y-auto'>
+          <UserPreview userData={user.data} />
+        </section>
+      </div>
+    </section>
   );
 };
 

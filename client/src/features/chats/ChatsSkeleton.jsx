@@ -1,6 +1,6 @@
-const ChatsSekelon = ({ amount = 5 }) => {
+const ChatsSekelon = ({ amount = 4 }) => {
   return (
-    <ul className='flex flex-col gap-3 my-3'>
+    <ul className='flex flex-col gap-3 my-3 px-3'>
       {Array(amount)
         .fill(0)
         .map((_, i) => (

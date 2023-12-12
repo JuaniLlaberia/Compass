@@ -1,12 +1,14 @@
-import { useGetPackages } from './useGetPackages';
 import PackItem from './PackItem';
+import { useGetPackages } from './useGetPackages';
 
 const PacksModal = () => {
   const { packages, isLoading, error } = useGetPackages();
 
   return (
     <>
-      <h1 className='text-xl mb-4 px-2 font-semibold'>All packages</h1>
+      <h1 className='text-xl mb-4 px-2 font-semibold xl:text-2xl'>
+        All packages
+      </h1>
       {isLoading ? (
         'Loading packages'
       ) : packages?.data && !error ? (
@@ -28,7 +30,7 @@ const PacksModal = () => {
           for the inconvenience.
         </p>
       )}
-      <p className='mt-5 text-sm text-light-text-2 dark:text-dark-text-2 px-2'>
+      <p className='mt-5 text-sm text-light-text-2 dark:text-dark-text-2 px-2 lg:text-base'>
         All extra like packages have no expiration date and they work exactly
         the same as regular likes. All payments are handle by Stripe©.
       </p>

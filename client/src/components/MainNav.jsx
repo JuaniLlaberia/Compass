@@ -1,29 +1,27 @@
-import {
-  IoSendSharp,
-  IoChatbubbleEllipsesSharp,
-  IoPerson,
-} from 'react-icons/io5';
+import { IoChatbubbleEllipsesSharp, IoPerson } from 'react-icons/io5';
+import { TbCardsFilled } from 'react-icons/tb';
+
 import NavItem from './NavItem';
 
 const items = [
   {
     link: '/app',
-    icon: <IoSendSharp size={25} />,
+    icon: <TbCardsFilled />,
   },
   {
     link: '/chats',
-    icon: <IoChatbubbleEllipsesSharp size={25} />,
+    icon: <IoChatbubbleEllipsesSharp />,
   },
   {
     link: '/profile',
-    icon: <IoPerson size={25} />,
+    icon: <IoPerson />,
   },
 ];
 
 const MainNav = () => {
   return (
     <nav>
-      <ul className='w-full h-14 fixed bottom-0 z-50 flex justify-around items-center '>
+      <ul className='w-full h-16 fixed bg-dark-bg-2 bottom-0 z-50 flex justify-around items-center md:justify-center md:gap-48'>
         {items.map(item => (
           <NavItem
             key={item.link}

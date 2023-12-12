@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
 const ws = require('ws');
 const jwt = require('jsonwebtoken');
 const app = require('./app');
 
 const Message = require('./models/messageModel');
 const Matches = require('./models/matchesModel');
-
-dotenv.config({ path: './config.env' });
 
 mongoose
   .connect(process.env.MONGODB_URL)

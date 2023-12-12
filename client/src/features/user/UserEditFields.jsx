@@ -42,7 +42,7 @@ const UserEditFields = ({
           register={register('summary', {
             required: 'Please tell us about you',
           })}
-          maxLength={200}
+          maxLength={300}
           id='summary'
           placeholder='Summary'
           type='text'

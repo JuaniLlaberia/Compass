@@ -44,15 +44,15 @@ const CardsWrapper = () => {
 
   return (
     <>
-      <section className='relative h-full'>
+      <section className='relative h-full px-3 md:px-12'>
         {users.data.length !== 0 && !isLoading ? (
-          <>
+          <div className='flex justify-center w-full'>
             <Cards userToSwipe={users.data[0]} />
             <CardsBtns
               swipeUserLeft={swipeUserLeft}
               swipeUserRight={swipeUserRight}
             />
-          </>
+          </div>
         ) : (
           <CardsEmpty />
         )}

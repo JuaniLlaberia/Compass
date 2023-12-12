@@ -1,12 +1,25 @@
-import Matches from '../features/chats/Matches';
 import Chats from '../features/chats/Chats';
+import MatchesChats from '../features/chats/ChatsConversation';
+import Matches from '../features/chats/Matches';
+import { ChatProvider } from '../context/ChatsContext';
 
 const ChatsPage = () => {
   return (
-    <section className='relative h-full'>
-      <Matches />
-      <Chats />
-    </section>
+    <ChatProvider>
+      <section className='relative h-full'>
+        <MatchesChats>
+          <MatchesChats.Sidebar>
+            <MatchesChats.List title='Matches'>
+              <Matches />
+            </MatchesChats.List>
+            <MatchesChats.List title='Chats'>
+              <Chats />
+            </MatchesChats.List>
+          </MatchesChats.Sidebar>
+          <MatchesChats.Conversation />
+        </MatchesChats>
+      </section>
+    </ChatProvider>
   );
 };
 

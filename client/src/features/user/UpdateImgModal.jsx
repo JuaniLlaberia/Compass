@@ -15,12 +15,12 @@ const UpdateImgModal = ({ onClose }) => {
 
   return (
     <section className='flex flex-col'>
-      <h1 className='text-lg text-center text-light-text-2 dark:text-dark-text-2 mb-6'>
+      <h1 className='text-lg lg:text-xl text-center text-light-text-2 dark:text-dark-text-2 mb-6'>
         Update your profile image
       </h1>
       <label
         htmlFor='update-image'
-        className='w-full text-center font-semibold border-y border-light-border-1 dark:border-dark-border-1 py-3 cursor-pointer active:bg-light-bg-2 dark:active:bg-dark-bg-2'
+        className='w-full text-center font-semibold border-y border-light-border-1 dark:border-dark-border-1 py-3 lg:py-4 cursor-pointer active:bg-light-bg-2 dark:active:bg-dark-bg-2 lg:text-xl'
       >
         Upload New Image
       </label>
@@ -33,7 +33,7 @@ const UpdateImgModal = ({ onClose }) => {
         onChange={e => handleUploadd(e.target.files[0])}
       />
       <button
-        className='w-full font-semibold text-red-500  pt-3'
+        className='w-full font-semibold text-red-500 pt-3 lg:text-xl lg:pt-4'
         onClick={onClose}
       >
         Cancel

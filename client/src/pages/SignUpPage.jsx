@@ -72,12 +72,17 @@ const SignUpPage = () => {
     if (data.role === 'user') {
       formData.append('gender', data.gender);
       formData.append('birthDate', data.birthDate);
+      formData.append('filters', JSON.stringify({ distance: 5 }));
     } else {
       const location = `${data.address}, ${data.city} ${data.country}`;
       const [lat, lon] = await getCoords(location);
 
       formData.append('location', [lon, lat]);
       formData.append('address', location);
+      formData.append(
+        'filters',
+        JSON.stringify({ minAge: 18, maxAge: 60, gender: 'male' })
+      );
     }
 
     updateUser(formData, {

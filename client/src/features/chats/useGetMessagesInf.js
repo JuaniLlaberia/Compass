@@ -14,6 +14,7 @@ export const useGetMessagesInf = ({ page }) => {
   } = useQuery({
     queryKey: ['messages', chatId],
     queryFn: () => getMessages({ chatId, page }),
+    refetchOnWindowFocus: false,
   });
 
   return {

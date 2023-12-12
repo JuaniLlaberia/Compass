@@ -5,9 +5,9 @@ const NavItem = ({ link, icon }) => {
     <li>
       <NavLink
         to={link}
-        className='text-[#89868a]'
+        className='text-dark-text-2'
       >
-        {icon}
+        <span className='text-2xl md:text-3xl'>{icon}</span>
       </NavLink>
     </li>
   );

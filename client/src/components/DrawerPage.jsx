@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { cloneElement, createContext, useContext, useState } from 'react';
 
 const DrawerContext = createContext();
 
@@ -42,25 +42,12 @@ const Page = ({ children, title, pageId }) => {
   );
 };
 
-const Button = ({ opensId, icon, label }) => {
+const Open = ({ opensId, children }) => {
   const { open } = useContext(DrawerContext);
-
-  return (
-    <div className='flex flex-col items-center gap-1 w-20'>
-      <button
-        onClick={() => open(opensId)}
-        className='p-2.5 rounded-full text-3xl text-secondary-1 bg-light-bg-1 dark:bg-dark-bg-2 active:bg-light-bg-2 border border-light-border-1 dark:border-dark-border-1 shadow-md'
-      >
-        {icon}
-      </button>
-      <p className='text-sm text-light-text-2 dark:text-dark-text-2 font-semibold'>
-        {label}
-      </p>
-    </div>
-  );
+  return cloneElement(children, { onClick: () => open(opensId) });
 };
 
 Drawer.Page = Page;
-Drawer.Button = Button;
+Drawer.Open = Open;
 
 export default Drawer;

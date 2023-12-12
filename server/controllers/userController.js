@@ -28,6 +28,7 @@ exports.updateUser = catchErrorAsync(async (req, res) => {
 
     //Upload buffer to bucket
     const bucketRef = ref(firebase.storage, `${req.user._id}.webp`);
+
     const imgSnapshot = await uploadBytesResumable(bucketRef, optimizedImg, {
       contentType: 'image/webp',
     });
@@ -49,6 +50,9 @@ exports.updateUser = catchErrorAsync(async (req, res) => {
     location: req.body.role === 'business' ? coords : undefined,
   };
   ['_id', 'email'].forEach(field => delete filteredBody[field]);
+
+  if (req.body?.filters && req.user.newUser)
+    filteredBody.filters = JSON.parse(req.body.filters);
 
   //Find and update the user
   const user = await User.findByIdAndUpdate(req.user._id, filteredBody, {
