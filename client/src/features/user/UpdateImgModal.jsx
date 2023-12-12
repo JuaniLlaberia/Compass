@@ -33,6 +33,7 @@ const UpdateImgModal = ({ onClose }) => {
         onChange={e => handleUploadd(e.target.files[0])}
       />
       <button
+        aria-label='cancel (close)'
         className='w-full font-semibold text-red-500 pt-3 lg:text-xl lg:pt-4'
         onClick={onClose}
       >

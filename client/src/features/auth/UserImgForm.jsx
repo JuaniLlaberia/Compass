@@ -19,10 +19,12 @@ const UserImgForm = ({ register, error }) => {
         className='flex justify-center items-end gap-6 mb-12'
       >
         <img
+          alt='user profile photo preview'
           src={previewImg}
           className='h-40 w-40 bg-[gray] rounded-full object-cover'
         />
         <img
+          alt='user profile photo preview (small)'
           src={previewImg}
           className='h-20 w-20 bg-[gray] rounded-full object-cover'
         />

@@ -17,7 +17,10 @@ const ErrorPage = () => {
         An error has occured when loading the page. Please try reloading the
         page or come back later. We apologies for the inconviniences.
       </p>
-      <Button onClick={() => window.location.replace('/app')}>
+      <Button
+        aria-label='reload page'
+        onClick={() => window.location.replace('/app')}
+      >
         <IoReload
           size={18}
           className='mr-2'

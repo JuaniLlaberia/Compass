@@ -14,6 +14,7 @@ const ProfileHome = () => {
       <header className='md:hidden'>
         <ProfileHeader userData={user.data} />
         <button
+          aria-label='open'
           className='absolute top-4 right-5 bg-secondary-1 text-dark-text-1 font-semibold py-1 px-3 rounded-xl'
           onClick={() => isPreviewOpen(true)}
         >
@@ -28,6 +29,7 @@ const ProfileHome = () => {
           className='fixed w-full h-full bg-light-bg-1 overflow-y-auto pb-24 md:hidden z-[100]'
         >
           <button
+            aria-label='close'
             className='absolute top-2.5 right-2.5'
             onClick={() => isPreviewOpen(false)}
           >

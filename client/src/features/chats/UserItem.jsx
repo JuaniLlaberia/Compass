@@ -30,6 +30,7 @@ const UserItem = ({ isActive, chatId, recipientUser, onlineUsers }) => {
           <div className='flex items-center gap-3 lg:gap-4'>
             <div className='relative'>
               <img
+                alt='user profile photo'
                 src={recipientUser.profileImage}
                 className='h-14 w-14 rounded-full lg:h-16 lg:w-16'
               />

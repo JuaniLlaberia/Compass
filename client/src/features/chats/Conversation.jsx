@@ -74,6 +74,7 @@ export const Conversation = ({
         </button>
         <div className='flex items-center gap-3'>
           <img
+            aria-label='user profile photo'
             src={profileImage}
             className='h-8 w-8 rounded-full lg:h-10 lg:w-10 xl:h-12 xl:w-12'
           />
@@ -148,6 +149,7 @@ export const Conversation = ({
           onChange={e => setInputField(e.target.value)}
         />
         <button
+          aria-label='send message'
           disabled={isLoading}
           className='absolute right-5 font-semibold text-secondary-1 lg:text-xl lg:right-7'
         >

@@ -92,7 +92,7 @@ const UserEdit = ({ onClose }) => {
           errors={errors}
         />
       )}
-      <Button>Edit Profile</Button>
+      <Button aria-label='submit'>Edit Profile</Button>
     </form>
   );
 };
