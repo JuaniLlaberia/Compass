@@ -33,9 +33,12 @@ export const Conversation = ({
   const closeChat = () => {
     searchParams.set('chatId', '');
     setSearchParams(searchParams);
+  };
+
+  useEffect(() => {
     setMessages([]);
     setPage(1);
-  };
+  }, [searchParams.get('chatId')]);
 
   useEffect(() => {
     if (!isLoading && !isRefetching) {

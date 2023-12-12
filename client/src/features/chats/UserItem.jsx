@@ -55,7 +55,9 @@ const UserItem = ({ isActive, chatId, recipientUser, onlineUsers }) => {
             src={recipientUser.profileImage}
             className='h-16 w-16 lg:h-20 lg:w-20 rounded-full bg-light-bg-3 dark:bg-dark-bg-3'
           />
-          <p>{recipientUser.fullName?.split(' ')[0]}</p>
+          <p className='text-light-text-1 dark:text-dark-text-1'>
+            {recipientUser.fullName?.split(' ')[0]}
+          </p>
         </li>
       )}
     </>
