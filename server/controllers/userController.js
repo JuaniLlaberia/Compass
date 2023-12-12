@@ -23,7 +23,7 @@ exports.updateUser = catchErrorAsync(async (req, res) => {
     const optimizedImg = await sharp(req.file.buffer)
       .resize(300, 300)
       .toFormat('webp')
-      .webp({ quality: 90 })
+      .webp({ quality: 85 })
       .toBuffer();
 
     //Upload buffer to bucket
