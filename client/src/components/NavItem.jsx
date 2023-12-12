@@ -4,6 +4,7 @@ const NavItem = ({ link, icon }) => {
   return (
     <li>
       <NavLink
+        aria-label='navigation link'
         to={link}
         className='text-dark-text-2'
       >

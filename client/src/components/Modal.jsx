@@ -36,6 +36,7 @@ const Window = ({ children, windowName }) => {
         className='bg-light-bg-1 text-light-text-1 dark:bg-dark-bg-1 dark:text-dark-text-1 fixed top-[40%] left-[50%] translate-x-[-50%] translate-y-[-40%] w-[50vw] min-w-[325px] max-w-[600px] p-3 rounded-lg min-h-[100px] max-h-[550px] lg:max-h-[650px] z-[110] shadow-md'
       >
         <button
+          aria-label='close modal'
           className='absolute top-2.5 right-2.5 text-light-text-2 dark:text-dark-text-2'
           onClick={close}
         >

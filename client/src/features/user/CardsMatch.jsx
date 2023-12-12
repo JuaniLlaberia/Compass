@@ -12,14 +12,14 @@ const CardsMatch = () => {
       <div className='flex justify-center gap-2 my-4 mb-12'>
         <div className='relative'>
           <img
-            aria-label='user profile photo'
+            alt='user profile photo'
             src={user.data.profileImage}
             className='h-24 w-24 bg-light-bg-3 rounded-full lg:h-28 lg:w-28'
           />
         </div>
         <div className='relative -ml-[32px]'>
           <img
-            aria-label='matched user profile photo'
+            alt='matched user profile photo'
             //   src={user.data.profileImage}
             className='h-24 w-24 bg-light-bg-3 rounded-full lg:h-28 lg:w-28'
           />

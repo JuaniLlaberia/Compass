@@ -39,7 +39,7 @@ const ProfileHome = () => {
         </motion.section>
       )}
       <div className='hidden md:flex md:w-full'>
-        <aside className='border-r'>
+        <aside className='border-r border-light-border-1 dark:border-dark-border-1'>
           <ProfileHeader userData={user.data} />
         </aside>
         <section className='flex justify-center w-full h-full overflow-y-auto'>

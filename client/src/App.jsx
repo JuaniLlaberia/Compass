@@ -4,7 +4,6 @@ import { Toaster } from 'sonner';
 import AuthPage from './pages/AuthPage';
 import AppLayout from './pages/AppLayout';
 import HomePage from './pages/HomePage';
-import NotificationPage from './pages/NotificationPage';
 import ChatsPage from './pages/ChatsPage';
 import ProfilePage from './pages/ProfilePage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -34,10 +33,6 @@ const router = createBrowserRouter([
           {
             path: '/app',
             element: <HomePage />,
-          },
-          {
-            path: '/notifications',
-            element: <NotificationPage />,
           },
           {
             path: '/chats',

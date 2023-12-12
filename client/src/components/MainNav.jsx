@@ -24,6 +24,7 @@ const MainNav = () => {
       <ul className='w-full h-16 fixed bg-dark-bg-2 bottom-0 z-50 flex justify-around items-center md:justify-center md:gap-48'>
         {items.map(item => (
           <NavItem
+            aria-label='navigation link'
             key={item.link}
             link={item.link}
             icon={item.icon}

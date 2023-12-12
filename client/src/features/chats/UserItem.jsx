@@ -53,6 +53,7 @@ const UserItem = ({ isActive, chatId, recipientUser, onlineUsers }) => {
           className='flex flex-col items-center min-w-[70px] cursor-pointer'
         >
           <img
+            alt='user profile photo'
             src={recipientUser.profileImage}
             className='h-16 w-16 lg:h-20 lg:w-20 rounded-full bg-light-bg-3 dark:bg-dark-bg-3'
           />

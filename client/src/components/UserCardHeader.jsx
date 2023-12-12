@@ -43,27 +43,27 @@ const UserCardHeader = ({
         {role === 'user' ? (
           <ul className='max-w-[18rem] 2xl:max-w-[30rem] w-full mt-5 p-2 text-light-text-1 dark:text-dark-text-1 border border-light-border-1 dark:border-dark-border-1 rounded-xl shadow-md'>
             <li className='flex justify-around py-2'>
-              <h3 className='flex items-center gap-2 font-semibold text-xl 2xl:text-2xl'>
+              <h2 className='flex items-center gap-2 font-semibold text-xl 2xl:text-2xl'>
                 <IoCalendarOutline />
                 <span className='text-base xl:text-lg 2xl:text-xl'>{age}</span>
-              </h3>
-              <h3 className='flex items-center gap-2 font-semibold text-xl 2xl:text-2xl'>
+              </h2>
+              <h2 className='flex items-center gap-2 font-semibold text-xl 2xl:text-2xl'>
                 <IoPersonOutline />
                 <span className='capitalize text-base xl:text-lg 2xl:text-xl'>
                   {gender}
                 </span>
-              </h3>
+              </h2>
             </li>
           </ul>
         ) : (
           <ul className='max-w-[18rem] 2xl:max-w-[30rem] w-full mt-5 p-2 text-light-text-1 dark:text-dark-text-1 border border-light-border-1 dark:border-dark-border-1 rounded-xl shadow-md'>
             <li className='flex justify-around py-2'>
-              <h3 className='flex items-center gap-2 font-semibold text-xl 2xl:text-2xl'>
+              <h2 className='flex items-center gap-2 font-semibold text-xl 2xl:text-2xl'>
                 <IoLocationOutline />
                 <span className='text-base line-clamp-1 2xl:text-lg'>
                   {address}
                 </span>
-              </h3>
+              </h2>
             </li>
           </ul>
         )}

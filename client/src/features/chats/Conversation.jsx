@@ -74,7 +74,7 @@ export const Conversation = ({
         </button>
         <div className='flex items-center gap-3'>
           <img
-            aria-label='user profile photo'
+            alt='user profile photo'
             src={profileImage}
             className='h-8 w-8 rounded-full lg:h-10 lg:w-10 xl:h-12 xl:w-12'
           />
@@ -127,6 +127,7 @@ export const Conversation = ({
               </span>
             </h5>
             <img
+              alt='user profile photo'
               src={profileImage}
               className='w-24 h-24 rounded-full lg:w-32 lg:h-32'
             />
