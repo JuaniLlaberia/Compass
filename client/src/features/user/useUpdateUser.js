@@ -11,7 +11,9 @@ export const useUpdateUser = () => {
       queryClient.invalidateQueries({ queryKey: ['auth-user'] });
       queryClient.setQueryData('auth-user', data?.data);
     },
-    onError: () => toast.error('Something went wrong. Please try again.'),
+    onError: err => {
+      toast.error(err.message);
+    },
   });
 
   return { updateUser, isUpdating };

@@ -22,7 +22,10 @@ export const updateUser = async userInfo => {
       isFormData ? optionsFormData : optionsRegular
     );
 
-    if (!response.ok) throw new Error(response.statusText);
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message.split('Errors: ')[1]);
+    }
 
     return await response.json();
   } catch (err) {
