@@ -15,6 +15,7 @@ const PackItem = ({ id, label, price, special, image }) => {
     >
       <div className='flex items-center gap-2 lg:gap-3'>
         <img
+          loading='lazy'
           alt='likes icon'
           src={image}
           className='h-10 w-10 lg:h-12 lg:w-12 rounded-full mr-1'

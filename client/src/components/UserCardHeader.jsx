@@ -33,6 +33,8 @@ const UserCardHeader = ({
           />
           {!isOpen ? (
             <button
+              name='more information'
+              aria-label='expand information'
               onClick={toggleOpen}
               className='absolute bottom-1 right-1 bg-secondary-1 text-dark-text-1 rounded-full'
             >
@@ -81,7 +83,7 @@ const UserCardHeader = ({
             </li>
           ))}
           {!isOpen && toggleOpen ? (
-            <li className='border text-light-text-2 dark:text-dark-text-2 border-light-border-1 dark:border-dark-border-1 py-1 px-3 rounded-lg 2xl:text-xl 2xl:py-2 2xl:px-5 active:bg-light-bg-2 dark:active:bg-dark-bg-2'>
+            <li className='border text-light-text-1 dark:text-dark-text-1 border-light-border-1 dark:border-dark-border-1 py-1 px-3 rounded-lg 2xl:text-xl 2xl:py-2 2xl:px-5 active:bg-light-bg-2 dark:active:bg-dark-bg-2'>
               <button onClick={toggleOpen}>View All</button>
             </li>
           ) : null}

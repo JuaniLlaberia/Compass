@@ -30,6 +30,7 @@ const UserItem = ({ isActive, chatId, recipientUser, onlineUsers }) => {
           <div className='flex items-center gap-3 lg:gap-4'>
             <div className='relative'>
               <img
+                loading='lazy'
                 alt='user profile photo'
                 src={recipientUser.profileImage}
                 className='h-14 w-14 rounded-full lg:h-16 lg:w-16'
@@ -53,6 +54,7 @@ const UserItem = ({ isActive, chatId, recipientUser, onlineUsers }) => {
           className='flex flex-col items-center min-w-[70px] cursor-pointer'
         >
           <img
+            loading='lazy'
             alt='user profile photo'
             src={recipientUser.profileImage}
             className='h-16 w-16 lg:h-20 lg:w-20 rounded-full bg-light-bg-3 dark:bg-dark-bg-3'
