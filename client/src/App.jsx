@@ -1,18 +1,21 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { lazy, Suspense } from 'react';
 import { Toaster } from 'sonner';
 
-import AuthPage from './pages/AuthPage';
+const AuthPage = lazy(() => import('./pages/AuthPage'));
+const SignUpPage = lazy(() => import('./pages/SignUpPage'));
+const HomePage = lazy(() => import('./pages/HomePage'));
+const ChatsPage = lazy(() => import('./pages/ChatsPage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const ErrorPage = lazy(() => import('./pages/ErrorPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+
 import AppLayout from './pages/AppLayout';
-import HomePage from './pages/HomePage';
-import ChatsPage from './pages/ChatsPage';
-import ProfilePage from './pages/ProfilePage';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
-import SignUpPage from './pages/SignUpPage';
+import FullScreenLoader from './components/FullScreenLoader';
 import { ThemeContextProvider } from './context/ThemeContext';
-import ErrorPage from './pages/ErrorPage';
-import NotFoundPage from './pages/NotFoundPage';
+import { AuthContextProvider } from './context/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -66,12 +69,10 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <AuthContextProvider>
           <ThemeContextProvider>
-            <RouterProvider router={router} />
-            <Toaster
-              richColors
-              closeButton
-              position='bottom-center'
-            />
+            <Suspense fallback={<FullScreenLoader />}>
+              <RouterProvider router={router} />
+            </Suspense>
+            <Toaster richColors closeButton position='bottom-center' />
           </ThemeContextProvider>
         </AuthContextProvider>
       </QueryClientProvider>
