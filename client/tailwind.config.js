@@ -24,9 +24,16 @@ export default {
         'light-shadow-2': '',
         'light-border-1': '#dddcdc',
         'secondary-1': '#936CF5',
-        'secondary-2': '#9772f3',
       },
+      backgroundImage: theme => ({
+        gradient:
+          'linear-gradient(to right, ' +
+          theme('colors.fuchsia.500') +
+          ', ' +
+          theme('colors.purple.500') +
+          ')',
+      }),
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
 };

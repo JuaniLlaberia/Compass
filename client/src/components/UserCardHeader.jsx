@@ -38,7 +38,7 @@ const UserCardHeader = ({
               name='more information'
               aria-label='expand information'
               onClick={toggleOpen}
-              className='absolute bottom-1 right-1 bg-secondary-1 text-dark-text-1 rounded-full'
+              className='absolute bottom-1 right-1 bg-gradient text-dark-text-1 rounded-full'
             >
               <IoInformation size={28} />
             </button>

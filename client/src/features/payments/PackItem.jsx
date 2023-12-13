@@ -8,7 +8,7 @@ const PackItem = ({ id, label, price, special, image }) => {
     <li
       className={`border relative flex items-center justify-between px-5 py-4 lg:py-5 rounded-lg shadow-md active:bg-light-bg-2 focus:bg-light-bg-2 dark:active:bg-dark-bg-2 dark:focus:bg-dark-bg-2 cursor-pointer ${
         special
-          ? 'border-secondary-1 after:-top-4 mt-4 after:content-["Popular"] after:left-3 after:px-3 after:rounded-lg after:py-1 after:text-sm lg:after:text-base after:text-dark-text-1 after:font-semibold after:absolute after:bg-secondary-1'
+          ? 'border-secondary-1 after:-top-4 mt-4 after:content-["Popular"] after:left-3 after:px-3 after:rounded-lg after:py-1 after:text-sm lg:after:text-base after:text-dark-text-1 after:font-semibold after:absolute after:bg-gradient'
           : 'border-light-border-1 dark:border-dark-border-1'
       }`}
       onClick={() => checkout(id)}
@@ -24,7 +24,7 @@ const PackItem = ({ id, label, price, special, image }) => {
           {label}
         </h2>
       </div>
-      <button className='bg-secondary-1 px-3 py-1 rounded-full text-dark-text-1 font-semibold lg:py-1.5 lg:text-lg'>
+      <button className='bg-gradient px-2 py-1 rounded-full text-dark-text-1 font-semibold lg:py-1.5 lg:text-lg'>
         {formatPrice(price / 100)}
       </button>
     </li>

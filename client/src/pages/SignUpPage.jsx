@@ -91,7 +91,7 @@ const SignUpPage = () => {
 
   return (
     <>
-      <header className='fixed top-0 bg-secondary-1 w-full h-14 flex justify-center items-center'></header>
+      <header className='fixed top-0 bg-gradient w-full h-14 flex justify-center items-center'></header>
       <main className='h-[100dvh]'>
         <form
           onSubmit={handleSubmit(onSubmit)}

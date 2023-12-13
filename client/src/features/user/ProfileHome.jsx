@@ -15,7 +15,7 @@ const ProfileHome = () => {
         <ProfileHeader userData={user.data} />
         <button
           aria-label='open'
-          className='absolute top-4 right-5 bg-secondary-1 text-dark-text-1 font-semibold py-1 px-3 rounded-xl'
+          className='absolute top-4 right-5 bg-gradient text-dark-text-1 font-semibold py-1 px-3 rounded-xl'
           onClick={() => isPreviewOpen(true)}
         >
           Preview

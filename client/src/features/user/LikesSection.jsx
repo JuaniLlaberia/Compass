@@ -9,7 +9,7 @@ const LikesSection = ({ likes, extraLikes }) => {
       <Modal>
         <div className='relative w-full bg-light-bg-1 dark:bg-dark-bg-1 border border-light-border-1 dark:border-dark-border-1 shadow-md rounded-lg px-3 pt-6 pb-2 lg:max-w-[20dvw] lg:min-w-[300px] lg:pb-4'>
           <img
-          draggable={false}
+            draggable={false}
             loading='lazy'
             alt='likes icon'
             className='absolute -top-8 left-[50%] translate-x-[-50%] h-16 w-16 border rounded-full p-3 bg-light-bg-1 dark:bg-dark-bg-1 border-light-border-1 dark:border-dark-border-1'
@@ -24,7 +24,7 @@ const LikesSection = ({ likes, extraLikes }) => {
         </div>
         <div className='relative w-full bg-light-bg-1 dark:bg-dark-bg-1 border border-light-border-1 dark:border-dark-border-1 shadow-md rounded-lg px-3 pt-6 pb-2 lg:max-w-[20dvw] lg:min-w-[300px] lg:pb-4'>
           <img
-          draggable={false}
+            draggable={false}
             loading='lazy'
             alt='likes icon'
             className='absolute -top-8 left-[50%] translate-x-[-50%] h-16 w-16 border rounded-full p-3 bg-light-bg-1 dark:bg-dark-bg-1 border-light-border-1 dark:border-dark-border-1'
@@ -38,7 +38,7 @@ const LikesSection = ({ likes, extraLikes }) => {
           </h2>
           <div className='flex justify-center lg:mt-3'>
             <Modal.Open opens='packages-modal'>
-              <button className='bg-secondary-1 px-5 py-1 rounded-full mt-4 text-dark-text-1 font-semibold lg:text-lg lg:py-2 lg:px-6 xl:text-xl'>
+              <button className='bg-gradient px-5 py-1 rounded-full mt-4 text-dark-text-1 font-semibold lg:text-lg lg:py-2 lg:px-6 xl:text-xl'>
                 Get more
               </button>
             </Modal.Open>

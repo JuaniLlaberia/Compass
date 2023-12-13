@@ -25,7 +25,7 @@ const AuthPage = () => {
         <Modal>
           <div className='py-8 px-8 md:px-24 w-full md:max-w-[650px]'>
             <Modal.Open opens='auth-modal'>
-              <button className='bg-secondary-1 border-2 border-secondary-1 py-2.5 px-6 rounded-full w-full mb-3  text-dark-text-1 font-semibold text-lg active:bg-secondary-2 md:hover:bg-secondary-2 xl:text-2xl'>
+              <button className='bg-gradient border-2 border-light-border-1 py-2.5 px-6 rounded-full w-full mb-3  text-dark-text-1 font-semibold text-lg active:bg-secondary-2 md:hover:bg-secondary-2 xl:text-2xl'>
                 Log In
               </button>
             </Modal.Open>
@@ -49,7 +49,7 @@ const AuthPage = () => {
                 <FacebookBtn />
                 <GoogleBtn />
               </div>
-              <p className='text-secondary-1 font-semibold text-center mt-4 md:hover:underline active:text-seconary-2 lg:text-lg lg:mt-8'>
+              <p className='bg-gradient-to-r from-fuchsia-500 to-purple-500 bg-clip-text text-transparent font-semibold text-center mt-4 md:hover:underline active:text-seconary-2 lg:text-lg lg:mt-8'>
                 Problems with your account?
               </p>
             </>
