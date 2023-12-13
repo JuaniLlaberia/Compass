@@ -13,7 +13,7 @@ const CustomRadio = ({ label, icon, id, value, register }) => {
         className='w-full text-5xl lg:text-6xl text-light-text-1 dark:text-dark-text-1 bg-light-bg-1 dark:bg-dark-bg-1 p-5 lg:p-7 border-2 rounded-xl active:bg-light-bg-2 dark:active:bg-dark-bg-2 flex gap-2 flex-col justify-center items-center peer-checked:border-secondary-1 dark:border-dark-text-2 md:hover:bg-light-bg-2 dark:md:hover:bg-dark-bg-2 cursor-pointer'
       >
         {icon}
-        <span className='lg:text-xl'>{label}</span>
+        <span className='text-lg lg:text-xl'>{label}</span>
       </label>
     </li>
   );

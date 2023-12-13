@@ -5,7 +5,7 @@ const Input = ({ error, register, ...props }) => {
         error
           ? 'border-red-500'
           : 'border-light-border-1 dark:border-dark-border-1 focus:border-secondary-1 dark:focus:border-secondary-1'
-      } md:hover:bg-light-bg-2`}
+      } md:hover:bg-light-bg-2 md:dark:hover:bg-dark-bg-2`}
       {...register}
       {...props}
     />
