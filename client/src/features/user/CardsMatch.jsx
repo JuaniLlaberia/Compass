@@ -12,6 +12,7 @@ const CardsMatch = ({ matchedUser }) => {
       <div className='flex justify-center gap-2 my-4 mb-12'>
         <div className='relative'>
           <img
+            draggable={false}
             loading='lazy'
             alt='user profile photo'
             src={user.data.profileImage}
@@ -20,6 +21,7 @@ const CardsMatch = ({ matchedUser }) => {
         </div>
         <div className='relative -ml-[32px]'>
           <img
+            draggable={false}
             loading='lazy'
             alt='matched user profile photo'
             src={matchedUser?.image}

@@ -71,6 +71,7 @@ export const Conversation = ({
         </button>
         <div className='flex items-center gap-3'>
           <img
+            draggable={false}
             loading='lazy'
             alt='user profile photo'
             src={profileImage}
@@ -125,6 +126,7 @@ export const Conversation = ({
               </span>
             </h5>
             <img
+              draggable={false}
               loading='lazy'
               alt='user profile photo'
               src={profileImage}

@@ -13,6 +13,7 @@ const ProfileHeader = ({ userData }) => {
       <section className='rounded-b-full flex flex-col justify-center items-center mt-2'>
         <div className='relative'>
           <img
+            draggable={false}
             alt='user profile photo'
             src={profileImage}
             className='h-32 w-32 xl:h-44 xl:w-44 rounded-full bg-light-bg-3 dark:bg-dark-bg-3'
