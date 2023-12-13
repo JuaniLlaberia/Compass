@@ -29,6 +29,7 @@ const UserCardHeader = ({
           <img
             draggable={false}
             aria-label='user profile photo'
+            alt='user profile photo'
             src={profileImage}
             className='w-72 h-72 2xl:w-[25rem] 2xl:h-[25rem] rounded-xl border border-light-border-1 dark:border-dark-border-1'
           />
