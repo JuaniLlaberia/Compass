@@ -23,7 +23,7 @@ const Chats = ({ online }) => {
           ))}
         </ul>
       ) : (
-        <p className='py-4 px-2 text-light-text-2 dark:text-dark-text-2'>
+        <p className='py-4 px-4 text-light-text-2 dark:text-dark-text-2'>
           No chats available. Start chatting now.
         </p>
       )}
