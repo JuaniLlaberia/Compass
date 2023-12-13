@@ -27,7 +27,7 @@ const SelectSingle = ({ options, onChange, selectedOption }) => {
         <h1 className='flex items-center h-full px-4 line-clamp-1 text-light-text-1 dark:text-dark-text-1'>
           {selectedOption === '' ? 'Select options' : selectedOption}
         </h1>
-        <div className='px-4 border-l border-light-border-1 dark:border-dark-border-1 text-light-text-1 dark:text-dark-text-1'>
+        <div className='flex items-center h-full px-4 border-l border-light-border-1 dark:border-dark-border-1 text-light-text-1 dark:text-dark-text-1'>
           <IoChevronDown
             className={`${
               isOpen ? 'rotate-180' : ''
@@ -40,7 +40,7 @@ const SelectSingle = ({ options, onChange, selectedOption }) => {
           isOpen
             ? 'h-60 md:36 border-t md:border border-light-border-1 dark:border-dark-border-1'
             : ''
-        } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-lg md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1 dark:bg-dark-bg-1`}
+        } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-lg md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1 dark:bg-dark-bg-1 scrollbar-thin scrollbar-thumb-dark-border-1 scrollbar-track-dark-bg-2 scrollbar-corner-transparent`}
       >
         {options.map(option => (
           <li

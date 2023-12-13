@@ -51,7 +51,7 @@ const SelectMultiple = ({ options, onChange, selectedOptions, max = 6 }) => {
           isOpen
             ? 'h-60 md:36 border-t md:border border-light-border-1 dark:border-dark-border-1'
             : ''
-        } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-lg md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1 dark:bg-dark-bg-1`}
+        } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-lg md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1 dark:bg-dark-bg-1 scrollbar-thin scrollbar-thumb-dark-border-1 scrollbar-track-dark-bg-2 scrollbar-corner-transparent`}
       >
         {options.map(option => (
           <li
