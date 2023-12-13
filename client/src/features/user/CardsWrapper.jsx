@@ -12,13 +12,19 @@ import { useSwipeLeft } from './useSwipeLeft';
 
 const CardsWrapper = () => {
   const { users, isLoading, refetch, error } = useGetUsers();
-  const { swipeRight, isMatch, closeMatch, isLikesError, closeError } =
-    useSwipeRight();
+  const {
+    swipeRight,
+    isMatch,
+    matchedUser,
+    closeMatch,
+    isLikesError,
+    closeError,
+  } = useSwipeRight();
   const { swipeLeft } = useSwipeLeft();
 
   const swipeUserRight = () => {
     //Perform swipe with userId
-    swipeRight(users.data[0]._id, {
+    swipeRight(users.data[0], {
       onSuccess: () => {
         //Remove user from screen
         users.data.shift();
@@ -59,7 +65,7 @@ const CardsWrapper = () => {
       </section>
       {isMatch ? (
         <CardsPopUp onClose={closeMatch}>
-          <CardsMatch />
+          <CardsMatch matchedUser={matchedUser} />
         </CardsPopUp>
       ) : null}
       {isLikesError ? (

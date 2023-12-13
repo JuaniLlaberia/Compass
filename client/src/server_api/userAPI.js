@@ -66,7 +66,7 @@ export const getUsers = async () => {
   }
 };
 
-export const swipeRight = async userId => {
+export const swipeRight = async user => {
   try {
     const response = await fetch('http://localhost:8000/api/swipes/right', {
       method: 'POST',
@@ -74,7 +74,7 @@ export const swipeRight = async userId => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ swipedUserId: userId }),
+      body: JSON.stringify({ swipedUser: user }),
     });
 
     if (!response.ok) {
