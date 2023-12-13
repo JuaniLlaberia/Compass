@@ -2,7 +2,7 @@ import { IoCheckmarkSharp, IoCloseSharp } from 'react-icons/io5';
 
 const CardsBtns = ({ swipeUserLeft, swipeUserRight }) => {
   return (
-    <div className='fixed bottom-20 2xl:bottom-24 left-0 flex justify-center items-center gap-10 w-full lg:gap-20'>
+    <div className='fixed bottom-20 left-0 flex justify-center items-center gap-10 w-full lg:gap-20'>
       <button
         aria-label='swipe user right (apply)'
         onClick={swipeUserRight}

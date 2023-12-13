@@ -40,10 +40,7 @@ const UserSettings = () => {
       <h1 className='font-semibold text-light-text-1 dark:text-dark-text-1 border-b border-light-border-1 dark:border-dark-border-1 py-1 mb-2'>
         My Likes
       </h1>
-      <LikesSection
-        likes={likes}
-        extraLikes={extraLikes}
-      />
+      <LikesSection likes={likes} extraLikes={extraLikes} />
       <SettingsBtns />
     </section>
   );

@@ -29,7 +29,7 @@ const UserCardHeader = ({
           <img
             aria-label='user profile photo'
             src={profileImage}
-            className='w-72 h-72 2xl:w-[30rem] 2xl:h-[30rem] rounded-xl border border-light-border-1 dark:border-dark-border-1'
+            className='w-72 h-72 2xl:w-[25rem] 2xl:h-[25rem] rounded-xl border border-light-border-1 dark:border-dark-border-1'
           />
           {!isOpen ? (
             <button
@@ -43,7 +43,7 @@ const UserCardHeader = ({
           ) : null}
         </div>
         {role === 'user' ? (
-          <ul className='max-w-[18rem] 2xl:max-w-[30rem] w-full mt-5 p-2 text-light-text-1 dark:text-dark-text-1 border border-light-border-1 dark:border-dark-border-1 rounded-xl shadow-md'>
+          <ul className='max-w-[18rem] 2xl:max-w-[25rem] w-full mt-5 p-2 text-light-text-1 dark:text-dark-text-1 border border-light-border-1 dark:border-dark-border-1 rounded-xl shadow-md'>
             <li className='flex justify-around py-2'>
               <h2 className='flex items-center gap-2 font-semibold text-xl 2xl:text-2xl'>
                 <IoCalendarOutline />
@@ -58,7 +58,7 @@ const UserCardHeader = ({
             </li>
           </ul>
         ) : (
-          <ul className='max-w-[18rem] 2xl:max-w-[30rem] w-full mt-5 p-2 text-light-text-1 dark:text-dark-text-1 border border-light-border-1 dark:border-dark-border-1 rounded-xl shadow-md'>
+          <ul className='max-w-[18rem] 2xl:max-w-[25rem] w-full mt-5 p-2 text-light-text-1 dark:text-dark-text-1 border border-light-border-1 dark:border-dark-border-1 rounded-xl shadow-md'>
             <li className='flex justify-around py-2'>
               <h2 className='flex items-center gap-2 font-semibold text-xl 2xl:text-2xl'>
                 <IoLocationOutline />
@@ -69,7 +69,7 @@ const UserCardHeader = ({
             </li>
           </ul>
         )}
-        <ul className='max-w-[18rem] 2xl:max-w-[30rem] w-full flex flex-wrap gap-2 mt-5 p-2 2xl:p-3 border border-light-border-1 dark:border-dark-border-1 rounded-xl shadow-md'>
+        <ul className='max-w-[18rem] 2xl:max-w-[25rem] w-full flex flex-wrap gap-2 mt-5 p-2 2xl:p-3 border border-light-border-1 dark:border-dark-border-1 rounded-xl shadow-md'>
           {categoriesToRender.map(cat => (
             <li
               key={cat}

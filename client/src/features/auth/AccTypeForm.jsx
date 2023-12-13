@@ -7,14 +7,14 @@ const AccTypeForm = ({ register, error }) => {
       <h1 className='text-light-text-1 dark:text-dark-text-1 text-2xl mb-1 font-semibold'>
         Select account type
       </h1>
-      <p className='mb-6 text-sm text-light-text-2 dark:text-dark-text-2'>
+      <p className='mb-6 text-sm lg:text-base text-light-text-2 dark:text-dark-text-2'>
         If you are looking for a job you should select 'Employee'. But if you
         are a business and are looking to hire, select 'Business'.
       </p>
       <ul className='flex flex-col gap-4'>
         <CustomRadio
           label='User'
-          icon={<FcConferenceCall size={50} />}
+          icon={<FcConferenceCall />}
           id='role-user'
           value='user'
           register={register('role', {
@@ -23,7 +23,7 @@ const AccTypeForm = ({ register, error }) => {
         />
         <CustomRadio
           label='Business'
-          icon={<FcShop size={50} />}
+          icon={<FcShop />}
           id='role-business'
           value='business'
           register={register('role', {

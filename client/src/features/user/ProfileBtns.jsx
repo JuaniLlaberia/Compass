@@ -9,8 +9,8 @@ import Drawer from '../../components/DrawerPage';
 import UserEdit from './UserEdit';
 import UserSettings from '../settings/UserSettings';
 import Modal from '../../components/Modal';
-import { useLogout } from '../auth/useLogout';
 import PacksModal from '../payments/PacksModal';
+import { useLogout } from '../auth/useLogout';
 
 const ProfileBtns = () => {
   const { logout } = useLogout();
@@ -68,10 +68,7 @@ const ProfileBtns = () => {
           <p>SUPPORT</p>
         </Modal.Window>
 
-        <Drawer.Page
-          title='Settings'
-          pageId='settings'
-        >
+        <Drawer.Page title='Settings' pageId='settings'>
           <UserSettings />
         </Drawer.Page>
       </Modal>

@@ -8,7 +8,7 @@ const UsersCard = ({ userData, categories, matchedCategories }) => {
 
   return (
     <>
-      <section className='pb-44'>
+      <section>
         <UserCardHeader
           userInfo={userData}
           categories={categories}

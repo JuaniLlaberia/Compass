@@ -51,10 +51,9 @@ const UserItem = ({ isActive, chatId, recipientUser, onlineUsers }) => {
       ) : (
         <li
           onClick={openChat}
-          className='flex flex-col items-center min-w-[70px] cursor-pointer'
+          className='flex flex-col items-center min-w-[70px] md:min-w-[80px] cursor-pointer'
         >
           <img
-            loading='lazy'
             alt='user profile photo'
             src={recipientUser.profileImage}
             className='h-16 w-16 lg:h-20 lg:w-20 rounded-full bg-light-bg-3 dark:bg-dark-bg-3'

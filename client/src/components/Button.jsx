@@ -9,14 +9,9 @@ const Button = ({ children, isLoading, type, ...props }) => {
         type === 'danger'
           ? 'bg-red-500 active:bg-red-400 hover:bg-red-600 dark:bg-red-500 dark:active:bg-red-400 dark:hover:bg-red-600'
           : ''
-      }`}
+      } lg:text-lg font-semibold`}
     >
-      {isLoading && (
-        <ClipLoader
-          size={18}
-          color='white'
-        />
-      )}
+      {isLoading && <ClipLoader size={18} color='white' />}
       {!isLoading && children}
     </button>
   );
