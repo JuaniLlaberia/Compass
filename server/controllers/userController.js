@@ -153,7 +153,6 @@ exports.getUsers = catchErrorAsync(async (req, res) => {
       likes: 0,
       filters: 0,
       location: 0,
-      role: 0,
       __v: 0,
       newUser: 0,
       hideUser: 0,
