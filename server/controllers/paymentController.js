@@ -34,7 +34,6 @@ exports.createCheckoutSession = catchErrorAsync(async (req, res, next) => {
     customer_email: req.user.email,
   });
 
-  // res.redirect(303, session.url);
   res.status(200).json({ link: session.url });
 });
 
