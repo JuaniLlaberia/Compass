@@ -18,7 +18,7 @@ const addInteraction = catchErrorAsync(async (userId, userToAdd, likesType) => {
 
 exports.swipeRight = catchErrorAsync(async (req, res, next) => {
   const crrUser = req.user._id;
-  const swipedUser = req.body.swipedUserId;
+  const swipedUser = req.body.swipedUser._id;
 
   if (req.user.likes <= 0 && req.user.extraLikes <= 0)
     return res
@@ -72,11 +72,12 @@ exports.swipeRight = catchErrorAsync(async (req, res, next) => {
   addInteraction(crrUser, swipedUser, hasExtraLikes ? 'extra' : 'regular');
 
   //4) Return response (match === false) + Decrese user likes
-  res.status(200).json({ status: 'success', match: isMatch });
+  const responseObj = { status: 'success', match: isMatch };
+  if (isMatch) responseObj.matchedUser = req.body.swipedUser;
+  res.status(200).json(responseObj);
 });
 
 exports.swipeLeft = catchErrorAsync(async (req, res, next) => {
-  console.log(req.body.swipedUserId);
   //1) Check if user you swiped left (reject) has swiped you right before
   const isSwiped = await Swipes.exists({
     $and: [
