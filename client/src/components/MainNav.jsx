@@ -2,6 +2,7 @@ import { IoChatbubbleEllipsesSharp, IoPerson } from 'react-icons/io5';
 import { TbCardsFilled } from 'react-icons/tb';
 
 import NavItem from './NavItem';
+import { memo } from 'react';
 
 const items = [
   {
@@ -35,4 +36,4 @@ const MainNav = () => {
   );
 };
 
-export default MainNav;
+export default memo(MainNav);

@@ -1,6 +1,7 @@
 import { IoEllipsisVerticalSharp } from 'react-icons/io5';
 import Modal from '../../components/Modal';
 import { useDeleteMatch } from './useDeleteMatch';
+import { memo } from 'react';
 
 const CancelMatchModal = () => {
   const { cancelMatch, isLoading } = useDeleteMatch();
@@ -38,4 +39,4 @@ const CancelMatchModal = () => {
   );
 };
 
-export default CancelMatchModal;
+export default memo(CancelMatchModal);
