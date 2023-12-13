@@ -25,10 +25,7 @@ const SignUpPage = () => {
 
   const { crrStep, nextStep, prevStep, isFirstStep, isLastStep } =
     useMultiStepForm([
-      <AccTypeForm
-        register={register}
-        error={errors.role}
-      />,
+      <AccTypeForm register={register} error={errors.role} />,
       <UserInfoForm
         setValue={setValue}
         selectedRole={getValues('role')}
@@ -36,10 +33,7 @@ const SignUpPage = () => {
         register={register}
         error={errors}
       />,
-      <UserImgForm
-        register={register}
-        error={errors.image}
-      />,
+      <UserImgForm register={register} error={errors.image} />,
     ]);
 
   const getCoords = async address => {
@@ -101,10 +95,12 @@ const SignUpPage = () => {
       <main className='h-[100dvh]'>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='bg-light-bg-1 dark:bg-dark-bg-1 h-full py-4 px-7 pt-16'
+          className='flex flex-col items-center bg-light-bg-1 dark:bg-dark-bg-1 h-full py-4 px-7 pt-16 md:pt-24'
         >
-          {crrStep}
-          <section className='flex gap-4 justify-end mt-6'>
+          <section className='max-w-[800px] md:min-h-[400px]'>
+            {crrStep}
+          </section>
+          <section className='flex justify-end gap-4 mt-6 w-full max-w-[800px] px-7'>
             {!isFirstStep && (
               <button
                 disabled={isUpdating}
