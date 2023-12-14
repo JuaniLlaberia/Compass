@@ -4,6 +4,8 @@ import { IoClose } from 'react-icons/io5';
 import UserPreview from './UserPreview';
 import ProfileHeader from './ProfileHeader';
 import { useAuthContext } from '../../context/AuthContext';
+import UserEdit from './UserEdit';
+import UserSettings from '../settings/UserSettings';
 
 const ProfileHome = () => {
   const { user } = useAuthContext();
