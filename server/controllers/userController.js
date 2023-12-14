@@ -138,7 +138,6 @@ exports.getUsers = catchErrorAsync(async (req, res) => {
     });
   }
 
-  //Returning just 2 random docs
   aggStages.push({
     $sample: {
       size: 1,
