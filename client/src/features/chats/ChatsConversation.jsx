@@ -51,7 +51,7 @@ const MatchesChats = ({ children }) => {
 //Layout component to make chat responsive
 const Sidebar = ({ children }) => {
   return (
-    <aside className='relative w-full md:w-auto border-r border-light-border-1 dark:border-dark-border-1'>
+    <aside className='relative h-full w-full md:w-full md:max-w-[450px] overflow-y-auto overflow-x-hidden  border-r border-light-border-1 dark:border-dark-border-1 scrollbar-thin scrollbar-thumb-light-border-1 scrollbar-track-light-bg-2 dark:scrollbar-thumb-dark-border-1 dark:scrollbar-track-dark-bg-2 scrollbar-corner-transparent'>
       {children}
     </aside>
   );

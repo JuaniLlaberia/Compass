@@ -73,7 +73,7 @@ const UserEdit = ({ onClose }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='flex flex-col mt-6 h-[500px] lg:h-[600px] overflow-auto px-2 scrollbar-thin scrollbar-thumb-dark-border-1 scrollbar-track-dark-bg-2 scrollbar-corner-transparent'
+      className='flex flex-col mt-6 h-[500px] lg:h-[600px] overflow-auto px-2 scrollbar-thin scrollbar-thumb-light-border-1 scrollbar-track-light-bg-2 dark:scrollbar-thumb-dark-border-1 dark:scrollbar-track-dark-bg-2 scrollbar-corner-transparent'
     >
       <h3 className='text-lg font-semibold mb-2'>Edit profile</h3>
       {user.data.role === 'user' ? (

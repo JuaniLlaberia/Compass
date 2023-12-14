@@ -7,7 +7,7 @@ const Chats = ({ online }) => {
   const { chats, isLoading } = useGetChats();
 
   return (
-    <section className='flex flex-col gap-1 overflow-x-hidden overflow-y-auto h-[400px] md:h-full'>
+    <section className='flex flex-col gap-1 md:h-full'>
       {isLoading ? (
         <ChatsSekelon />
       ) : chats.data.length >= 1 ? (

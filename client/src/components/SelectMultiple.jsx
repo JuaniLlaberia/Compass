@@ -26,7 +26,10 @@ const SelectMultiple = ({ options, onChange, selectedOptions, max = 6 }) => {
   };
 
   return (
-    <div className='relative mb-7 cursor-pointer' ref={ref}>
+    <div
+      className='relative mb-7 cursor-pointer'
+      ref={ref}
+    >
       <div
         className={`w-full border border-light-border-1 dark:border-dark-border-1 h-11 lg:h-12 rounded-lg flex justify-between items-center ${
           isOpen ? 'border-secondary-1' : ''
@@ -51,7 +54,7 @@ const SelectMultiple = ({ options, onChange, selectedOptions, max = 6 }) => {
           isOpen
             ? 'h-60 md:36 border-t md:border border-light-border-1 dark:border-dark-border-1'
             : ''
-        } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-lg md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1 dark:bg-dark-bg-1 scrollbar-thin scrollbar-thumb-dark-border-1 scrollbar-track-dark-bg-2 scrollbar-corner-transparent`}
+        } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-lg md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1 dark:bg-dark-bg-1 scrollbar-thin scrollbar-thumb-light-border-1 scrollbar-track-light-bg-2 dark:scrollbar-thumb-dark-border-1 dark:scrollbar-track-dark-bg-2 scrollbar-corner-transparent`}
       >
         {options.map(option => (
           <li

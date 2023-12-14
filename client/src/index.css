@@ -5,3 +5,7 @@
 a.active {
   color: #936cf5;
 }
+
+html.dark a.active {
+  color: #936cf5;
+}
