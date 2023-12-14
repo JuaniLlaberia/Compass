@@ -70,7 +70,7 @@ const UserSettings = () => {
       <section
         className={`${
           mobileWindowOpen ? 'fixed' : 'hidden'
-        } h-full w-full md:relative bg-light-bg-1 dark:bg-dark-bg-1 p-3 md:block md:px-12 xl:px-32`}
+        } h-full w-full md:relative bg-light-bg-1 dark:bg-dark-bg-1 p-3 md:block md:max-w-[1000px] md:px-12 xl:px-32`}
       >
         <Outlet />
         <Link

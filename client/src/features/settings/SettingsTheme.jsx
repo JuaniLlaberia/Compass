@@ -16,7 +16,7 @@ const SettingsTheme = () => {
         Change how the application looks to suit your taste.
       </p>
       <RadioGroup
-        options={['Light', 'Dark', 'System']}
+        options={['Light', 'Dark']}
         fn={register('theme', {
           onChange: val => {
             toggleTheme(val.target.value);
