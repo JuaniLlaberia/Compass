@@ -52,7 +52,7 @@ const SelectMultiple = ({ options, onChange, selectedOptions, max = 6 }) => {
       <ul
         className={`fixed w-full h-0 max-h-60 bottom-0 left-0 z-[100] md:absolute md:max-h-36 md:top-[100%] ${
           isOpen
-            ? 'h-60 md:36 border-t md:border border-light-border-1 dark:border-dark-border-1'
+            ? 'h-60 md:36 border border-light-border-1 dark:border-dark-border-1'
             : ''
         } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-lg md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1 dark:bg-dark-bg-1 scrollbar-thin scrollbar-thumb-light-border-1 scrollbar-track-light-bg-2 dark:scrollbar-thumb-dark-border-1 dark:scrollbar-track-dark-bg-2 scrollbar-corner-transparent`}
       >
