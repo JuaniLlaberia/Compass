@@ -1,5 +1,6 @@
-![logo](https://firebasestorage.googleapis.com/v0/b/jobsapp-2b306.appspot.com/o/logo1.png?alt=media&token=f5d203e4-b8fc-47d9-a71a-    37f7acf995e7&_gl=1*v1x7lh*_ga*MTgyNTUwNTc2OS4xNjk3NDk0NTQw*_ga_CW55HF8NVT*MTY5NzU3MTc4Ny4zLjEuMTY5NzU3MTgyNi4yMS4wLjA.)
-
+<div align="center">
+  <img width=400 src="https://firebasestorage.googleapis.com/v0/b/jobs-swipe-auth.appspot.com/o/logo_for_git.png?alt=media&token=2ee43834-e49c-49bb-b77f-cede27c671d7">
+</div>
 
 # Compass | Find Your Ideal Job
 We are a game changing work related social media plataform. We are **Compass**. Find the perfect employer/employee by talking directly to them.
@@ -11,6 +12,7 @@ We are a game changing work related social media plataform. We are **Compass**. 
  - When both users are interested a **match** is created.
  - Chat with matched users about the job opportunities and land a new job.
  - Customize your profile, to show other users who you are.
+ - Users can purchase extra likes to keep swiping.
 
 
 ## What we built:
@@ -29,6 +31,10 @@ We are a game changing work related social media plataform. We are **Compass**. 
  - Data pagination to boost performance.
  - Profile images are optimize before being uploaded to our cloud bucket.
  - The images are store in the **Firebase cloud storage** service.
+ - 
+### Payments & Likes
+ - Included **Stripe** API to process all payments securely with the help of **Web Hooks**.
+ - Cron-Jobs to restore likes every 24hs to all users.
 
 ### Front-End
  - Implemented a variety of React design patterns for the development of this application (e.g. Compound components, render props, etc.).
