@@ -4,9 +4,9 @@ const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-router.route('/').get(authController.protect, chatController.getChats);
-router
-  .route('/messages/:chatId')
-  .get(authController.protect, chatController.getMessages);
+router.use(authController.protect);
+
+router.route('/').get(chatController.getChats);
+router.route('/messages/:chatId').get(chatController.getMessages);
 
 module.exports = router;
