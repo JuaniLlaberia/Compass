@@ -4,6 +4,7 @@ import GoogleBtn from '../features/auth/GoogleBtn';
 import FacebookBtn from '../features/auth/FacebookBtn';
 import Modal from '../components/Modal';
 import Footer from '../components/Footer';
+import Logo from '../components/Logo';
 import { useAuthContext } from '../context/AuthContext';
 
 const AuthPage = () => {
@@ -17,8 +18,11 @@ const AuthPage = () => {
 
   return (
     <>
-      <main className='text-black p-4 flex flex-col justify-between items-center h-[100dvh]'>
-        <h1 className='text-lg font-semibold text-center mb-5'>LOGO (big)</h1>
+      <main
+        id='bganimation'
+        className='text-black p-4 flex flex-col justify-between items-center h-[100dvh]'
+      >
+        <Logo />
         <h2 className='text-2xl font-bold text-center py-24 md:text-3xl xl:text-5xl'>
           Find your ideal job
         </h2>
@@ -37,11 +41,11 @@ const AuthPage = () => {
           </div>
           <Modal.Window windowName='auth-modal'>
             <>
-              <h1 className='text-center mb-4'>LOGO (small)</h1>
-              <h2 className='text-lg text-center font-semibold mb-2 lg:text-2xl'>
+              <Logo withText={false} />
+              <h2 className='text-lg text-center mt-5 font-semibold mb-2 lg:text-2xl'>
                 Welcome! Let's get started
               </h2>
-              <p className='px-2 text-light-text-2 lg:text-lg'>
+              <p className='px-2 text-light-text-2 dark:text-dark-text-2 lg:text-lg'>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry.
               </p>

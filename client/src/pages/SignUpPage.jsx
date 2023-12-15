@@ -5,6 +5,7 @@ import AccTypeForm from '../features/auth/AccTypeForm';
 import UserInfoForm from '../features/auth/UserInfoForm';
 import UserImgForm from '../features/auth/UserImgForm';
 import Button from '../components/Button';
+import Logo from '../components/Logo';
 import { useMultiStepForm } from '../hooks/useMultiStepForm';
 import { useUpdateUser } from '../features/user/useUpdateUser';
 import { useAuthContext } from '../context/AuthContext';
@@ -95,7 +96,9 @@ const SignUpPage = () => {
 
   return (
     <>
-      <header className='fixed top-0 bg-gradient w-full h-14 flex justify-center items-center'></header>
+      <header className='fixed top-0 bg-gradient w-full h-14 flex justify-center items-center'>
+        <Logo withColor={false} size='small' />
+      </header>
       <main className='h-[100dvh]'>
         <form
           onSubmit={handleSubmit(onSubmit)}
