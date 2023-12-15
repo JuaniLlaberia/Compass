@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import { useMultiStepForm } from '../hooks/useMultiStepForm';
 import { useUpdateUser } from '../features/user/useUpdateUser';
 import { useAuthContext } from '../context/AuthContext';
+import { toast } from 'sonner';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -25,10 +26,7 @@ const SignUpPage = () => {
 
   const { crrStep, nextStep, prevStep, isFirstStep, isLastStep } =
     useMultiStepForm([
-      <AccTypeForm
-        register={register}
-        error={errors.role}
-      />,
+      <AccTypeForm register={register} error={errors.role} />,
       <UserInfoForm
         setValue={setValue}
         selectedRole={getValues('role')}
@@ -36,10 +34,7 @@ const SignUpPage = () => {
         register={register}
         error={errors}
       />,
-      <UserImgForm
-        register={register}
-        error={errors.image}
-      />,
+      <UserImgForm register={register} error={errors.image} />,
     ]);
 
   const getCoords = async address => {
@@ -86,7 +81,10 @@ const SignUpPage = () => {
     }
 
     updateUser(formData, {
-      onSuccess: () => navigate('/app'),
+      onSuccess: () => {
+        toast.success('Account created successfully');
+        navigate('/app');
+      },
     });
   };
 
