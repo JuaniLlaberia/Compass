@@ -91,7 +91,7 @@ const Footer = () => {
           <span className='text-dark-text-1'>Let's start swiping!</span>
         </p>
       </section>
-      <section className='py-2 px-4 lg:px-36 lg:py-4'>
+      <section className='py-4 px-4 lg:px-36 lg:py-6'>
         <p className='text-end text-dark-text-2 text-sm'>
           © {new Date().getFullYear()} Copyright.
         </p>
