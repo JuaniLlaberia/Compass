@@ -11,7 +11,10 @@ const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const UserSettings = lazy(() => import('./features/settings/UserSettings'));
+const Faq = lazy(() => import('./pages/extra/Faq'));
+const Legal = lazy(() => import('./pages/extra/Legal'));
 
+import HomeLayout from './pages/HomeLayout';
 import AppLayout from './pages/AppLayout';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
 import FullScreenLoader from './components/FullScreenLoader';
@@ -26,6 +29,20 @@ const router = createBrowserRouter([
     path: '/',
     element: <AuthPage />,
   },
+  {
+    element: <HomeLayout />,
+    children: [
+      {
+        path: '/faq',
+        element: <Faq />,
+      },
+      {
+        path: '/legal',
+        element: <Legal />,
+      },
+    ],
+  },
+
   {
     element: <ProtectedRoutes />,
     children: [
@@ -94,11 +111,7 @@ const App = () => {
             <Suspense fallback={<FullScreenLoader />}>
               <RouterProvider router={router} />
             </Suspense>
-            <Toaster
-              richColors
-              closeButton
-              position='bottom-center'
-            />
+            <Toaster richColors closeButton position='bottom-center' />
           </ThemeContextProvider>
         </AuthContextProvider>
       </QueryClientProvider>
