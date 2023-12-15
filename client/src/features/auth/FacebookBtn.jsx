@@ -6,12 +6,9 @@ const FacebookBtn = () => {
   return (
     <Link
       to={getFacebookAuthUrl()}
-      className='flex justify-center items-center gap-2 bg-light-bg-1 text-light-text-1 active:bg-light-bg-2 md:hover:bg-light-bg-2 shadow-sm border rounded-lg py-3 my-3 lg:py-5 font-semibold cursor-pointer transition-colors'
+      className='flex justify-center items-center gap-2 bg-light-bg-1 text-light-text-1 active:bg-light-bg-3 md:hover:bg-light-bg-3 shadow-sm border rounded-lg py-3 my-3 lg:py-5 font-semibold cursor-pointer transition-colors'
     >
-      <FaFacebook
-        size={30}
-        fill='#3b5998'
-      />
+      <FaFacebook size={30} fill='#3b5998' />
       <span className='lg:text-xl'>Continue with Facebook</span>
     </Link>
   );

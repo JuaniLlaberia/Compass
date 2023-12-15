@@ -75,7 +75,7 @@ const UserSettings = () => {
         <Outlet />
         <Link
           onClick={() => setMobileWindowOpen(false)}
-          className='text-light-text-1 dark:text-dark-text-1 absolute top-2.5 right-4 lg:hidden'
+          className='text-light-text-1 dark:text-dark-text-1 absolute top-2.5 right-4 md:hidden'
           to='/settings'
         >
           <IoClose size={23} />

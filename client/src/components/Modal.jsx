@@ -37,7 +37,7 @@ const Window = ({ children, windowName }) => {
       >
         <button
           aria-label='close modal'
-          className='absolute top-2.5 right-2.5 text-light-text-2 dark:text-dark-text-2'
+          className='absolute top-2.5 right-2.5 text-light-text-2 dark:text-dark-text-2 hover:rotate-90 transition-all'
           onClick={close}
         >
           <HiOutlineXMark size={25} />

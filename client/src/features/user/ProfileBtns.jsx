@@ -18,13 +18,13 @@ const ProfileBtns = () => {
     <Modal>
       <ul>
         <Modal.Open opens='edit-profile'>
-          <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1 cursor-pointer'>
+          <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1 cursor-pointer md:hover:dark:text-dark-text-2 transition-colors'>
             <IoPersonOutline size={25} />
             <h3 className='text-lg 2xl:text-xl font-semibold'>Edit Profile</h3>
           </li>
         </Modal.Open>
         <Link to='/settings'>
-          <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1 cursor-pointer'>
+          <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1 cursor-pointer md:hover:dark:text-dark-text-2 transition-colors'>
             <IoSettingsOutline size={25} />
             <h3 className='text-lg 2xl:text-xl font-semibold'>
               Account Settings
@@ -32,7 +32,7 @@ const ProfileBtns = () => {
           </li>
         </Link>
         <Modal.Open opens='likes-package'>
-          <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1 cursor-pointer'>
+          <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1 cursor-pointer md:hover:dark:text-dark-text-2 transition-colors'>
             <IoHeartOutline size={25} />
             <h3 className='text-lg 2xl:text-xl font-semibold'>
               Likes Packages
@@ -40,13 +40,13 @@ const ProfileBtns = () => {
           </li>
         </Modal.Open>
         <Modal.Open opens='support-modal'>
-          <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1 cursor-pointer'>
+          <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1 cursor-pointer md:hover:dark:text-dark-text-2 transition-colors'>
             <IoHelpCircleOutline size={25} />
             <h3 className='text-lg 2xl:text-xl font-semibold'>Support</h3>
           </li>
         </Modal.Open>
         <li
-          className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1 cursor-pointer'
+          className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1 cursor-pointer md:hover:dark:text-red-500 transition-colors'
           onClick={logout}
         >
           <IoLogOutOutline size={25} />

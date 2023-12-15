@@ -24,7 +24,10 @@ const ProfileHeader = ({ userData }) => {
                 aria-label='open modal'
                 className='absolute -bottom-1 -right-1 text-light-text-1 dark:text-dark-text-1 bg-light-bg-1 dark:bg-dark-bg-1 rounded-full p-1.5 border border-light-border-1  dark:border-dark-border-1'
               >
-                <IoImage size={25} />
+                <IoImage
+                  size={25}
+                  className='hover:scale-110 transition-transform'
+                />
               </button>
             </Modal.Open>
             <Modal.Window windowName='update-image'>

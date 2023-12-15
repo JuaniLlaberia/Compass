@@ -10,7 +10,7 @@ const PackItem = ({ id, label, price, special, image }) => {
         special
           ? 'border-secondary-1 after:-top-4 mt-4 after:content-["Popular"] after:left-3 after:px-3 after:rounded-lg after:py-1 after:text-sm lg:after:text-base after:text-dark-text-1 after:font-semibold after:absolute after:bg-gradient'
           : 'border-light-border-1 dark:border-dark-border-1'
-      }`}
+      } hover:bg-light-bg-2 hover:dark:bg-dark-bg-2`}
       onClick={() => checkout(id)}
     >
       <div className='flex items-center gap-2 lg:gap-3'>
