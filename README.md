@@ -31,7 +31,11 @@ We are a game changing work related social media plataform. We are **Compass**. 
  - Data pagination to boost performance.
  - Profile images are optimize before being uploaded to our cloud bucket.
  - The images are store in the **Firebase cloud storage** service.
- - 
+ 
+### Chats
+ - Implemented Web Sockets for real time messging.
+ - Online users indicator.
+
 ### Payments & Likes
  - Included **Stripe** API to process all payments securely with the help of **Web Hooks**.
  - Cron-Jobs to restore likes every 24hs to all users.
