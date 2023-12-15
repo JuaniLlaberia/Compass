@@ -32,15 +32,11 @@ const pageLinks = [
   },
   {
     label: 'Contact Us',
-    link: '/contact',
+    link: 'mailto:webmaster@example.com',
   },
   {
     label: 'Policies & Terms',
-    link: '/policies-terms',
-  },
-  {
-    label: 'Cookies Policy',
-    link: '/cookies',
+    link: '/legal',
   },
 ];
 
@@ -93,7 +89,7 @@ const Footer = () => {
       </section>
       <section className='py-4 px-4 lg:px-36 lg:py-6'>
         <p className='text-end text-dark-text-2 text-sm'>
-          © {new Date().getFullYear()} Copyright.
+          © {new Date().getFullYear()} Compass Copyright.
         </p>
       </section>
     </footer>

@@ -39,7 +39,7 @@ const ProfileBtns = () => {
             </h3>
           </li>
         </Modal.Open>
-        <Link to='/contact'>
+        <Link to='mailto:webmaster@example.com'>
           <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1 cursor-pointer md:hover:dark:text-dark-text-2 transition-colors'>
             <IoHelpCircleOutline size={25} />
             <h3 className='text-lg 2xl:text-xl font-semibold'>Support</h3>

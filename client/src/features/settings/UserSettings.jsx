@@ -36,12 +36,6 @@ const settingsBtns = [
     link: '/legal',
     redirects: true,
   },
-  {
-    icon: <IoExtensionPuzzleOutline size={25} />,
-    label: 'Cookies Policy',
-    link: '/cookies-policy',
-    redirects: true,
-  },
 ];
 
 const UserSettings = () => {

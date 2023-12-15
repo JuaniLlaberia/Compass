@@ -1,9 +1,10 @@
 import logo from '/logo_color.svg';
 import logoWhite from '/logo_white.svg';
+import { Link } from 'react-router-dom';
 
 const Logo = ({ withText = true, size, withColor = true }) => {
   return (
-    <header className='flex justify-center items-center gap-2'>
+    <Link to='/' className='flex justify-center items-center gap-2'>
       <img
         className={`${size === 'small' ? 'w-8 h-8' : 'w-14 h-14'}`}
         src={withColor ? logo : logoWhite}
@@ -22,7 +23,7 @@ const Logo = ({ withText = true, size, withColor = true }) => {
           Compass
         </h1>
       )}
-    </header>
+    </Link>
   );
 };
 
