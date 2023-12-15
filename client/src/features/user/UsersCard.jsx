@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { IoClose, IoFlagOutline } from 'react-icons/io5';
+import Modal from '../../components/Modal';
 import UserCardHeader from '../../components/UserCardHeader';
+import ReportModal from './ReportModal';
 
 const UsersCard = ({ userData, categories, matchedCategories }) => {
   const [open, setOpen] = useState(false);
@@ -39,13 +40,17 @@ const UsersCard = ({ userData, categories, matchedCategories }) => {
                   {userData.summary}
                 </p>
               </div>
-              <Link
-                to='/app/report'
-                className='flex items-center gap-1 py-2 px-5 font-semibold mt-4 border border-light-border-1 dark:border-dark-border-1 rounded-xl bg-dark-bg-2 text-dark-text-1 2xl:gap-2 2xl:text-xl 2xl:mt-8 2xl:py-3 2xl:px-10 active:bg-dark-bg-3'
-              >
-                <IoFlagOutline size={20} />
-                Report
-              </Link>
+              <Modal>
+                <Modal.Open opens='report-modal'>
+                  <button className='flex items-center gap-1 py-2 px-5 font-semibold mt-4 border border-light-border-1 dark:border-dark-border-1 rounded-xl bg-dark-bg-2 text-dark-text-1 2xl:gap-2 2xl:text-xl 2xl:mt-8 2xl:py-3 2xl:px-10 active:bg-dark-bg-3'>
+                    <IoFlagOutline size={20} />
+                    Report
+                  </button>
+                </Modal.Open>
+                <Modal.Window windowName='report-modal'>
+                  <ReportModal />
+                </Modal.Window>
+              </Modal>
             </div>
           </>
         )}
