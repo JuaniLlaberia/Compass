@@ -39,12 +39,12 @@ const ProfileBtns = () => {
             </h3>
           </li>
         </Modal.Open>
-        <Modal.Open opens='support-modal'>
+        <Link to='/contact'>
           <li className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1 cursor-pointer md:hover:dark:text-dark-text-2 transition-colors'>
             <IoHelpCircleOutline size={25} />
             <h3 className='text-lg 2xl:text-xl font-semibold'>Support</h3>
           </li>
-        </Modal.Open>
+        </Link>
         <li
           className='flex items-center gap-4 px-6 mb-5 text-light-text-1 dark:text-dark-text-1 cursor-pointer md:hover:dark:text-red-500 transition-colors'
           onClick={logout}
@@ -59,9 +59,6 @@ const ProfileBtns = () => {
       </Modal.Window>
       <Modal.Window windowName='likes-package'>
         <PacksModal />
-      </Modal.Window>
-      <Modal.Window windowName='support-modal'>
-        <p>SUPPORT</p>
       </Modal.Window>
     </Modal>
   );
