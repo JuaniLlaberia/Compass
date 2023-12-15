@@ -15,6 +15,8 @@ const matchesSchema = new mongoose.Schema({
   },
 });
 
+matchesSchema.index({ users: 1 });
+
 const Matches = mongoose.model('Matches', matchesSchema);
 
 module.exports = Matches;
