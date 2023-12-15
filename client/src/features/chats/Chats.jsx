@@ -1,4 +1,3 @@
-import React from 'react';
 import ChatsSekelon from './ChatsSkeleton';
 import UserItem from './UserItem';
 import { useGetChats } from './useGetChats';

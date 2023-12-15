@@ -1,4 +1,3 @@
-import React from 'react';
 import MatchesSkeleton from './MatchesSkeleton';
 import UserItem from './UserItem';
 import { useGetMatches } from './useGetMatches';

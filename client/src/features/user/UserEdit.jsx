@@ -2,9 +2,9 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import UserEditFields from './UserEditFields';
 import BusinessEditFields from './BusinessEditFields';
+import Button from '../../components/Button';
 import { useUpdateUser } from '../user/useUpdateUser';
 import { useAuthContext } from '../../context/AuthContext';
-import Button from '../../components/Button';
 
 const UserEdit = ({ onClose }) => {
   const { user } = useAuthContext();

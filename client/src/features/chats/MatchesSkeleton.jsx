@@ -1,4 +1,4 @@
-const MatchesSkeleton = ({ amount = 5, type }) => {
+const MatchesSkeleton = ({ amount = 5 }) => {
   return (
     <ul
       aria-label='component placeholder'
