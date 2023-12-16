@@ -42,7 +42,7 @@ const pageLinks = [
 
 const Footer = () => {
   return (
-    <footer className='w-full bg-dark-bg-2'>
+    <footer className='w-full bg-dark-bg-1'>
       <section className='flex gap-6 border-b border-dark-border-1 py-4 px-4 lg:px-36 lg:py-6'>
         <div className='w-full'>
           <h2 className='mb-2 text-dark-text-1 font-semibold'>
