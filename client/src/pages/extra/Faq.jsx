@@ -72,7 +72,9 @@ const Faq = () => {
           <h3 className='text-lg font-semibold text-center mb-2'>
             Are you ready?
           </h3>
-          <CardsLink link='/'>Get Started</CardsLink>
+          <div className='flex justify-center'>
+            <CardsLink link='/'>Get Started</CardsLink>
+          </div>
         </div>
       </section>
     </>
