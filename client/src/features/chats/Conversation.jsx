@@ -34,10 +34,12 @@ export const Conversation = ({
     setSearchParams(searchParams);
   };
 
+  const chatIdParam = searchParams.get('chatId');
+
   useEffect(() => {
     setMessages([]);
     setPage(1);
-  }, [searchParams.get('chatId')]);
+  }, [chatIdParam, setMessages, setPage]);
 
   useEffect(() => {
     if (!isLoading && !isRefetching) {
@@ -51,7 +53,7 @@ export const Conversation = ({
         }, 1);
       }
     }
-  }, [fetchedMessages, isRefetching]);
+  }, [fetchedMessages, isRefetching, reference, isLoading, setMessages]);
 
   const getMoreMessages = () => {
     setPage(prev => prev + 1);
