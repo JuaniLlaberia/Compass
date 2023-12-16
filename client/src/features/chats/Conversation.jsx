@@ -10,8 +10,7 @@ export const Conversation = ({
   chatId,
   sendMessage,
   messages,
-  inputField,
-  setInputField,
+  inputRef,
   recipientUser,
   reference,
   setMessages,
@@ -144,8 +143,7 @@ export const Conversation = ({
           placeholder='Write your message...'
           disabled={isLoading}
           className='bg-light-bg-1 dark:bg-dark-bg-1 w-full text-base rounded-2xl p-2.5 pr-[3.5rem] text-light-text-1 dark:text-dark-text-1 focus:outline-none border border-light-border-1 dark:border-dark-border-1 focus:border-secondary-1 dark:focus:border-secondary-1 placeholder:text-light-text-2 dark:placeholder:text-dark-text-2 md:hover:bg-light-bg-2 md:dark:hover:bg-dark-bg-2 lg:py-3 lg:pr-[4.25rem] lg:placeholder:text-lg lg:text-lg transition-colors'
-          value={inputField}
-          onChange={e => setInputField(e.target.value)}
+          ref={inputRef}
         />
         <button
           aria-label='send message'
