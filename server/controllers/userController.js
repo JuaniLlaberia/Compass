@@ -23,7 +23,7 @@ exports.updateUser = catchErrorAsync(async (req, res) => {
     const optimizedImg = await sharp(req.file.buffer)
       .resize(300, 300)
       .toFormat('webp')
-      .webp({ quality: 90 })
+      .webp({ quality: 85 })
       .toBuffer();
 
     //Upload buffer to bucket
@@ -138,7 +138,6 @@ exports.getUsers = catchErrorAsync(async (req, res) => {
     });
   }
 
-  //Returning just 2 random docs
   aggStages.push({
     $sample: {
       size: 1,
@@ -149,6 +148,10 @@ exports.getUsers = catchErrorAsync(async (req, res) => {
   aggStages.push({
     $project: {
       email: 0,
+      extraLikes: 0,
+      likes: 0,
+      filters: 0,
+      location: 0,
       __v: 0,
       newUser: 0,
       hideUser: 0,

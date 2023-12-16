@@ -1,4 +1,3 @@
-import React from 'react';
 import ChatsSekelon from './ChatsSkeleton';
 import UserItem from './UserItem';
 import { useGetChats } from './useGetChats';
@@ -7,7 +6,7 @@ const Chats = ({ online }) => {
   const { chats, isLoading } = useGetChats();
 
   return (
-    <section className='flex flex-col gap-1 overflow-x-hidden overflow-y-auto h-[400px] md:h-full'>
+    <section className='flex flex-col gap-1 md:h-full'>
       {isLoading ? (
         <ChatsSekelon />
       ) : chats.data.length >= 1 ? (
@@ -23,7 +22,7 @@ const Chats = ({ online }) => {
           ))}
         </ul>
       ) : (
-        <p className='py-4 px-2 text-light-text-2 dark:text-dark-text-2'>
+        <p className='py-4 px-4 text-light-text-2 dark:text-dark-text-2'>
           No chats available. Start chatting now.
         </p>
       )}

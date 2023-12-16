@@ -42,11 +42,7 @@ export const BusinessFields = ({
         />
       </InputWrapper>
       <div className='flex gap-4'>
-        <InputWrapper
-          label='City'
-          id='city'
-          error={error?.city?.message}
-        >
+        <InputWrapper label='City' id='city' error={error?.city?.message}>
           <Input
             register={register('city', {
               required: 'Please provide your city',

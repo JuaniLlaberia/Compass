@@ -51,7 +51,7 @@ const MatchesChats = ({ children }) => {
 //Layout component to make chat responsive
 const Sidebar = ({ children }) => {
   return (
-    <aside className='relative w-full md:w-auto border-r border-light-border-1 dark:border-dark-border-1'>
+    <aside className='relative h-full w-full md:w-full md:max-w-[450px] overflow-y-auto overflow-x-hidden  border-r border-light-border-1 dark:border-dark-border-1 scrollbar-thin scrollbar-thumb-light-border-1 scrollbar-track-light-bg-2 dark:scrollbar-thumb-dark-border-1 dark:scrollbar-track-dark-bg-2 scrollbar-corner-transparent'>
       {children}
     </aside>
   );
@@ -72,9 +72,9 @@ const List = ({ children, title }) => {
 };
 
 //Chat/Conversation page
-const Conversation = ({}) => {
+const Conversation = () => {
   const [searchParams] = useSearchParams();
-  const [inputField, setInputField] = useState('');
+  const inputRef = useRef(null);
   const { setMessages, messages, ws } = useContext(MatchesChatsContext);
 
   const { user } = useAuthContext();
@@ -88,19 +88,20 @@ const Conversation = ({}) => {
   const sendMessage = e => {
     e.preventDefault();
 
-    if (inputField === '') return;
+    if (inputRef.current.value === '') return;
 
     const message = {
       sender: user.data._id,
       chatId: chatIdToRender,
-      message: inputField,
+      message: inputRef.current.value,
       recipient: recipientUser?._id,
       isChatActive,
     };
 
     ws.send(JSON.stringify(message));
     setMessages(prev => [...prev, message]);
-    setInputField('');
+
+    inputRef.current.value = '';
 
     setTimeout(() => {
       chatRef.current.scrollIntoView({
@@ -115,9 +116,8 @@ const Conversation = ({}) => {
         <section className='fixed bottom-0 left-0 h-full w-full bg-light-bg-1 dark:bg-dark-bg-1 z-[100] md:relative'>
           <>
             <ConversationPage
+              inputRef={inputRef}
               reference={chatRef}
-              inputField={inputField}
-              setInputField={setInputField}
               messages={messages}
               setMessages={setMessages}
               sendMessage={sendMessage}

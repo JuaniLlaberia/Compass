@@ -34,7 +34,6 @@ exports.createCheckoutSession = catchErrorAsync(async (req, res, next) => {
     customer_email: req.user.email,
   });
 
-  // res.redirect(303, session.url);
   res.status(200).json({ link: session.url });
 });
 
@@ -49,15 +48,15 @@ exports.webHookCheckout = catchErrorAsync(async (req, res, next) => {
   const payload = req.body;
   const signature = req.headers['stripe-signature'];
 
-  //Use the real SECRET when API is hosted
-  const secret =
-    'whsec_513344b90abf7fb9abfdcf418e3f7c803b97f7e2099b1a5657cd9158bb9e666a';
-
   //Verify the stripe signature
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(payload, signature, secret);
+    event = stripe.webhooks.constructEvent(
+      payload,
+      signature,
+      process.env.STRIPE_WEBHOOK
+    );
   } catch (err) {
     return next(new CustomError(err.message, 400));
   }

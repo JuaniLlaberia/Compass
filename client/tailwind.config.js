@@ -14,7 +14,7 @@ export default {
         'dark-shadow-1': '',
         'dark-shadow-2': '',
         'dark-border-1': '#4645459d',
-        'light-bg-1': '#FFFFFF',
+        'light-bg-1': '#faf7f7',
         'light-bg-2': '#F4F4F4',
         'light-bg-3': '#EAEAE9',
         'light-text-1': '#0A0A0A',
@@ -24,9 +24,16 @@ export default {
         'light-shadow-2': '',
         'light-border-1': '#dddcdc',
         'secondary-1': '#936CF5',
-        'secondary-2': '#9772f3',
       },
+      backgroundImage: theme => ({
+        gradient:
+          'linear-gradient(to right, ' +
+          theme('colors.fuchsia.500') +
+          ', ' +
+          theme('colors.purple.500') +
+          ')',
+      }),
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
 };

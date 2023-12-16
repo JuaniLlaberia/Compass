@@ -7,7 +7,7 @@ const swipesController = require('../controllers/swipesController');
 //See if we leave it or not
 const swipeLimiter = rateLimit({
   max: 1,
-  windowMs: 800,
+  windowMs: 500,
   message: 'Too many swipes registered.',
 });
 

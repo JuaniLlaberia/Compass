@@ -24,7 +24,7 @@ const SettingsBtns = () => {
   };
 
   return (
-    <section className='absolute bottom-2 w-full flex flex-col gap-2'>
+    <section className='absolute bottom-2 left-0 w-full flex flex-col gap-2 px-2'>
       <Button
         onClick={logout}
         isLoading={isLoading}

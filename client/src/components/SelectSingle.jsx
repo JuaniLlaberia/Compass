@@ -22,15 +22,15 @@ const SelectSingle = ({ options, onChange, selectedOption }) => {
       ref={ref}
     >
       <div
-        className={`w-full border border-light-border-1 dark:border-dark-border-1 h-11 rounded-lg flex justify-between items-center ${
+        className={`w-full border border-light-border-1 dark:border-dark-border-1 h-11 lg:h-12 rounded-lg flex justify-between items-center ${
           isOpen ? 'border-secondary-1' : ''
         }`}
         onClick={toggleMenu}
       >
-        <h1 className='px-4 line-clamp-1 text-light-text-1 dark:text-dark-text-1'>
+        <h1 className='flex items-center h-full px-4 line-clamp-1 text-light-text-1 dark:text-dark-text-1'>
           {selectedOption === '' ? 'Select options' : selectedOption}
         </h1>
-        <div className='px-4 border-l border-light-border-1 dark:border-dark-border-1 text-light-text-1 dark:text-dark-text-1'>
+        <div className='flex items-center h-full px-4 border-l border-light-border-1 dark:border-dark-border-1 text-light-text-1 dark:text-dark-text-1'>
           <IoChevronDown
             className={`${
               isOpen ? 'rotate-180' : ''
@@ -43,13 +43,13 @@ const SelectSingle = ({ options, onChange, selectedOption }) => {
           isOpen
             ? 'h-60 md:36 border-t md:border border-light-border-1 dark:border-dark-border-1'
             : ''
-        } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-lg md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1 dark:bg-dark-bg-1`}
+        } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-lg md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1 dark:bg-dark-bg-1 scrollbar-thin scrollbar-thumb-light-border-1 scrollbar-track-light-bg-2 dark:scrollbar-thumb-dark-border-1 dark:scrollbar-track-dark-bg-2 scrollbar-corner-transparent`}
       >
         {options.map(option => (
           <li
             key={option}
             onClick={() => selectOption(option)}
-            className={`px-3 py-2.5 text-light-text-1 dark:text-dark-text-1 active:bg-light-bg-2 active:dark:bg-dark-bg-2 border-b border-light-border-1 dark:border-dark-border-1 flex items-center gap-3 ${
+            className={`px-3 py-2.5 lg:py-3 text-light-text-1 dark:text-dark-text-1 active:bg-light-bg-2 active:dark:bg-dark-bg-2 border-b border-light-border-1 dark:border-dark-border-1 flex items-center gap-3 ${
               selectedOption === option ? 'bg-light-bg-2 dark:bg-dark-bg-2' : ''
             }`}
           >

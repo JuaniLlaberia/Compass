@@ -2,9 +2,9 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import UserEditFields from './UserEditFields';
 import BusinessEditFields from './BusinessEditFields';
+import Button from '../../components/Button';
 import { useUpdateUser } from '../user/useUpdateUser';
 import { useAuthContext } from '../../context/AuthContext';
-import Button from '../../components/Button';
 
 const UserEdit = ({ onClose }) => {
   const { user } = useAuthContext();
@@ -73,7 +73,7 @@ const UserEdit = ({ onClose }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='flex flex-col h-[500px] lg:h-[600px] overflow-auto px-2'
+      className='flex flex-col mt-6 h-[500px] lg:h-[600px] overflow-auto px-2 scrollbar-thin scrollbar-thumb-light-border-1 scrollbar-track-light-bg-2 dark:scrollbar-thumb-dark-border-1 dark:scrollbar-track-dark-bg-2 scrollbar-corner-transparent'
     >
       <h3 className='text-lg font-semibold mb-2'>Edit profile</h3>
       {user.data.role === 'user' ? (
@@ -92,7 +92,7 @@ const UserEdit = ({ onClose }) => {
           errors={errors}
         />
       )}
-      <Button>Edit Profile</Button>
+      <Button aria-label='submit'>Edit Profile</Button>
     </form>
   );
 };

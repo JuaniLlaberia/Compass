@@ -5,9 +5,11 @@ import AccTypeForm from '../features/auth/AccTypeForm';
 import UserInfoForm from '../features/auth/UserInfoForm';
 import UserImgForm from '../features/auth/UserImgForm';
 import Button from '../components/Button';
+import Logo from '../components/Logo';
 import { useMultiStepForm } from '../hooks/useMultiStepForm';
 import { useUpdateUser } from '../features/user/useUpdateUser';
 import { useAuthContext } from '../context/AuthContext';
+import { toast } from 'sonner';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -25,10 +27,7 @@ const SignUpPage = () => {
 
   const { crrStep, nextStep, prevStep, isFirstStep, isLastStep } =
     useMultiStepForm([
-      <AccTypeForm
-        register={register}
-        error={errors.role}
-      />,
+      <AccTypeForm register={register} error={errors.role} />,
       <UserInfoForm
         setValue={setValue}
         selectedRole={getValues('role')}
@@ -36,10 +35,7 @@ const SignUpPage = () => {
         register={register}
         error={errors}
       />,
-      <UserImgForm
-        register={register}
-        error={errors.image}
-      />,
+      <UserImgForm register={register} error={errors.image} />,
     ]);
 
   const getCoords = async address => {
@@ -86,7 +82,10 @@ const SignUpPage = () => {
     }
 
     updateUser(formData, {
-      onSuccess: () => navigate('/app'),
+      onSuccess: () => {
+        toast.success('Account created successfully');
+        navigate('/app');
+      },
     });
   };
 
@@ -97,14 +96,18 @@ const SignUpPage = () => {
 
   return (
     <>
-      <header className='fixed top-0 bg-secondary-1 w-full h-14 flex justify-center items-center'></header>
+      <header className='fixed top-0 bg-gradient w-full h-14 flex justify-center items-center'>
+        <Logo withColor={false} size='small' />
+      </header>
       <main className='h-[100dvh]'>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='bg-light-bg-1 dark:bg-dark-bg-1 h-full py-4 px-7 pt-16'
+          className='flex flex-col items-center bg-light-bg-1 dark:bg-dark-bg-1 h-full py-4 px-7 pt-16 md:pt-24'
         >
-          {crrStep}
-          <section className='flex gap-4 justify-end mt-6'>
+          <section className='max-w-[800px] md:min-h-[400px]'>
+            {crrStep}
+          </section>
+          <section className='fixed bottom-0 py-2 bg-light-bg-1 border-t border-light-border-1 flex justify-end gap-4 mt-6 w-full max-w-[800px] px-3 md:px-7 md:relative md:py-0 md:bg-none md:border-none'>
             {!isFirstStep && (
               <button
                 disabled={isUpdating}

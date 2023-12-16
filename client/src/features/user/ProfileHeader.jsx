@@ -13,13 +13,21 @@ const ProfileHeader = ({ userData }) => {
       <section className='rounded-b-full flex flex-col justify-center items-center mt-2'>
         <div className='relative'>
           <img
+            draggable={false}
+            alt='user profile photo'
             src={profileImage}
             className='h-32 w-32 xl:h-44 xl:w-44 rounded-full bg-light-bg-3 dark:bg-dark-bg-3'
           />
           <Modal>
             <Modal.Open opens='update-image'>
-              <button className='absolute -bottom-1 -right-1 text-light-text-1 dark:text-dark-text-1 bg-light-bg-1 dark:bg-dark-bg-1 rounded-full p-1.5 border border-light-border-1  dark:border-dark-border-1'>
-                <IoImage size={25} />
+              <button
+                aria-label='open modal'
+                className='absolute -bottom-1 -right-1 text-light-text-1 dark:text-dark-text-1 bg-light-bg-1 dark:bg-dark-bg-1 rounded-full p-1.5 border border-light-border-1  dark:border-dark-border-1'
+              >
+                <IoImage
+                  size={25}
+                  className='hover:scale-110 transition-transform'
+                />
               </button>
             </Modal.Open>
             <Modal.Window windowName='update-image'>

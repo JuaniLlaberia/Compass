@@ -1,4 +1,5 @@
 import { getUserCoords } from '../utils/getUserCoords';
+const URL = import.meta.env.VITE_URL;
 
 export const updateUser = async userInfo => {
   const isFormData = userInfo instanceof FormData;
@@ -18,11 +19,14 @@ export const updateUser = async userInfo => {
 
   try {
     const response = await fetch(
-      'http://localhost:8000/api/user/update',
+      `${URL}/user/update`,
       isFormData ? optionsFormData : optionsRegular
     );
 
-    if (!response.ok) throw new Error(response.statusText);
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message.split('Errors: ')[1]);
+    }
 
     return await response.json();
   } catch (err) {
@@ -32,7 +36,7 @@ export const updateUser = async userInfo => {
 
 export const deleteUser = async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/user/delete', {
+    const response = await fetch(`${URL}/user/delete`, {
       method: 'DELETE',
       credentials: 'include',
     });
@@ -47,13 +51,10 @@ export const getUsers = async () => {
   const [lng, lat] = await getUserCoords();
 
   try {
-    const response = await fetch(
-      `http://localhost:8000/api/user?lng=${lng}&lat=${lat}`,
-      {
-        method: 'GET',
-        credentials: 'include',
-      }
-    );
+    const response = await fetch(`${URL}/user?lng=${lng}&lat=${lat}`, {
+      method: 'GET',
+      credentials: 'include',
+    });
 
     if (!response.ok) throw new Error(response.statusText);
 
@@ -63,15 +64,15 @@ export const getUsers = async () => {
   }
 };
 
-export const swipeRight = async userId => {
+export const swipeRight = async user => {
   try {
-    const response = await fetch('http://localhost:8000/api/swipes/right', {
+    const response = await fetch(`${URL}/swipes/right`, {
       method: 'POST',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ swipedUserId: userId }),
+      body: JSON.stringify({ swipedUser: user }),
     });
 
     if (!response.ok) {
@@ -87,7 +88,7 @@ export const swipeRight = async userId => {
 
 export const swipeLeft = async userId => {
   try {
-    const response = await fetch('http://localhost:8000/api/swipes/left', {
+    const response = await fetch(`${URL}/swipes/left`, {
       method: 'POST',
       credentials: 'include',
       headers: {

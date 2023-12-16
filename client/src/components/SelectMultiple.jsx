@@ -31,7 +31,7 @@ const SelectMultiple = ({ options, onChange, selectedOptions, max = 6 }) => {
       ref={ref}
     >
       <div
-        className={`w-full border border-light-border-1 dark:border-dark-border-1 h-11 rounded-lg flex justify-between items-center ${
+        className={`w-full border border-light-border-1 dark:border-dark-border-1 h-11 lg:h-12 rounded-lg flex justify-between items-center ${
           isOpen ? 'border-secondary-1' : ''
         }`}
         onClick={toggleMenu}
@@ -41,7 +41,7 @@ const SelectMultiple = ({ options, onChange, selectedOptions, max = 6 }) => {
             ? 'Select options'
             : selectedOptions.join(', ')}
         </h1>
-        <div className='px-4 border-l border-light-border-1 dark:border-dark-border-1 text-light-text-1 dark:text-dark-text-1'>
+        <div className='flex items-center h-full px-4 border-l border-light-border-1 dark:border-dark-border-1 text-light-text-1 dark:text-dark-text-1'>
           <IoChevronDown
             className={`${
               isOpen ? 'rotate-180' : ''
@@ -52,9 +52,9 @@ const SelectMultiple = ({ options, onChange, selectedOptions, max = 6 }) => {
       <ul
         className={`fixed w-full h-0 max-h-60 bottom-0 left-0 z-[100] md:absolute md:max-h-36 md:top-[100%] ${
           isOpen
-            ? 'h-60 md:36 border-t md:border border-light-border-1 dark:border-dark-border-1'
+            ? 'h-60 md:36 border border-light-border-1 dark:border-dark-border-1'
             : ''
-        } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-lg md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1 dark:bg-dark-bg-1`}
+        } overflow-y-scroll overflow-x-hidden transition-all duration-300 rounded-t-lg md:rounded-2xl mt-1 shadow-sm z-40 bg-light-bg-1 dark:bg-dark-bg-1 scrollbar-thin scrollbar-thumb-light-border-1 scrollbar-track-light-bg-2 dark:scrollbar-thumb-dark-border-1 dark:scrollbar-track-dark-bg-2 scrollbar-corner-transparent`}
       >
         {options.map(option => (
           <li
@@ -64,7 +64,7 @@ const SelectMultiple = ({ options, onChange, selectedOptions, max = 6 }) => {
                 ? unSelectOption(option)
                 : selectOption(option)
             }
-            className={`px-3 py-2.5 text-light-text-1 dark:text-dark-text-1 active:bg-light-bg-2 active:dark:bg-dark-bg-2 border-b border-light-border-1 dark:border-dark-border-1 flex items-center gap-3 ${
+            className={`px-3 py-2.5 lg:py-3 text-light-text-1 dark:text-dark-text-1 active:bg-light-bg-2 active:dark:bg-dark-bg-2 border-b border-light-border-1 dark:border-dark-border-1 flex items-center gap-3 ${
               selectedOptions.includes(option)
                 ? 'bg-light-bg-2 dark:bg-dark-bg-2'
                 : ''

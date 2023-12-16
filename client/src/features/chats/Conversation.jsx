@@ -10,8 +10,7 @@ export const Conversation = ({
   chatId,
   sendMessage,
   messages,
-  inputField,
-  setInputField,
+  inputRef,
   recipientUser,
   reference,
   setMessages,
@@ -35,10 +34,12 @@ export const Conversation = ({
     setSearchParams(searchParams);
   };
 
+  const chatIdParam = searchParams.get('chatId');
+
   useEffect(() => {
     setMessages([]);
     setPage(1);
-  }, [searchParams.get('chatId')]);
+  }, [chatIdParam, setMessages, setPage]);
 
   useEffect(() => {
     if (!isLoading && !isRefetching) {
@@ -52,7 +53,7 @@ export const Conversation = ({
         }, 1);
       }
     }
-  }, [fetchedMessages, isRefetching]);
+  }, [fetchedMessages, isRefetching, reference, isLoading, setMessages]);
 
   const getMoreMessages = () => {
     setPage(prev => prev + 1);
@@ -66,14 +67,14 @@ export const Conversation = ({
   return (
     <section className='flex flex-col h-full'>
       <nav className='flex justify-between bg-light-bg-1 dark:bg-dark-bg-1 md:bg-light-bg-2 md:dark:bg-dark-bg-2 items-center py-2 px-4 border-b border-light-border-1 dark:border-dark-border-1 shadow-sm'>
-        <button
-          onClick={closeChat}
-          className='text-secondary-1'
-        >
+        <button onClick={closeChat} className='text-secondary-1'>
           <IoArrowBackOutline size={22} />
         </button>
         <div className='flex items-center gap-3'>
           <img
+            draggable={false}
+            loading='lazy'
+            alt='user profile photo'
             src={profileImage}
             className='h-8 w-8 rounded-full lg:h-10 lg:w-10 xl:h-12 xl:w-12'
           />
@@ -126,6 +127,9 @@ export const Conversation = ({
               </span>
             </h5>
             <img
+              draggable={false}
+              loading='lazy'
+              alt='user profile photo'
               src={profileImage}
               className='w-24 h-24 rounded-full lg:w-32 lg:h-32'
             />
@@ -136,18 +140,15 @@ export const Conversation = ({
         )}
       </section>
 
-      <form
-        onSubmit={sendMessage}
-        className='flex items-center gap-3 p-1.5'
-      >
+      <form onSubmit={sendMessage} className='flex items-center gap-3 p-1.5'>
         <input
           placeholder='Write your message...'
           disabled={isLoading}
-          className='bg-light-bg-1 dark:bg-dark-bg-1 w-full text-base rounded-2xl p-2.5 pr-[3.5rem] text-light-text-1 dark:text-dark-text-1 focus:outline-none border border-light-border-1 dark:border-dark-border-1 focus:border-secondary-1 dark:focus:border-secondary-1 placeholder:text-light-text-2 dark:placeholder:text-dark-text-2 md:hover:bg-light-bg-2 lg:py-3 lg:pr-[4.25rem] lg:placeholder:text-lg lg:text-lg transition-colors'
-          value={inputField}
-          onChange={e => setInputField(e.target.value)}
+          className='bg-light-bg-1 dark:bg-dark-bg-1 w-full text-base rounded-2xl p-2.5 pr-[3.5rem] text-light-text-1 dark:text-dark-text-1 focus:outline-none border border-light-border-1 dark:border-dark-border-1 focus:border-secondary-1 dark:focus:border-secondary-1 placeholder:text-light-text-2 dark:placeholder:text-dark-text-2 md:hover:bg-light-bg-2 md:dark:hover:bg-dark-bg-2 lg:py-3 lg:pr-[4.25rem] lg:placeholder:text-lg lg:text-lg transition-colors'
+          ref={inputRef}
         />
         <button
+          aria-label='send message'
           disabled={isLoading}
           className='absolute right-5 font-semibold text-secondary-1 lg:text-xl lg:right-7'
         >

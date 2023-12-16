@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Cards from './Cards';
 import CardsEmpty from './CardsEmpty';
 import CardsLoader from './CardsLoader';
@@ -12,31 +13,55 @@ import { useSwipeLeft } from './useSwipeLeft';
 
 const CardsWrapper = () => {
   const { users, isLoading, refetch, error } = useGetUsers();
-  const { swipeRight, isMatch, closeMatch, isLikesError, closeError } =
-    useSwipeRight();
+  const {
+    swipeRight,
+    isMatch,
+    matchedUser,
+    closeMatch,
+    isLikesError,
+    closeError,
+  } = useSwipeRight();
   const { swipeLeft } = useSwipeLeft();
 
-  const swipeUserRight = () => {
-    //Perform swipe with userId
-    swipeRight(users.data[0]._id, {
-      onSuccess: () => {
-        //Remove user from screen
-        users.data.shift();
-        //Fetch more users
-        refetch();
-      },
-    });
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+
+  useEffect(() => {
+    if (users?.data && users?.data.length > 0) {
+      setCurrentCardIndex(0);
+    }
+  }, [users]);
+
+  const fetchNextCard = async () => {
+    try {
+      const response = await refetch();
+      if (response.status === 'success') {
+        setCurrentCardIndex(users.data.length - 1);
+      }
+    } catch (error) {
+      console.error('Error fetching next user:', error);
+    }
   };
+
+  const swipeUserRight = () => {
+    if (currentCardIndex < users.data.length) {
+      const swipedUser = users.data[currentCardIndex];
+      swipeRight(swipedUser, {
+        onSuccess: () => {
+          fetchNextCard();
+        },
+      });
+    }
+  };
+
   const swipeUserLeft = () => {
-    //Perform swipe with userId
-    swipeLeft(users.data[0]._id, {
-      onSuccess: () => {
-        //Remove user from screen
-        users.data.shift();
-        //Fetch more users
-        refetch();
-      },
-    });
+    if (currentCardIndex < users.data.length) {
+      const swipedUserId = users.data[currentCardIndex]._id;
+      swipeLeft(swipedUserId, {
+        onSuccess: () => {
+          fetchNextCard();
+        },
+      });
+    }
   };
 
   if (isLoading) return <CardsLoader />;
@@ -59,7 +84,7 @@ const CardsWrapper = () => {
       </section>
       {isMatch ? (
         <CardsPopUp onClose={closeMatch}>
-          <CardsMatch />
+          <CardsMatch matchedUser={matchedUser} />
         </CardsPopUp>
       ) : null}
       {isLikesError ? (

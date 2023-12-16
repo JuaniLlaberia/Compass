@@ -1,4 +1,5 @@
 import { IoEllipsisVerticalSharp } from 'react-icons/io5';
+import { memo } from 'react';
 import Modal from '../../components/Modal';
 import { useDeleteMatch } from './useDeleteMatch';
 
@@ -18,12 +19,14 @@ const CancelMatchModal = () => {
             Details
           </h1>
           <button
+            aria-label='redirect'
             disabled={isLoading}
             className='w-full font-semibold text-red-500 py-3 border-b border-light-border-1 dark:border-dark-border-1 xl:text-xl xl:py-4'
           >
             Report
           </button>
           <button
+            aria-label='delete match'
             disabled={isLoading}
             className='w-full font-semibold text-red-500 pt-3 xl:pt-4 xl:text-xl'
             onClick={cancelMatch}
@@ -36,4 +39,4 @@ const CancelMatchModal = () => {
   );
 };
 
-export default CancelMatchModal;
+export default memo(CancelMatchModal);

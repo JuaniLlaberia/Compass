@@ -1,6 +1,8 @@
+const URL = import.meta.env.VITE_URL;
+
 export const getAuthUser = async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/user/me', {
+    const response = await fetch(`${URL}/user/me`, {
       method: 'GET',
       credentials: 'include',
     });
@@ -13,7 +15,7 @@ export const getAuthUser = async () => {
 
 export const logoutUser = async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/auth/logout', {
+    const response = await fetch(`${URL}/auth/logout`, {
       method: 'POST',
       credentials: 'include',
     });
