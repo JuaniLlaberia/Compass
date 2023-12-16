@@ -1,4 +1,5 @@
 import { getUserCoords } from '../utils/getUserCoords';
+const URL = import.meta.env.VITE_URL;
 
 export const updateUser = async userInfo => {
   const isFormData = userInfo instanceof FormData;
@@ -18,7 +19,7 @@ export const updateUser = async userInfo => {
 
   try {
     const response = await fetch(
-      'http://localhost:8000/api/user/update',
+      `${URL}/user/update`,
       isFormData ? optionsFormData : optionsRegular
     );
 
@@ -35,7 +36,7 @@ export const updateUser = async userInfo => {
 
 export const deleteUser = async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/user/delete', {
+    const response = await fetch(`${URL}/user/delete`, {
       method: 'DELETE',
       credentials: 'include',
     });
@@ -50,13 +51,10 @@ export const getUsers = async () => {
   const [lng, lat] = await getUserCoords();
 
   try {
-    const response = await fetch(
-      `http://localhost:8000/api/user?lng=${lng}&lat=${lat}`,
-      {
-        method: 'GET',
-        credentials: 'include',
-      }
-    );
+    const response = await fetch(`${URL}/user?lng=${lng}&lat=${lat}`, {
+      method: 'GET',
+      credentials: 'include',
+    });
 
     if (!response.ok) throw new Error(response.statusText);
 
@@ -68,7 +66,7 @@ export const getUsers = async () => {
 
 export const swipeRight = async user => {
   try {
-    const response = await fetch('http://localhost:8000/api/swipes/right', {
+    const response = await fetch(`${URL}/swipes/right`, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -90,7 +88,7 @@ export const swipeRight = async user => {
 
 export const swipeLeft = async userId => {
   try {
-    const response = await fetch('http://localhost:8000/api/swipes/left', {
+    const response = await fetch(`${URL}/swipes/left`, {
       method: 'POST',
       credentials: 'include',
       headers: {

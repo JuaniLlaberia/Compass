@@ -1,6 +1,8 @@
+const URL = import.meta.env.VITE_URL;
+
 export const getPackages = async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/payment/packages', {
+    const response = await fetch(`${URL}/payment/packages`, {
       method: 'GET',
       credentials: 'include',
     });
@@ -17,15 +19,12 @@ export const getPackages = async () => {
 
 export const createCheckout = async packageId => {
   try {
-    const response = await fetch(
-      'http://localhost:8000/api/payment/create-session',
-      {
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ packageId }),
-      }
-    );
+    const response = await fetch(`${URL}/payment/create-session`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ packageId }),
+    });
 
     if (!response.ok) throw new Error(response.statusText);
 

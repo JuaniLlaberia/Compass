@@ -1,6 +1,8 @@
+const URL = import.meta.env.VITE_URL;
+
 export const getChats = async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/chats', {
+    const response = await fetch(`${URL}/chats`, {
       method: 'GET',
       credentials: 'include',
     });
@@ -16,7 +18,7 @@ export const getChats = async () => {
 export const getMessages = async ({ chatId, page }) => {
   try {
     const response = await fetch(
-      `http://localhost:8000/api/chats/messages/${chatId}?page=${page}`,
+      `${URL}/chats/messages/${chatId}?page=${page}`,
       {
         method: 'GET',
         credentials: 'include',
@@ -33,7 +35,7 @@ export const getMessages = async ({ chatId, page }) => {
 
 export const getMatches = async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/matches', {
+    const response = await fetch(`${URL}/matches`, {
       method: 'GET',
       credentials: 'include',
     });
@@ -48,10 +50,10 @@ export const getMatches = async () => {
 
 export const deleteMatch = async matchId => {
   try {
-    const response = await fetch(
-      `http://localhost:8000/api/matches/cancel/${matchId}`,
-      { method: 'DELETE', credentials: 'include' }
-    );
+    const response = await fetch(`${URL}/matches/cancel/${matchId}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
 
     if (!response.ok) throw new Error(response.statusText);
   } catch (err) {
