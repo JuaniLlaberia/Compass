@@ -19,8 +19,8 @@ const createSendJWT = (id, res) => {
     expires: new Date(Date.now() + 6 * 24 * 60 * 1000),
     path: '/',
     httpOnly: true,
-    // secure: true,
-    sameSite: 'lax',
+    secure: true,
+    sameSite: 'none',
   };
 
   res.cookie('jwt', token, cookieOptions);
@@ -86,7 +86,7 @@ exports.logout = (req, res) => {
     expires: new Date(Date.now() - 10 * 1000),
     httpOnly: true,
     secure: true,
-    sameSite: 'lax',
+    sameSite: 'none',
   };
 
   res.cookie('jwt', null, cookieOptions);
