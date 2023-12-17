@@ -1,4 +1,4 @@
-const ChatsSekelon = ({ amount = 4 }) => {
+const ChatsSekelon = ({ amount = 5 }) => {
   return (
     <ul className='flex flex-col gap-3 my-3 px-3'>
       {Array(amount)

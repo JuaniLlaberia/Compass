@@ -24,9 +24,9 @@ const Faq = () => {
               <Expand.Body id='faq-how'>
                 <p className='text-dark-text-2 px-2 lg:text-lg'>
                   After creating your profile either as a employer or employee,
-                  you can swipe other users right(interested) or left(not
-                  interested). If both are interested you match and can start
-                  chatting.
+                  you can start swiping userss right(if you are interested) or
+                  left(not interested). If both are interested you match and can
+                  start chatting.
                 </p>
               </Expand.Body>
             </Expand.Wrapper>

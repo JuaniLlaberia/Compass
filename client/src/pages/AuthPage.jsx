@@ -20,7 +20,7 @@ const AuthPage = () => {
     <>
       <Modal>
         <main
-          className={`bg-dark-bg-2 p-4 flex flex-col justify-between bg-[url('../../public/bg_mobile.svg')] md:bg-[url('../../public/bg_mid.svg')] xl:bg-[url('../../public/bg_large.svg')] items-center h-[100dvh] bg-center bg-no-repeat bg-cover`}
+          className={`bg-dark-bg-2 p-4 flex flex-col justify-between bg-[url('/bg_mobile.svg')] md:bg-[url('/bg_mid.svg')] xl:bg-[url('../../public/bg_large.svg')] items-center h-[100dvh] bg-center bg-no-repeat bg-cover`}
         >
           <Logo />
 
@@ -42,13 +42,9 @@ const AuthPage = () => {
         <Modal.Window windowName='auth-modal'>
           <>
             <Logo withText={false} />
-            <h2 className='text-lg text-center mt-5 font-semibold mb-2 lg:text-2xl'>
+            <h2 className='text-xl text-center mt-5 font-semibold mb-2 lg:text-2xl'>
               Welcome! Let's get started
             </h2>
-            <p className='px-2 text-light-text-2 dark:text-dark-text-2 lg:text-lg'>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry.
-            </p>
             <div className='mt-12 px-3'>
               <FacebookBtn />
               <GoogleBtn />

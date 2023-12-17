@@ -41,7 +41,7 @@ const ProfileHeader = ({ userData }) => {
         <ul className='flex justify-center gap-2 flex-wrap px-6 mt-2'>
           {category.map(cat => (
             <li
-              className='text-secondary-1 font-semibold border border-light-border-1 dark:border-dark-border-1 rounded-full text-sm px-3 py-0.5 md:text-base xl:text-lg xl:px-5'
+              className='bg-gradient-to-r from-fuchsia-500 to-purple-500 bg-clip-text text-transparent font-semibold border border-light-border-1 dark:border-dark-border-1 rounded-full text-sm px-3 py-0.5 md:text-base xl:text-lg xl:px-5'
               key={cat}
             >
               {cat}

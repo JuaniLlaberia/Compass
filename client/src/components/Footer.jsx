@@ -81,9 +81,9 @@ const Footer = () => {
         <h2 className='text-dark-text-1 font-semibold'>About Us</h2>
         <p className='text-dark-text-2'>
           Are you looking for a new job or a career change? Then you are in the
-          right place, with [app name] you can search and find your ideal job
-          and talk directly to your future employers. Do you need new staff for
-          your business? Find the perfect workers for your needs.{' '}
+          right place, with Compass© you can search and find your ideal job and
+          talk directly to your future employers. Do you need new staff for your
+          business? Find the perfect workers for your needs.{' '}
           <span className='text-dark-text-1'>Let's start swiping!</span>
         </p>
       </section>
