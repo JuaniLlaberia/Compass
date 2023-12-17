@@ -20,7 +20,7 @@ const AuthPage = () => {
     <>
       <Modal>
         <main
-          className={`bg-dark-bg-2 p-4 flex flex-col justify-between bg-[url('/bg_mobile.svg')] md:bg-[url('/bg_mid.svg')] xl:bg-[url('../../public/bg_large.svg')] items-center h-[100dvh] bg-center bg-no-repeat bg-cover`}
+          className={`bg-dark-bg-2 p-4 flex flex-col justify-between bg-[url('/bg_mobile.svg')] md:bg-[url('/bg_mid.svg')] xl:bg-[url('/bg_large.svg')] items-center h-[100dvh] bg-center bg-no-repeat bg-cover`}
         >
           <Logo />
 
