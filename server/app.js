@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://compass-alpha.vercel.app',
     credentials: true,
   })
 );
