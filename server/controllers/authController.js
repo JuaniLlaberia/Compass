@@ -44,14 +44,16 @@ const checkSignUser = catchAsyncErrors(async (user, res) => {
     createSendJWT(newUser._id.valueOf(), res);
 
     //Redicrect to finish profile page
-    return res.status(201).redirect('http://localhost:5173/signup/information');
+    return res
+      .status(201)
+      .redirect('https://compass-alpha.vercel.app/signup/information');
   }
 
   //Create JWT token for authorization and store it in the cookies.
   createSendJWT(userId._id.valueOf(), res);
 
   //Redirect the user back to the home page
-  res.status(200).redirect('http://localhost:5173/app');
+  res.status(200).redirect('https://compass-alpha.vercel.app/app');
 });
 
 exports.googleAuthHandler = catchAsyncErrors(async (req, res) => {

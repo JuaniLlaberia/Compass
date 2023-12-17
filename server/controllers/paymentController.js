@@ -28,8 +28,8 @@ exports.createCheckoutSession = catchErrorAsync(async (req, res, next) => {
       },
     ],
     mode: 'payment',
-    success_url: 'http://localhost:5173/profile',
-    cancel_url: 'http://localhost:5173/profile',
+    success_url: 'https://compass-alpha.vercel.app/profile',
+    cancel_url: 'https://compass-alpha.vercel.app/profile',
     client_reference_id: likesAmount,
     customer_email: req.user.email,
   });
