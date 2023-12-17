@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    font-family: 'Open Sans', sans-serif;
-  }
-}
-
 a.active {
   color: #936cf5;
 }

@@ -102,7 +102,12 @@ exports.getUsers = catchErrorAsync(async (req, res) => {
     aggStages.push({
       $match: {
         $and: [
-          { gender },
+          {
+            $or: [
+              { gender: { $in: ['male', 'female', 'other'] } },
+              { gender: gender },
+            ],
+          },
           { birthDate: { $gte: sub(new Date(), { years: maxAge }) } },
           { birthDate: { $lte: sub(new Date(), { years: minAge }) } },
           { role: 'user' },

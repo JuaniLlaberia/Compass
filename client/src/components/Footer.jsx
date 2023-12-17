@@ -42,7 +42,7 @@ const pageLinks = [
 
 const Footer = () => {
   return (
-    <footer className='w-full bg-dark-bg-2'>
+    <footer className='w-full bg-dark-bg-1'>
       <section className='flex gap-6 border-b border-dark-border-1 py-4 px-4 lg:px-36 lg:py-6'>
         <div className='w-full'>
           <h2 className='mb-2 text-dark-text-1 font-semibold'>
@@ -81,9 +81,9 @@ const Footer = () => {
         <h2 className='text-dark-text-1 font-semibold'>About Us</h2>
         <p className='text-dark-text-2'>
           Are you looking for a new job or a career change? Then you are in the
-          right place, with [app name] you can search and find your ideal job
-          and talk directly to your future employers. Do you need new staff for
-          your business? Find the perfect workers for your needs.{' '}
+          right place, with Compass© you can search and find your ideal job and
+          talk directly to your future employers. Do you need new staff for your
+          business? Find the perfect workers for your needs.{' '}
           <span className='text-dark-text-1'>Let's start swiping!</span>
         </p>
       </section>

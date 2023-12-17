@@ -4,6 +4,9 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        special: ['lobster'],
+      },
       colors: {
         'dark-bg-1': '#0A0A0A',
         'dark-bg-2': '#1D1B1B',

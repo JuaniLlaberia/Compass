@@ -7,6 +7,8 @@ const router = express.Router();
 const storage = mutler.memoryStorage();
 const update = mutler({ storage: storage });
 
+router.route('/reset-likes').patch(userController.resetLikes);
+
 router.use(authController.protect);
 
 router.route('/').get(userController.getUsers);
@@ -15,7 +17,5 @@ router
   .route('/update')
   .patch(update.single('profileImage'), userController.updateUser);
 router.route('/delete').delete(userController.deleteUser);
-
-router.route('/reset-likes').patch(userController.resetLikes);
 
 module.exports = router;

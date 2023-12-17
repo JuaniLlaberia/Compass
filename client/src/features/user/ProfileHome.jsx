@@ -4,8 +4,6 @@ import { IoClose } from 'react-icons/io5';
 import UserPreview from './UserPreview';
 import ProfileHeader from './ProfileHeader';
 import { useAuthContext } from '../../context/AuthContext';
-import UserEdit from './UserEdit';
-import UserSettings from '../settings/UserSettings';
 
 const ProfileHome = () => {
   const { user } = useAuthContext();
@@ -13,7 +11,7 @@ const ProfileHome = () => {
 
   return (
     <section className='flex h-full w-full'>
-      <header className='md:hidden'>
+      <header className='md:hidden w-full'>
         <ProfileHeader userData={user.data} />
         <button
           aria-label='open'
@@ -41,7 +39,7 @@ const ProfileHome = () => {
         </motion.section>
       )}
       <div className='hidden md:flex md:w-full md:pb-3'>
-        <aside className='border-r border-light-border-1 dark:border-dark-border-1'>
+        <aside className='border-r md:min-w-[350px] border-light-border-1 dark:border-dark-border-1'>
           <ProfileHeader userData={user.data} />
         </aside>
 

@@ -13,7 +13,7 @@ const Logo = ({ withText = true, size, withColor = true }) => {
       {withText && (
         <h1
           className={`${
-            size === 'small' ? 'text-xl' : 'text-3xl'
+            size === 'small' ? 'text-xl' : 'text-4xl'
           } font-semibold ${
             withColor
               ? 'bg-gradient-to-r to-fuchsia-500 from-purple-500 bg-clip-text text-transparent'
