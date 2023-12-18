@@ -27,7 +27,7 @@ const MatchesChats = ({ children }) => {
   //Handle web socket initialization and actions => When we enter the chats page we create the connection via scokets and it gets close when we leave
   useEffect(() => {
     //Connecting to web socket
-    const ws = new WebSocket('wss://compass-ocp9.onrender.com');
+    const ws = new WebSocket('wss://compass-server.vercel.app');
     setWs(ws);
 
     ws.addEventListener('message', handleWSActivity);
