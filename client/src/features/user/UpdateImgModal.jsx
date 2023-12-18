@@ -1,3 +1,4 @@
+import { ClipLoader } from 'react-spinners';
 import { useUpdateUser } from './useUpdateUser';
 
 const UpdateImgModal = ({ onClose }) => {
@@ -22,7 +23,11 @@ const UpdateImgModal = ({ onClose }) => {
         htmlFor='update-image'
         className='w-full text-center font-semibold border-y border-light-border-1 dark:border-dark-border-1 py-3 lg:py-4 cursor-pointer active:bg-light-bg-2 dark:active:bg-dark-bg-2 lg:text-xl'
       >
-        Upload New Image
+        {isUpdating ? (
+          <ClipLoader size={20} color='gray' />
+        ) : (
+          'Upload New Image'
+        )}
       </label>
       <input
         disabled={isUpdating}
