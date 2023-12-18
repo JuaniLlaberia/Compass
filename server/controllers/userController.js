@@ -175,3 +175,7 @@ exports.resetLikes = catchErrorAsync(async (req, res) => {
     .status(200)
     .json({ status: 'success', message: 'Likes have been reseted.' });
 });
+
+exports.stayAlive = catchErrorAsync(async (req, res) => {
+  res.status(200).json({ status: 'success', message: 'Server alive' });
+});

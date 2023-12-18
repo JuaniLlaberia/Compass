@@ -8,6 +8,7 @@ const storage = mutler.memoryStorage();
 const update = mutler({ storage: storage });
 
 router.route('/reset-likes').patch(userController.resetLikes);
+router.route('/server-alive').patch(userController.stayAlive);
 
 router.use(authController.protect);
 

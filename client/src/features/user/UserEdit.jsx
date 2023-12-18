@@ -8,7 +8,7 @@ import { useAuthContext } from '../../context/AuthContext';
 
 const UserEdit = ({ onClose }) => {
   const { user } = useAuthContext();
-  const { updateUser } = useUpdateUser();
+  const { updateUser, isUpdating } = useUpdateUser();
 
   const [selectedOptionsCategory, setSelectedOptionsCategory] = useState(
     user.data.category || []
@@ -92,7 +92,9 @@ const UserEdit = ({ onClose }) => {
           errors={errors}
         />
       )}
-      <Button aria-label='submit'>Edit Profile</Button>
+      <Button isLoading={isUpdating} aria-label='submit'>
+        Edit Profile
+      </Button>
     </form>
   );
 };
