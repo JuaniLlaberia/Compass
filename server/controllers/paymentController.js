@@ -66,11 +66,12 @@ exports.webHookCheckout = catchErrorAsync(async (req, res, next) => {
       //In development add likes as test mode will always be this type
       if (process.env.NODE_ENV === 'development') addLikes(event.data.object);
       //When paid add likes
-      if (event.status === 'paid') addLikes(event.data.object);
+      if (event.data.object.payment_status === 'paid')
+        addLikes(event.data.object);
       break;
     }
 
-    case 'checkout.session.async_payment_succeded': {
+    case 'checkout.session.async_payment_succeeded': {
       //Add bought likes
       addLikes(event.data.object);
       break;
