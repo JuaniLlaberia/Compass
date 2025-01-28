@@ -4,6 +4,7 @@
 
 # Compass | Find Your Ideal Job
 We are a game changing work related social media plataform. We are **Compass**. Find the perfect employer/employee by talking directly to them.
+(The demo may take 1-2 minutes to work, because it needs to start after being in sleep mode)
 
 ## What's in Compass alpha:
  - Create an account either as a **employer** or a **employee**.
